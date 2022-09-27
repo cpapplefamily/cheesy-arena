@@ -290,7 +290,7 @@
       {{end}}
     </g>
     <g id="connectors">
-    {{if eq .BracketType "double_8"|eq .BracketType "double_4"}}
+    {{if eq .BracketType "double_8"}}
       <g id="connectors_doubleelim">
         <g id="connectors_evergreen">
           <polyline points="1211,390 1546,390 1546,656 1507,656"/>
@@ -444,6 +444,7 @@
           </g>
         </g>
       </g>
+    {{else if eq .BracketType "double_4"}}
     {{else}}
       <g id="connectors_standardbracket">
         {{if index .Matchups "1_1"}}<polyline class="cb16 st8" points="139,247 325,247 325,342 456,342"/>{{end}}
@@ -479,7 +480,7 @@
       {{end}}
     </g>
     <g id="labels">
-      {{if eq .BracketType "double_8"|eq .BracketType "double_4"}}
+      {{if eq .BracketType "double_8"}}
         <text x="219" y="975">Round 1</text>
         <text x="516" y="975">Round 2</text>
         <text x="813" y="975">Round 3</text>
@@ -487,6 +488,7 @@
         <text x="1405" y="975">Round 5</text>
         <text x="1702" y="975">Finals</text>
         <text id="finals_subtitle" x="1802" y="434">Best-of-3</text>
+      {{else if eq .BracketType "double_4"}}
       {{else}}
         <line id="label_underline" x1="663" y1="371" x2="1257" y2="371"/>
         <text id="l_r16" transform="translate(198.7197 964.415)" class="label_16">Round of 16</text>

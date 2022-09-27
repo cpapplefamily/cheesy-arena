@@ -7,14 +7,16 @@ package web
 
 import (
 	"fmt"
-	"github.com/Team254/cheesy-arena/model"
 	"io"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"os"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/Team254/cheesy-arena/model"
 )
 
 // Shows the event settings editing page.
@@ -44,8 +46,12 @@ func (web *Web) settingsPostHandler(w http.ResponseWriter, r *http.Request) {
 	eventSettings.ElimType = r.PostFormValue("elimType")
 	numAlliances := 0
 	if eventSettings.ElimType == "double" {
+		log.Printf("setup_settings.go eventSettings.ElimType: double")
 		//numAlliances = 8
-		numAlliances = 4
+		numAlliances, _ = strconv.Atoi(r.PostFormValue("numElimAlliances"))
+		log.Printf("setup_settings.go numAlliances: %s", numAlliances)
+		
+		//numAlliances = 4
 		/*numAlliances, _ = strconv.Atoi(r.PostFormValue("numElimAlliances"))
 		 if numAlliances != 4 || numAlliances != 8 {
 			//web.renderSettings(w, r, "Number of alliances For Double Must be 4 or 8." + numAlliances)
@@ -53,7 +59,9 @@ func (web *Web) settingsPostHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		} */
 	} else {
+		log.Printf("setup_settings.go eventSettings.ElimType: single")
 		numAlliances, _ = strconv.Atoi(r.PostFormValue("numElimAlliances"))
+		log.Printf("setup_settings.go numAlliances: %s", numAlliances)
 		if numAlliances < 2 || numAlliances > 16 {
 			web.renderSettings(w, r, "Number of alliances must be between 2 and 16.")
 			return

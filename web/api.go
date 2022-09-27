@@ -291,6 +291,7 @@ func (web *Web) generateBracketSvg(w io.Writer, hideActive bool) error {
 	numAlliances := web.arena.EventSettings.NumElimAlliances
 
 	log.Printf("web.arena.EventSettings.ElimType: %s", web.arena.EventSettings.ElimType)
+	log.Printf("web.arena.EventSettings.NumElimAlliances: %s", web.arena.EventSettings.NumElimAlliances)
 
 	if web.arena.EventSettings.ElimType == "double" {
 		if numAlliances == 8 {
