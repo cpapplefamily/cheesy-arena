@@ -8,15 +8,17 @@ package web
 import (
 	"encoding/json"
 	"fmt"
+	"io"
+	"log"
+	"net/http"
+	"os"
+	"strconv"
+
 	"github.com/Team254/cheesy-arena/game"
 	"github.com/Team254/cheesy-arena/model"
 	"github.com/Team254/cheesy-arena/partner"
 	"github.com/Team254/cheesy-arena/websocket"
 	"github.com/gorilla/mux"
-	"io"
-	"net/http"
-	"os"
-	"strconv"
 )
 
 type MatchResultWithSummary struct {
@@ -283,9 +285,23 @@ func (web *Web) generateBracketSvg(w io.Writer, hideActive bool) error {
 			matchups[fmt.Sprintf("%d_%d", matchup.Round, matchup.Group)] = &allianceMatchup
 		}
 	}
-
-	bracketType := "double"
+	
+	//bracketType := "double"
+	bracketType := web.arena.EventSettings.ElimType
 	numAlliances := web.arena.EventSettings.NumElimAlliances
+
+	log.Printf("web.arena.EventSettings.ElimType: %s", web.arena.EventSettings.ElimType)
+
+	if web.arena.EventSettings.ElimType == "double" {
+		if numAlliances == 8 {
+			bracketType = "double_8"
+		} else if numAlliances == 4 {
+			bracketType = "double_4"
+		} else {
+			//bracketType = "2"
+		}
+	}
+
 	if web.arena.EventSettings.ElimType == "single" {
 		if numAlliances > 8 {
 			bracketType = "16"
@@ -297,6 +313,7 @@ func (web *Web) generateBracketSvg(w io.Writer, hideActive bool) error {
 			bracketType = "2"
 		}
 	}
+	log.Printf("Bracket Type: %s", bracketType)
 
 	template, err := web.parseFiles("templates/bracket.svg")
 	if err != nil {

@@ -22,10 +22,9 @@
       stroke-miterlimit:10;
     }
 
-    <!--
+   
     .bracket_double_8 #bgdouble,
     .bracket_double_4 #bgdouble,
-    -->
     .bracket_double #bgdouble,
     .bracket_16 #bg16,
     .bracket_8 #bg8,
@@ -202,25 +201,45 @@
 
   <!-- Match Positioning -->
 
-    .bracket_double #match_1_1 {transform: translate(114px, 158px);}
-    .bracket_double #match_1_2 {transform: translate(114px, 348px);}
-    .bracket_double #match_1_3 {transform: translate(114px, 538px);}
-    .bracket_double #match_1_4 {transform: translate(114px, 728px);}
+    .bracket_double_4 #match_1_1 {transform: translate(114px, 158px);}
+    .bracket_double_4 #match_1_2 {transform: translate(114px, 348px);}
+    .bracket_double_4 #match_1_3 {transform: translate(114px, 538px);}
+    .bracket_double_4 #match_1_4 {transform: translate(114px, 728px);}
 
-    .bracket_double #match_2_3 {transform: translate(412px, 158px);}
-    .bracket_double #match_2_4 {transform: translate(412px, 348px);}
-    .bracket_double #match_2_1 {transform: translate(412px, 538px);}
-    .bracket_double #match_2_2 {transform: translate(412px, 728px);}
+    .bracket_double_4 #match_2_3 {transform: translate(412px, 158px);}
+    .bracket_double_4 #match_2_4 {transform: translate(412px, 348px);}
+    .bracket_double_4 #match_2_1 {transform: translate(412px, 538px);}
+    .bracket_double_4 #match_2_2 {transform: translate(412px, 728px);}
 
-    .bracket_double #match_3_2 {transform: translate(709px, 504px);}
-    .bracket_double #match_3_1 {transform: translate(709px, 694px);}
+    .bracket_double_4 #match_3_2 {transform: translate(709px, 504px);}
+    .bracket_double_4 #match_3_1 {transform: translate(709px, 694px);}
 
-    .bracket_double #match_4_2 {transform: translate(1006px, 301px);}
-    .bracket_double #match_4_1 {transform: translate(1006px, 599px);}
+    .bracket_double_4 #match_4_2 {transform: translate(1006px, 301px);}
+    .bracket_double_4 #match_4_1 {transform: translate(1006px, 599px);}
 
-    .bracket_double #match_5_1 {transform: translate(1302px, 567px);}
+    .bracket_double_4 #match_5_1 {transform: translate(1302px, 567px);}
 
-    .bracket_double #match_6_1 {transform: translate(1598px, 417px);}
+    .bracket_double_4 #match_6_1 {transform: translate(1598px, 417px);}
+
+    .bracket_double_8 #match_1_1 {transform: translate(114px, 158px);}
+    .bracket_double_8 #match_1_2 {transform: translate(114px, 348px);}
+    .bracket_double_8 #match_1_3 {transform: translate(114px, 538px);}
+    .bracket_double_8 #match_1_4 {transform: translate(114px, 728px);}
+
+    .bracket_double_8 #match_2_3 {transform: translate(412px, 158px);}
+    .bracket_double_8 #match_2_4 {transform: translate(412px, 348px);}
+    .bracket_double_8 #match_2_1 {transform: translate(412px, 538px);}
+    .bracket_double_8 #match_2_2 {transform: translate(412px, 728px);}
+
+    .bracket_double_8 #match_3_2 {transform: translate(709px, 504px);}
+    .bracket_double_8 #match_3_1 {transform: translate(709px, 694px);}
+
+    .bracket_double_8 #match_4_2 {transform: translate(1006px, 301px);}
+    .bracket_double_8 #match_4_1 {transform: translate(1006px, 599px);}
+
+    .bracket_double_8 #match_5_1 {transform: translate(1302px, 567px);}
+
+    .bracket_double_8 #match_6_1 {transform: translate(1598px, 417px);}
 
 
     .bracket_16 #match_1_1 {transform: translate(94px, 158px);}
@@ -259,8 +278,10 @@
   </style>
   <g id="bracket" class="bracket_{{.BracketType}}">
     <g id="background">
-      {{if eq .BracketType "double"}}
+      {{if eq .BracketType "double_8"}}
         <rect id="bgdouble" x="70" y="115" width="1780" height="900"/>
+      {{else if eq .BracketType "double_4"}}
+        <rect id="bgdouble" x="70" y="115" width="1780" height="450"/>
       {{else}}
         <rect id="bg16" x="70" y="115" width="1780" height="900"/>
         <rect id="bg8" x="417.12" y="115" width="1085.759" height="900"/>
@@ -269,7 +290,7 @@
       {{end}}
     </g>
     <g id="connectors">
-    {{if eq .BracketType "double"}}
+    {{if eq .BracketType "double_8"|eq .BracketType "double_4"}}
       <g id="connectors_doubleelim">
         <g id="connectors_evergreen">
           <polyline points="1211,390 1546,390 1546,656 1507,656"/>
@@ -458,7 +479,7 @@
       {{end}}
     </g>
     <g id="labels">
-      {{if eq .BracketType "double"}}
+      {{if eq .BracketType "double_8"|eq .BracketType "double_4"}}
         <text x="219" y="975">Round 1</text>
         <text x="516" y="975">Round 2</text>
         <text x="813" y="975">Round 3</text>
