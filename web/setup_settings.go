@@ -14,6 +14,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"log"
 
 	"github.com/Team254/cheesy-arena/model"
 )
@@ -46,14 +47,25 @@ func (web *Web) settingsPostHandler(w http.ResponseWriter, r *http.Request) {
 	numAlliances := 0
 	if r.PostFormValue("playoffType") == "SingleEliminationPlayoff" {
 		playoffType = model.SingleEliminationPlayoff
+		log.Printf("setup_settings.go playoffType: %s", playoffType)
+		log.Printf("setup_settings.go eventSettings.ElimType: Single")
 		numAlliances, _ = strconv.Atoi(r.PostFormValue("numPlayoffAlliances"))
+		log.Printf("setup_settings.go numAlliances: %s", numAlliances)
 		if numAlliances < 2 || numAlliances > 16 {
 			web.renderSettings(w, r, "Number of alliances must be between 2 and 16.")
 			return
 		}
 	} else {
 		playoffType = model.DoubleEliminationPlayoff
-		numAlliances = 8
+		log.Printf("setup_settings.go playoffType: %s", playoffType)
+		log.Printf("setup_settings.go eventSettings.ElimType: double")
+		numAlliances, _ = strconv.Atoi(r.PostFormValue("numPlayoffAlliances"))
+		log.Printf("setup_settings.go numAlliances: %s", numAlliances)
+		
+		if numAlliances != 4 && numAlliances != 8 && numAlliances != 6 {
+			web.renderSettings(w, r, "Number of alliances For Double Must be 4, 6, or 8.")
+			return
+		} 
 	}
 	if eventSettings.PlayoffType != playoffType {
 		alliances, err := web.arena.Database.GetAllAlliances()

@@ -18,6 +18,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"log"
 )
 
 type MatchResultWithSummary struct {
@@ -322,6 +323,21 @@ func (web *Web) generateBracketSvg(w io.Writer, activeMatch *model.Match) error 
 
 	bracketType := "double"
 	numAlliances := web.arena.EventSettings.NumPlayoffAlliances
+
+	log.Printf("web.arena.EventSettings.PlayoffType: %s", web.arena.EventSettings.PlayoffType)
+
+	if web.arena.EventSettings.PlayoffType == model.DoubleEliminationPlayoff {
+		if numAlliances == 8 {
+			bracketType = "double_8"
+		} else if numAlliances == 6 {
+			bracketType = "double_6"
+		} else if numAlliances == 4 {
+			bracketType = "double_4"
+		} else {
+			//bracketType = "2"
+		}
+	}
+
 	if web.arena.EventSettings.PlayoffType == model.SingleEliminationPlayoff {
 		if numAlliances > 8 {
 			bracketType = "16"
@@ -333,6 +349,8 @@ func (web *Web) generateBracketSvg(w io.Writer, activeMatch *model.Match) error 
 			bracketType = "2"
 		}
 	}
+
+	log.Printf("web.api.go Bracket Type: %s", bracketType)
 
 	template, err := web.parseFiles("templates/bracket.svg")
 	if err != nil {
