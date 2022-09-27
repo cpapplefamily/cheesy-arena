@@ -512,18 +512,18 @@
             <!--<polyline points="319,437 367,437 367,281 411,281"/>-->
             <!--<text transform="translate(332.4185 239.67)">W</text>-->
             <!--<text transform="translate(332.4185 429.67)">W</text>-->
-            <polyline class="loser" points="660,447 660,650 1000,650"/>-->
+            <polyline class="loser" points="660,447 660,650 1000,650"/>
             <!--<line class="loser" x1="660" y1="447" x2="660" y2="618"/>-->
-            <line class="loser" x1="660" y1="248" x2="660" y2="427"/>-->
-            <polyline points="698,247 790,247 790,358 1010,358"/>-->
-            <polyline points="698,437 790,437 790,421 1010,421"/>-->
+            <line class="loser" x1="660" y1="248" x2="660" y2="427"/>
+            <polyline points="698,247 790,247 790,358 1010,358"/>
+            <polyline points="698,437 790,437 790,421 1010,421"/>
           </g>
           <g id="connectors_2_4"{{if (index .Matchups "2_4").IsActive}} class="active"{{end}}>
             <!--<polyline points="319,627 360,627 360,405 411,405"/>-->
-            <text transform="translate(668.566 429.1972)">W</text>-->
-            <text transform="translate(643.3726 469.2499)" class="loser">L</text>-->
+            <text transform="translate(668.566 429.1972)">W</text>
+            <text transform="translate(643.3726 469.2499)" class="loser">L</text>
             <!--<polyline points="319,817 374,817 374,473 411,473"/>-->
-            <polyline  class="loser" points="660,438 660,725 1000,725"/>-->
+            <polyline  class="loser" points="660,438 660,725 1000,725"/>
             <!--<text transform="translate(332.4185 618.67)">W</text>-->
             <!--<text transform="translate(332.4185 808.67)">W</text>-->
             <!--<rect class="coverup" x="699.216" y="241.054" width="312.117" height="199.156"/>-->
@@ -554,15 +554,17 @@
           </g>
           <g id="connectors_4_1"{{if (index .Matchups "4_1").IsActive}} class="active"{{end}}>
             <rect class="coverup" x="955.326" y="589.109" width="68.612" height="200.486"/>
-            <text transform="translate(1223.2803 681.0883)">W</text>
+            <text transform="translate(1223.2803 681.0883)">W</text>-->
             <text transform="translate(1223.3726 717.1893)" class="loser">L</text>
-            <line class="loser" x1="1238" y1="689" x2="1238" y2="738"/>
+            <line class="loser" x1="1238" y1="689" x2="1238" y2="738"/>-->
             <line class="loser" x1="1246.485" y1="729.515" x2="1229.515" y2="746.485"/>
             <line class="loser" x1="1246.485" y1="746.485" x2="1229.515" y2="729.515"/>
-            <text transform="translate(926.2617 775.3125)">W</text>
-            <text transform="translate(926.2617 585.3125)">W</text>
-            <polyline points="955,593 955,655 1008,655"/>
-            <polyline points="955,783 955,725 1008,725"/>
+            <!-- Sorce Match -->
+            <text transform="translate(926.2617 710)" class="loser">L</text>
+            <text transform="translate(926.2617 630)" class="loser">L</text>
+            <polyline class="loser" points="670,447 670,650 1000,650"/>
+            <line class="loser" x1="670" y1="248" x2="670" y2="427"/>
+            <polyline  class="loser" points="640,438 640,725 1000,725"/>
           </g>
           <g id="connectors_4_2"{{if (index .Matchups "4_2").IsActive}} class="active"{{end}}>
             <rect class="coverup" x="699.216" y="241.054" width="312.117" height="199.156"/>
@@ -572,7 +574,7 @@
             <text transform="translate(628.5344 239.1004)">W</text>
             <text transform="translate(1263.0288 382.2166)">W</text>
             <text transform="translate(1239.3726 418.7044)" class="loser">L</text>
-            <polyline  class="loser" points="1256,391 1256,625 1323,625"/>
+            <polyline  class="loser" points="1256,391 1256,625 1323,625"/>-->
           </g>
           <g id="connectors_5_1"{{if (index .Matchups "5_1").IsActive}} class="active"{{end}}>
             <rect class="coverup" x="1523.794" y="381.275" width="83.494" height="287.877"/>
