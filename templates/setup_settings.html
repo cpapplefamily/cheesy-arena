@@ -36,7 +36,7 @@
               </div>
               <div class="radio">
                 <label>
-                  <input type="radio" name="elimType" value="double" onclick="updateNumElimAlliances(true);"
+                  <input type="radio" name="elimType" value="double" onclick="updateNumElimAlliances(false);"
                       {{if eq .ElimType "double"}}checked{{end}}>
                   Double-Elimination (8 alliances)
                 </label>
@@ -398,9 +398,9 @@
   updateNumElimAlliances = function(isDoubleElimination) {
     const numElimAlliances = $("input[name=numElimAlliances]");
     numElimAlliances.prop("disabled", isDoubleElimination);
-    if (isDoubleElimination) {
+    <!╌ if (isDoubleElimination) {
       numElimAlliances.val(8);
-    }
+    }╌>
   };
 </script>
 {{end}}

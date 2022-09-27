@@ -22,6 +22,10 @@
       stroke-miterlimit:10;
     }
 
+    <!--
+    .bracket_double_8 #bgdouble,
+    .bracket_double_4 #bgdouble,
+    -->
     .bracket_double #bgdouble,
     .bracket_16 #bg16,
     .bracket_8 #bg8,

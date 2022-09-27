@@ -44,7 +44,14 @@ func (web *Web) settingsPostHandler(w http.ResponseWriter, r *http.Request) {
 	eventSettings.ElimType = r.PostFormValue("elimType")
 	numAlliances := 0
 	if eventSettings.ElimType == "double" {
-		numAlliances = 8
+		//numAlliances = 8
+		numAlliances = 4
+		/*numAlliances, _ = strconv.Atoi(r.PostFormValue("numElimAlliances"))
+		 if numAlliances != 4 || numAlliances != 8 {
+			//web.renderSettings(w, r, "Number of alliances For Double Must be 4 or 8." + numAlliances)
+			web.renderSettings(w, r, string(numAlliances))
+			return
+		} */
 	} else {
 		numAlliances, _ = strconv.Atoi(r.PostFormValue("numElimAlliances"))
 		if numAlliances < 2 || numAlliances > 16 {
