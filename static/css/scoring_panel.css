@@ -12,7 +12,7 @@ body {
   background-color: #222;
 }
 .container {
-  padding-top: 1vw;
+  padding-top: 2vw;
   width: 100%;
   height: 100%;
   display: flex;
@@ -30,39 +30,55 @@ body {
   border: 1px solid #333;
 }
 #alliance[data-alliance="red"] {
-  background-color: #322;
+  background-color: rgb(160, 63, 63);/* #322; */
 }
 #alliance[data-alliance="blue"] {
-  background-color: #223;
+  background-color: rgb(40, 40, 102);/* #223; */
+}
+#alliance2 {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 25px;
+  border: 1px solid #333;
+}
+#alliance2[data-alliance2="blue"] {
+  /*background-color: #322;*/
+  background-color: rgb(124, 58, 58);
+}
+#alliance2[data-alliance2="red"] {
+  /*background-color: #223;*/
+  background-color: rgb(40, 40, 102);
 }
 #matchName {
-  font-size: 3vw;
+  font-size: 2vw;
 }
 .scoring-section {
   margin-bottom: 0.5vw;
   display: flex;
-  font-size: 2.5vw;
+  font-size: 1.5vw;
   color: #ccc;
 }
 .scoring-header>div{
-  height: 7vw;
-  display: flex;
-  align-items: center;
+  height: 2.5vw;
   margin: 0.4vw 1vw 0.4vw 0.2vw;
-  color: #666;
+  color: rgb(255, 255, 255);
 }
 .robot-field {
   width: 17vw;
-  height: 7vw;
+  height: 2.5vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 0.4vw 0.2vw;
+  border: 3px solid #666;
+  border-radius: 0.5vw;
 }
 .team {
   display: flex;
   justify-content: center;
-  font-size: 5vw;
   font-weight: bold;
 }
 .boolean[data-value="false"] {
@@ -100,26 +116,26 @@ body {
 .goal-header {
   height: 5vw;
   margin: 0.4vw 0vw;
-  color: #666;
+  color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 .goal-period {
   text-align: center;
-  color: #666;
+  color: rgb(255, 255, 255);
 }
 .goal {
-  width: 17vw;
-  height: 7vw;
+  width: 13vw;
+  height: 5vw;
   margin: 0.4vw 3vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .number-button {
-  width: 6vw;
-  height: 6vw;
+  width: 4vw;
+  height: 4vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
