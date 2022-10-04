@@ -200,19 +200,19 @@
     }
 
   <!-- Match Positioning -->
-
-    .bracket_double_4 #match_1_1 {transform: translate(0px, 158px);}
-    .bracket_double_4 #match_1_2 {transform: translate(0px, 348px);}
-    .bracket_double_4 #match_1_3 {transform: translate(0px, 538px);}
-    .bracket_double_4 #match_1_4 {transform: translate(0px, 728px);}
+    
+    .bracket_double_4 #match_1_1 {transform: translate(-1000px, 158px);}<!-- Keep These Bracket off Screen-->
+    .bracket_double_4 #match_1_2 {transform: translate(-1000px, 348px);}<!-- Keep These Bracket off Screen-->
+    .bracket_double_4 #match_1_3 {transform: translate(-1000px, 538px);}<!-- Keep These Bracket off Screen-->
+    .bracket_double_4 #match_1_4 {transform: translate(-1000px, 728px);}<!-- Keep These Bracket off Screen-->
 
     .bracket_double_4 #match_2_3 {transform: translate(412px, 158px);}
     .bracket_double_4 #match_2_4 {transform: translate(412px, 348px);}
-    .bracket_double_4 #match_2_1 {transform: translate(10px, 538px);}
-    .bracket_double_4 #match_2_2 {transform: translate(10px, 728px);}
+    .bracket_double_4 #match_2_1 {transform: translate(-1000px, 538px);}<!-- Keep These Bracket off Screen-->
+    .bracket_double_4 #match_2_2 {transform: translate(-1000px, 728px);}<!-- Keep These Bracket off Screen-->
 
-    .bracket_double_4 #match_3_2 {transform: translate(20px, 504px);}
-    .bracket_double_4 #match_3_1 {transform: translate(20px, 694px);}
+    .bracket_double_4 #match_3_2 {transform: translate(-1000px, 504px);}<!-- Keep These Bracket off Screen-->
+    .bracket_double_4 #match_3_1 {transform: translate(-1000px, 694px);}<!-- Keep These Bracket off Screen-->
 
     .bracket_double_4 #match_4_2 {transform: translate(1006px, 301px);}
     .bracket_double_4 #match_4_1 {transform: translate(1006px, 599px);}
