@@ -157,10 +157,15 @@ var handleRealtimeScore = function(data) {
   }
 };
 
-var finalSeriesStatus;
+var redscore = 0;
+var bluescore = 0;
+var matchtype;
+
 // Handles a websocket message to populate the final score data.
 var handleScorePosted = function(data) {
-  finalSeriesStatus = data.SeriesStatus;
+  matchtype = data.MatchType;
+  redscore = data.RedScoreSummary.Score;
+  bluescore = data.BlueScoreSummary.Score;
   $("#" + redSide + "FinalScore").text(data.RedScoreSummary.Score);
   $("#" + redSide + "FinalTeam1").html(getRankingText(data.Match.Red1, data.Rankings) + "" + data.Match.Red1);
   $("#" + redSide + "FinalTeam2").html(getRankingText(data.Match.Red2, data.Rankings) + "" + data.Match.Red2);
@@ -334,10 +339,30 @@ var transitionBlankToMatch = function(callback) {
 };
 
 var transitionBlankToScore = function(callback) {
-  transitionBlankToLogo(function() {
-    setTimeout(function() { transitionLogoToScore(callback); }, 50);
+  transitionBlankToLogo(function(){
+    setTimeout(function(){ transitionLogoToWinner(callback); },1500)
   });
 };
+
+var transitionLogoToWinner = function(callback) {
+
+  //$("#wincolor").attr("src", "/static/img/goal.png");
+  $("#wincolor").attr("src", "/static/img/" + getWinnerColor() + ".png");
+  //$("#wincolor").attr("src", "/static/img/winner-red.png");
+  $("#winner").show();
+  $("#winner").transition({queue: false, opacity: 1}, 1000, "ease", callback);
+  setTimeout(function() { transitionLogoToScore(callback); }, 3000); // Delay Score
+};
+
+var getWinnerColor = function(data) {
+  if (redscore == bluescore){
+    return "winner-tie"
+  } else if (redscore > bluescore){
+    return "winner-red"
+  } else {
+    return "winner-blue"
+  }
+}
 
 var transitionBlankToSponsor = function(callback) {
   $(".blindsCenter.blank").css({rotateY: "90deg"});
@@ -464,7 +489,7 @@ var transitionLogoToLogoLuma = function(callback) {
 };
 
 var transitionLogoToScore = function(callback) {
-  if(finalSeriesStatus ==""){
+  if(matchtype == "Qualification"){
     $(".final-rp").show();
   }else{
     $(".final-rp").hide();
@@ -472,6 +497,7 @@ var transitionLogoToScore = function(callback) {
   $(".blindsCenter.full").transition({queue: false, top: scoreLogoTop}, 625, "ease");
   $("#finalScore").show();
   $("#finalScore").transition({queue: false, opacity: 1}, 1000, "ease", callback);
+  $("#winner").hide();
 };
 
 var transitionLogoToSponsor = function(callback) {

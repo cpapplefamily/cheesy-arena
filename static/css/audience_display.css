@@ -257,6 +257,24 @@ html {
   top: 37px;
   height: 250px;
 }
+#winner {
+  position: fixed;
+  width: 1000px;
+  height: 600px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto auto;
+  z-index: 1;
+  opacity: 0;
+
+  text-align: center;
+  animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 2s;
+}
 .final-rp{
   padding: 20px 0;
   font-family: "FuturaLTBold";
@@ -277,6 +295,10 @@ html {
   z-index: 0;
   opacity: 0;
   background-color: #444;
+  animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 2s;
 }
 .final-score {
   float: left;
