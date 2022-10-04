@@ -7,6 +7,13 @@ package web
 
 import (
 	"fmt"
+	"io"
+	"log"
+	"net/http"
+	"sort"
+	"strconv"
+	"time"
+
 	"github.com/Team254/cheesy-arena/bracket"
 	"github.com/Team254/cheesy-arena/field"
 	"github.com/Team254/cheesy-arena/game"
@@ -15,12 +22,6 @@ import (
 	"github.com/Team254/cheesy-arena/websocket"
 	"github.com/gorilla/mux"
 	"github.com/mitchellh/mapstructure"
-	"io"
-	"log"
-	"net/http"
-	"sort"
-	"strconv"
-	"time"
 )
 
 type MatchPlayListItem struct {
@@ -139,6 +140,10 @@ func (web *Web) matchPlayLoadHandler(w http.ResponseWriter, r *http.Request) {
 		handleWebErr(w, err)
 		return
 	}
+
+	web.arena.AudienceDisplayMode = "intro"
+	web.arena.AudienceDisplayModeNotifier.Notify()
+	web.arena.PlaySound("result")
 
 	http.Redirect(w, r, "/match_play", 303)
 }
