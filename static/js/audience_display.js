@@ -157,8 +157,10 @@ var handleRealtimeScore = function(data) {
   }
 };
 
+var finalSeriesStatus;
 // Handles a websocket message to populate the final score data.
 var handleScorePosted = function(data) {
+  finalSeriesStatus = data.SeriesStatus;
   $("#" + redSide + "FinalScore").text(data.RedScoreSummary.Score);
   $("#" + redSide + "FinalTeam1").html(getRankingText(data.Match.Red1, data.Rankings) + "" + data.Match.Red1);
   $("#" + redSide + "FinalTeam2").html(getRankingText(data.Match.Red2, data.Rankings) + "" + data.Match.Red2);
@@ -170,6 +172,7 @@ var handleScorePosted = function(data) {
   $("#" + redSide + "FinalCargoPoints").text(data.RedScoreSummary.CargoPoints);
   $("#" + redSide + "FinalHangarPoints").text(data.RedScoreSummary.HangarPoints);
   $("#" + redSide + "FinalFoulPoints").text(data.RedScoreSummary.FoulPoints);
+  $("#" + redSide + "FinalRP").text(getRPCount(data.RedScoreSummary,data.BlueScoreSummary.Score) + " RP");
   $("#" + redSide + "FinalCargoBonusRankingPoint").html(data.RedScoreSummary.CargoBonusRankingPoint ? "&#x2714;" : "&#x2718;");
   $("#" + redSide + "FinalCargoBonusRankingPoint").attr("data-checked", data.RedScoreSummary.CargoBonusRankingPoint);
   $("#" + redSide + "FinalHangarBonusRankingPoint").html(data.RedScoreSummary.HangarBonusRankingPoint ? "&#x2714;" : "&#x2718;");
@@ -187,6 +190,7 @@ var handleScorePosted = function(data) {
   $("#" + blueSide + "FinalCargoPoints").text(data.BlueScoreSummary.CargoPoints);
   $("#" + blueSide + "FinalHangarPoints").text(data.BlueScoreSummary.HangarPoints);
   $("#" + blueSide + "FinalFoulPoints").text(data.BlueScoreSummary.FoulPoints);
+  $("#" + blueSide + "FinalRP").text(getRPCount(data.BlueScoreSummary,data.RedScoreSummary.Score) + " RP");
   $("#" + blueSide + "FinalCargoBonusRankingPoint").html(data.BlueScoreSummary.CargoBonusRankingPoint ? "&#x2714;" : "&#x2718;");
   $("#" + blueSide + "FinalCargoBonusRankingPoint").attr("data-checked", data.BlueScoreSummary.CargoBonusRankingPoint);
   $("#" + blueSide + "FinalHangarBonusRankingPoint").html(data.BlueScoreSummary.HangarBonusRankingPoint ? "&#x2714;" : "&#x2718;");
@@ -200,6 +204,23 @@ var handleScorePosted = function(data) {
   // Reload the bracket to reflect any changes.
   $("#bracketSvg").attr("src", "/api/bracket/svg?v=" + new Date().getTime());
 };
+
+var getRPCount = function(scoreSummary, oponentScore) {
+  var count = 0;
+  if (scoreSummary.CargoBonusRankingPoint) {
+    count = count + 1;    
+  }
+  if (scoreSummary.HangarBonusRankingPoint) {
+    count  = count + 1;    
+  }
+  if(scoreSummary.Score > oponentScore){
+    count  = count + 2;
+  }
+  if(scoreSummary.Score == oponentScore){
+    count  = count + 1;
+  }
+  return count;
+}
 
 // Handles a websocket message to play a sound to signal match start/stop/etc.
 var handlePlaySound = function(sound) {
@@ -443,6 +464,11 @@ var transitionLogoToLogoLuma = function(callback) {
 };
 
 var transitionLogoToScore = function(callback) {
+  if(finalSeriesStatus ==""){
+    $(".final-rp").show();
+  }else{
+    $(".final-rp").hide();
+  }
   $(".blindsCenter.full").transition({queue: false, top: scoreLogoTop}, 625, "ease");
   $("#finalScore").show();
   $("#finalScore").transition({queue: false, opacity: 1}, 1000, "ease", callback);
