@@ -27,6 +27,7 @@ var handleArenaStatus = function(data) {
     var teamRadioTextElement = $(teamElementPrefix + "Radio span");
     var teamRobotElement = $(teamElementPrefix + "Robot");
     var teamBypassElement = $(teamElementPrefix + "Bypass");
+    var teamBandwidthElement = $(teamElementPrefix + "Bandwidth");
 
     teamNotesTextElement.attr("data-station", station);
 
@@ -86,11 +87,20 @@ var handleArenaStatus = function(data) {
       } else {
         teamRobotElement.text(dsConn.BatteryVoltage.toFixed(1) + "V");
       }
+
+      if (dsConn.Bandwidth > 0.01) {
+        teamBandwidthElement.text(dsConn.Bandwidth.toFixed(1));
+        teamBandwidthElement.attr("data-status-ok", true);
+      } else {
+        teamBandwidthElement.text("-");
+      }
     } else {
       teamDsElement.attr("data-status-ok", "");
       teamDsElement.text("DS");
       teamRobotElement.attr("data-status-ok", "");
       teamRobotElement.text("RBT");
+      teamBandwidthElement.attr("data-status-ok", "");
+      teamBandwidthElement.text("-");
 
       // Format the robot status box according to whether the AP is configured with the correct SSID.
       var expectedTeamId = stationStatus.Team ? stationStatus.Team.Id : 0;
