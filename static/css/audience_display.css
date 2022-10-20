@@ -602,3 +602,9 @@ html {
   font-family: "FuturaLTBold";
   line-height: 87px;
 }
+
+img#bracketSvg {
+  max-width: 100%;
+  max-height: 100vh;
+  margin: auto;
+}
