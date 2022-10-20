@@ -8,6 +8,10 @@ html {
   -webkit-user-select: none;
   -moz-user-select: none;
   overflow: hidden;
+  /*
+  This is for the chroma OverRide
+  background-color: #222;
+  */
 }
 #overlayCentering {
   position: absolute;
