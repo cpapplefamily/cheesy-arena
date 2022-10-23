@@ -4,11 +4,12 @@
 package field
 
 import (
-	"github.com/Team254/cheesy-arena/network"
-	"github.com/stretchr/testify/assert"
 	"net"
 	"testing"
 	"time"
+
+	"github.com/Team254/cheesy-arena/network"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestEncodeControlPacket(t *testing.T) {
@@ -152,11 +153,12 @@ func TestDecodeStatusPacket(t *testing.T) {
 	assert.Nil(t, err)
 	defer dsConn.close()
 
-	data := [36]byte{22, 28, 103, 19, 192, 0, 246, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	data := [36]byte{22, 28, 103, 19, 192, 0, 246, 0, 0, 40, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 		0, 0, 0, 0, 0, 0, 0, 0, 0}
 	dsConn.decodeStatusPacket(data)
 	assert.Equal(t, 103, dsConn.MissedPacketCount)
 	assert.Equal(t, 14, dsConn.DsRobotTripTimeMs)
+	assert.Equal(t, float32(40.5), dsConn.Bandwidth)
 }
 
 func TestListenForDriverStations(t *testing.T) {

@@ -41,6 +41,7 @@ type DriverStationConnection struct {
 	BatteryVoltage            float64
 	DsRobotTripTimeMs         int
 	MissedPacketCount         int
+	Bandwidth                 float32
 	SecondsSinceLastRobotLink float64
 	lastPacketTime            time.Time
 	lastRobotLinkedTime       time.Time
@@ -271,6 +272,12 @@ func (dsConn *DriverStationConnection) decodeStatusPacket(data [36]byte) {
 
 	// Number of missed packets sent from the DS to the robot.
 	dsConn.MissedPacketCount = int(data[2]) - dsConn.missedPacketOffset
+
+	rawBw := data[9:11]
+	bw := uint16(rawBw[0]) << 8
+	bw |= uint16(rawBw[1])
+
+	dsConn.Bandwidth = float32(bw) / 256.0
 }
 
 // Listens for TCP connection requests to Cheesy Arena from driver stations.
