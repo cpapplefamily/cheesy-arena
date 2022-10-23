@@ -29,9 +29,9 @@ const eventMatchInfoUp = $("#eventMatchInfo").css("height");
 const logoUp = "10px";
 const logoDown = $("#logo").css("top");
 const scoreIn = $(".score").css("width");
-const scoreMid = "135px";
-const scoreOut = "255px";
-const scoreFieldsOut = "40px";
+const scoreMid = "350px";//"135px";
+const scoreOut = "350px";
+const scoreFieldsOut = "70px";//"40px";
 const scoreLogoTop = "-350px";
 const bracketLogoTop = "-780px";
 const bracketLogoScale = 0.75;
@@ -142,8 +142,17 @@ var handleRealtimeScore = function(data) {
   $("#" + redSide + "ScoreNumber").text(data.Red.ScoreSummary.Score - data.Red.ScoreSummary.HangarPoints);
   $("#" + blueSide + "ScoreNumber").text(data.Blue.ScoreSummary.Score - data.Blue.ScoreSummary.HangarPoints);
 
+  var t = data.AutoCargoRemaining
+
+  //$("#" + redSide + "CargoDisplay").css("color", setCargoColor(data.Red.ScoreSummary));
+  $("#" + redSide + "UpperCargo").text(getUpperCargoCount(data.Red.Score));
+  $("#" + redSide + "LowerCargo").text(getLowerCargoCount(data.Red.Score));
   $("#" + redSide + "CargoNumerator").text(data.Red.ScoreSummary.CargoCount);
   $("#" + redSide + "CargoDenominator").text(data.Red.ScoreSummary.CargoGoal);
+
+  //$("#" + blueSide + "CargoDisplay").css("color", setCargoColor(data.Blue.ScoreSummary));
+  $("#" + blueSide + "UpperCargo").text(getUpperCargoCount(data.Blue.Score));
+  $("#" + blueSide + "LowerCargo").text(getLowerCargoCount(data.Blue.Score));
   $("#" + blueSide + "CargoNumerator").text(data.Blue.ScoreSummary.CargoCount);
   $("#" + blueSide + "CargoDenominator").text(data.Blue.ScoreSummary.CargoGoal);
   if (currentMatch.Type === "elimination") {
@@ -155,8 +164,47 @@ var handleRealtimeScore = function(data) {
     $("#" + blueSide + "CargoDenominator").show();
     $(".cargo-splitter").show();
   }
+
+  //Color the Cargo Total
+  $("#" + redSide + "CargoNumerator").css("color", setCargoColor(data.Red.ScoreSummary));
+  $("#" + redSide + "CargoDenominator").css("color", setCargoColor(data.Red.ScoreSummary));
+
+  $("#" + blueSide + "CargoNumerator").css("color", setCargoColor(data.Blue.ScoreSummary));
+  $("#" + blueSide + "CargoDenominator").css("color", setCargoColor(data.Blue.ScoreSummary));
+  //$(".score-fields").css("color", "Yellow");
+  
 };
 
+var setCargoColor = function(scoreSummary) {
+  //window.alert(game.QuintetThreshold);
+  if(scoreSummary.CargoBonusRankingPoint){ 
+    return "Aquamarine"
+  }
+  if (scoreSummary.QuintetAchieved) {
+    return "Yellow"
+  } else {
+    return "White"
+  }
+}
+
+var getUpperCargoCount = function(score){
+  var value = 0;
+  for (let i = 0; i < 4; i++) {
+    value += score.AutoCargoUpper[i] + score.TeleopCargoUpper[i];
+  }
+  return value;
+}
+
+var getLowerCargoCount = function(score){
+  var value = 0;
+  for (let i = 0; i < 4; i++) {
+    value += score.AutoCargoLower[i] + score.TeleopCargoLower[i];
+  }
+  return value;
+}
+
+
+var finalSeriesStatus;// = data.SeriesStatus;
 var redscore = 0;
 var bluescore = 0;
 var matchtype;
