@@ -15,6 +15,7 @@ var currentMatch;
 var overlayCenteringHideParams;
 var overlayCenteringShowParams;
 var allianceSelectionTemplate = Handlebars.compile($("#allianceSelectionTemplate").html());
+var availableTeamsTemplate = Handlebars.compile($("#availableTeamsTemplate").html());
 var sponsorImageTemplate = Handlebars.compile($("#sponsorImageTemplate").html());
 var sponsorTextTemplate = Handlebars.compile($("#sponsorTextTemplate").html());
 
@@ -289,10 +290,12 @@ var handlePlaySound = function(sound) {
 var handleAllianceSelection = function(alliances) {
   if (alliances && alliances.length > 0) {
     var numColumns = alliances[0].TeamIds.length + 1;
+    
     $.each(alliances, function(k, v) {
       v.Index = k + 1;
     });
     $("#allianceSelection").html(allianceSelectionTemplate({alliances: alliances, numColumns: numColumns}));
+    $("#availableTeams").html(availableTeamsTemplate({rankedTeams: alliances}));
   }
 };
 
