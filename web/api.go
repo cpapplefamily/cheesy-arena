@@ -296,6 +296,8 @@ func (web *Web) generateBracketSvg(w io.Writer, hideActive bool) error {
 	if web.arena.EventSettings.ElimType == "double" {
 		if numAlliances == 8 {
 			bracketType = "double_8"
+		} else if numAlliances == 6 {
+			bracketType = "double_6"
 		} else if numAlliances == 4 {
 			bracketType = "double_4"
 		} else {

@@ -50,8 +50,8 @@ func (web *Web) settingsPostHandler(w http.ResponseWriter, r *http.Request) {
 		numAlliances, _ = strconv.Atoi(r.PostFormValue("numElimAlliances"))
 		log.Printf("setup_settings.go numAlliances: %s", numAlliances)
 		
-		if numAlliances != 4 && numAlliances != 8 {
-			web.renderSettings(w, r, "Number of alliances For Double Must be 4 or 8.")
+		if numAlliances != 4 && numAlliances != 8 && numAlliances != 6 {
+			web.renderSettings(w, r, "Number of alliances For Double Must be 4, 6, or 8.")
 			return
 		} 
 	} else {

@@ -14,11 +14,13 @@ import (
 func NewDoubleEliminationBracket(numAlliances int) (*Bracket, error) {
 	if (numAlliances == 8) {
 		return newBracket(doubleEliminationBracketMatchupTemplates_8, newMatchupKey(6, 1), numAlliances)
+	}else if (numAlliances == 6) {
+		return newBracket(doubleEliminationBracketMatchupTemplates_6, newMatchupKey(6, 1), numAlliances)
 	}else if (numAlliances == 4) {
 		return newBracket(doubleEliminationBracketMatchupTemplates_4, newMatchupKey(6, 1), numAlliances)
 	}else{
 		log.Printf("NewDoubleEliminationBracket numAlliances: %s", numAlliances)
-		return nil, fmt.Errorf("Must have exactly 4 or 8 alliances")	
+		return nil, fmt.Errorf("Must have exactly 4,6 or 8 alliances")	
 	}
 }
 
@@ -122,6 +124,107 @@ var doubleEliminationBracketMatchupTemplates_8 = []matchupTemplate{
 		blueAllianceSource: newWinnerAllianceSource(5, 1),
 	},
 }
+var doubleEliminationBracketMatchupTemplates_6 = []matchupTemplate{
+	{	//Fource Alliance RED to win
+		matchupKey:         newMatchupKey(1, 1),
+		displayName:        "Alliance 1",
+		NumWinsToAdvance:   1,
+		redAllianceSource:  allianceSource{allianceId: 1},
+		blueAllianceSource: allianceSource{allianceId: 1},
+	},
+	{	
+		matchupKey:         newMatchupKey(1, 2),
+		displayName:        "M1",
+		NumWinsToAdvance:   1,
+		redAllianceSource:  allianceSource{allianceId: 4},
+		blueAllianceSource: allianceSource{allianceId: 5},
+	},
+	{	
+		matchupKey:         newMatchupKey(1, 3),
+		displayName:        "M2",
+		NumWinsToAdvance:   1,
+		redAllianceSource:  allianceSource{allianceId: 3},
+		blueAllianceSource: allianceSource{allianceId: 6},
+	},
+	{	//Fource Alliance RED to win
+		matchupKey:         newMatchupKey(1, 4),
+		displayName:        "Alliance 2",
+		NumWinsToAdvance:   1,
+		redAllianceSource:  allianceSource{allianceId: 2},
+		blueAllianceSource: allianceSource{allianceId: 2},
+	},
+	{	
+		matchupKey:         newMatchupKey(2, 1),
+		displayName:        "Loser M3",
+		NumWinsToAdvance:   1,
+		redAllianceSource:  newLoserAllianceSource(2, 3),
+		blueAllianceSource: newLoserAllianceSource(2, 3),
+	},
+	{	
+		matchupKey:         newMatchupKey(2, 2),
+		displayName:        "Loser M4",
+		NumWinsToAdvance:   1,
+		redAllianceSource:  newLoserAllianceSource(2, 4),
+		blueAllianceSource: newLoserAllianceSource(2, 4),
+	},
+	{	//Fource Alliance RED to win
+		matchupKey:         newMatchupKey(2, 3),
+		displayName:        "M3",
+		NumWinsToAdvance:   1,
+		redAllianceSource:  newWinnerAllianceSource(1, 1),
+		blueAllianceSource: newWinnerAllianceSource(1, 2),
+	},
+	{   //Fource Alliance RED to win
+		matchupKey:         newMatchupKey(2, 4),
+		displayName:        "M4",
+		NumWinsToAdvance:   1,
+		redAllianceSource:  newWinnerAllianceSource(1, 4),
+		blueAllianceSource: newWinnerAllianceSource(1, 3),
+	},
+	{	
+		matchupKey:         newMatchupKey(3, 1),
+		displayName:        "M6",
+		NumWinsToAdvance:   1,
+		redAllianceSource:  newLoserAllianceSource(1, 2),
+		blueAllianceSource: newWinnerAllianceSource(2, 2),
+	},
+	{	
+		matchupKey:         newMatchupKey(3, 2),
+		displayName:        "M5",
+		NumWinsToAdvance:   1,
+		redAllianceSource:  newLoserAllianceSource(1, 3),
+		blueAllianceSource: newWinnerAllianceSource(2, 1),
+	},
+	{
+		matchupKey:         newMatchupKey(4, 1),
+		displayName:        "M8",
+		NumWinsToAdvance:   1,
+		redAllianceSource:  newWinnerAllianceSource(3, 2),
+		blueAllianceSource: newWinnerAllianceSource(3, 1),
+	},
+	{
+		matchupKey:         newMatchupKey(4, 2),
+		displayName:        "M7",
+		NumWinsToAdvance:   1,
+		redAllianceSource:  newWinnerAllianceSource(2, 3),
+		blueAllianceSource: newWinnerAllianceSource(2, 4),
+	},
+	{
+		matchupKey:         newMatchupKey(5, 1),
+		displayName:        "M9",
+		NumWinsToAdvance:   1,
+		redAllianceSource:  newLoserAllianceSource(4, 2),
+		blueAllianceSource: newWinnerAllianceSource(4, 1),
+	},
+	{
+		matchupKey:         newMatchupKey(6, 1),
+		displayName:        "F",
+		NumWinsToAdvance:   2,
+		redAllianceSource:  newWinnerAllianceSource(4, 2),
+		blueAllianceSource: newWinnerAllianceSource(5, 1),
+	},
+}
+
 var doubleEliminationBracketMatchupTemplates_4 = []matchupTemplate{
 	{	//Fource Alliance RED to win
 		matchupKey:         newMatchupKey(1, 1),
