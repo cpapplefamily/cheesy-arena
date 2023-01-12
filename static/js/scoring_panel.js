@@ -57,8 +57,12 @@ var handleRealtimeScore = function(data) {
     var i1 = i + 1;
     $("#taxiStatus" + i1 + ">.value").text(score1.TaxiStatuses[i] ? "Yes" : "No");
     $("#taxiStatus" + i1).attr("data-value", score1.TaxiStatuses[i]);
+    $("#mobilityStatus" + i1 + ">.value").text(score1.MobilityStatuses[i] ? "Yes" : "No");
+    $("#mobilityStatus" + i1).attr("data-value", score1.MobilityStatuses[i]);
     $("#endgameStatus" + i1 + ">.value").text(getEndgameStatusText(score1.EndgameStatuses[i]));
     $("#endgameStatus" + i1).attr("data-value", score1.EndgameStatuses[i]);
+    $("#chargedUpEndgameStatus" + i1 + ">.value").text(getChargedUpEndgameStatusText(score1.ChargedUpEndgameStatuses[i]));
+    $("#chargedUpEndgameStatus" + i1).attr("data-value", score1.ChargedUpEndgameStatuses[i]);
     $("#autoCargoLower").text(score1.AutoCargoLower[0]);
     $("#autoCargoUpper").text(score1.AutoCargoUpper[0]);
     $("#teleopCargoLower").text(score1.TeleopCargoLower[0]);
@@ -70,8 +74,12 @@ var handleRealtimeScore = function(data) {
     var i1 = i + 1;
     $("#taxiStatus2" + i1 + ">.value").text(score2.TaxiStatuses[i] ? "Yes" : "No");
     $("#taxiStatus2" + i1).attr("data-value", score2.TaxiStatuses[i]);
+    $("#mobilityStatus2" + i1 + ">.value").text(score2.MobilityStatuses[i] ? "Yes" : "No");
+    $("#mobilityStatus2" + i1).attr("data-value", score2.MobilityStatuses[i]);
     $("#endgameStatus2" + i1 + ">.value").text(getEndgameStatusText(score2.EndgameStatuses[i]));
     $("#endgameStatus2" + i1).attr("data-value", score2.EndgameStatuses[i]);
+    $("#chargedUpEndgameStatus2" + i1 + ">.value").text(getChargedUpEndgameStatusText(score2.ChargedUpEndgameStatuses[i]));
+    $("#chargedUpEndgameStatus2" + i1).attr("data-value", score2.ChargedUpEndgameStatuses[i]);
     $("#autoCargoLower2").text(score2.AutoCargoLower[0]);
     $("#autoCargoUpper2").text(score2.AutoCargoUpper[0]);
     $("#teleopCargoLower2").text(score2.TeleopCargoLower[0]);
@@ -107,6 +115,17 @@ var getEndgameStatusText = function(level) {
       return "High";
     case 4:
       return "Traversal";
+    default:
+      return "None";
+  }
+};
+var getChargedUpEndgameStatusText = function(level) {
+  //console.log(level);
+  switch (level) {
+    case 1:
+      return "Parked";
+    case 2:
+      return "Docked";
     default:
       return "None";
   }

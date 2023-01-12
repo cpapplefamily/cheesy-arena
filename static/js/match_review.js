@@ -36,7 +36,9 @@ var renderResults = function(alliance) {
 
     if (i < 3) {
       getInputElement(alliance, "TaxiStatuses" + i1).prop("checked", result.score.TaxiStatuses[i]);
+      getInputElement(alliance, "MobilityStatuses" + i1).prop("checked", result.score.MobilityStatuses[i]);
       getInputElement(alliance, "EndgameStatuses" + i1, result.score.EndgameStatuses[i]).prop("checked", true);
+      getInputElement(alliance, "ChargedUpEndgameStatuses" + i1, result.score.ChargedUpEndgameStatuses[i]).prop("checked", true);
     }
 
     getInputElement(alliance, "AutoCargoLower" + i).val(result.score.AutoCargoLower[i]);
@@ -74,12 +76,15 @@ var updateResults = function(alliance) {
   result.score.TeleopCargoLower = [];
   result.score.TeleopCargoUpper = [];
   result.score.EndgameStatuses = [];
+  result.score.ChargedUpEndgameStatuses = [];
   for (var i = 0; i < 4; i++) {
     var i1 = i + 1;
 
     if (i < 3) {
       result.score.TaxiStatuses[i] = formData[alliance + "TaxiStatuses" + i1] === "on";
+      result.score.MobilityStatuses[i] = formData[alliance + "TaxiStatuses" + i1] === "on";
       result.score.EndgameStatuses[i] = parseInt(formData[alliance + "EndgameStatuses" + i1]);
+      result.score.ChargedUpEndgameStatuses[i] = parseInt(formData[alliance + "ChargedUpEndgameStatuses" + i1]);
     }
 
     result.score.AutoCargoLower[i] = parseInt(formData[alliance + "AutoCargoLower" + i]);

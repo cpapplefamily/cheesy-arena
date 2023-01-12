@@ -115,12 +115,18 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 			if number <= 3 {
 				index := number - 1
 				score1.TaxiStatuses[index] = !score1.TaxiStatuses[index]
+				score1.MobilityStatuses[index] = !score1.MobilityStatuses[index]
 				scoreChanged = true
 			} else {
 				index := number - 4
 				score1.EndgameStatuses[index]++
 				if score1.EndgameStatuses[index] == 5 {
 					score1.EndgameStatuses[index] = 0
+				}
+				score1.ChargedUpEndgameStatuses[index]++
+				if score1.ChargedUpEndgameStatuses[index] == 3 {
+					score1.ChargedUpEndgameStatuses[index] = 0
+					log.Print(index)
 				}
 				scoreChanged = true
 			}

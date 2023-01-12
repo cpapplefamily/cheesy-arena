@@ -20,6 +20,20 @@ type ScoreSummary struct {
 	CargoBonusRankingPoint  bool
 	HangarBonusRankingPoint bool
 	DoubleBonusRankingPoint bool
+	MobilityPoints						int
+	GridPoints							int
+	AutoPoints							int
+	AutoChargePoints					int
+	LinksCount							int
+	LinksPoints							int
+	LinksGoal							int
+	LinksRankingPoint					bool
+	Endgame_ParkedPoints				int
+	Endgame_DockedPoints				int
+	Endgame_EngagedPoints				int
+	ChargeStationPoints					int
+	ChargeStationRankingPoint			bool
+
 }
 
 type MatchStatus string
