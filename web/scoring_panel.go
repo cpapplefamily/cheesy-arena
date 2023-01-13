@@ -101,7 +101,11 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 		score1 := &(*realtimeScore1).CurrentScore
 		score2 := &(*realtimeScore2).CurrentScore
 		scoreChanged := false
-
+		if command == "-"{
+			log.Print("command: ",command)
+			score1.EndGameChargeStationEngaged = !score1.EndGameChargeStationEngaged
+			scoreChanged = true	
+		}
 		if command == "commitMatch" {
 			if web.arena.MatchState != field.PostMatch {
 				// Don't allow committing the score until the match is over.
@@ -110,15 +114,19 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 			}
 			web.arena.ScoringPanelRegistry.SetScoreCommitted(alliance, ws)
 			web.arena.ScoringStatusNotifier.Notify()
-		} else if number, err := strconv.Atoi(command); err == nil && number >= 1 && number <= 6 {
+		} else if number, err := strconv.Atoi(command); err == nil && number >= 0 && number <= 9 {
 			// Handle per-robot scoring fields.
-			if number <= 3 {
+			log.Print("Number: ", number)
+			if number == 0 {
+				score1.AutoChargeStationEngaged = !score1.AutoChargeStationEngaged
+				scoreChanged = true	
+			} else if number <= 3 {
 				index := number - 1
 				score1.TaxiStatuses[index] = !score1.TaxiStatuses[index]
 				score1.MobilityStatuses[index] = !score1.MobilityStatuses[index]
 				scoreChanged = true
-			} else {
-				index := number - 4
+			} else if number >= 7{ //Buttons 7-9
+				index := number - 7
 				score1.EndgameStatuses[index]++
 				if score1.EndgameStatuses[index] == 5 {
 					score1.EndgameStatuses[index] = 0
@@ -126,9 +134,12 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 				score1.ChargedUpEndgameStatuses[index]++
 				if score1.ChargedUpEndgameStatuses[index] == 3 {
 					score1.ChargedUpEndgameStatuses[index] = 0
-					log.Print(index)
 				}
 				scoreChanged = true
+			} else { //Buttons 4-6
+				index := number - 4
+				score1.AutoChargeStationDockedStatuses[index] = !score1.AutoChargeStationDockedStatuses[index]
+				scoreChanged = true	
 			}
 		} else if !web.arena.Plc.IsEnabled() {
 			switch strings.ToUpper(command) {

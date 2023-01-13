@@ -63,12 +63,20 @@ var handleRealtimeScore = function(data) {
     $("#endgameStatus" + i1).attr("data-value", score1.EndgameStatuses[i]);
     $("#chargedUpEndgameStatus" + i1 + ">.value").text(getChargedUpEndgameStatusText(score1.ChargedUpEndgameStatuses[i]));
     $("#chargedUpEndgameStatus" + i1).attr("data-value", score1.ChargedUpEndgameStatuses[i]);
+    $("#autoDockedStatus" + i1 + ">.value").text(score1.AutoChargeStationDockedStatuses[i] ? "Yes" : "No");
+    $("#autoDockedStatus" + i1).attr("data-value", score1.AutoChargeStationDockedStatuses[i]);
     $("#autoCargoLower").text(score1.AutoCargoLower[0]);
     $("#autoCargoUpper").text(score1.AutoCargoUpper[0]);
     $("#teleopCargoLower").text(score1.TeleopCargoLower[0]);
     $("#teleopCargoUpper").text(score1.TeleopCargoUpper[0]);
+    //For Debuging Scoring
   }
-
+  $("#currentScore").text("Current Score: " + realtimeScore1.ScoreSummary.Score);
+  $("#autoEngagedStatus>.value").text(score1.AutoChargeStationEngaged ? "Yes" : "No");
+  $("#autoEngagedStatus").attr("data-value", score1.AutoChargeStationEngaged);
+  $("#endGameChargeStationEngaged>.value").text(score1.EndGameChargeStationEngaged ? "Yes" : "No");
+  $("#endGameChargeStationEngaged").attr("data-value", score1.EndGameChargeStationEngaged);
+  
   //Group Two Score 
   for (var i = 0; i < 3; i++) {
     var i1 = i + 1;
@@ -80,10 +88,13 @@ var handleRealtimeScore = function(data) {
     $("#endgameStatus2" + i1).attr("data-value", score2.EndgameStatuses[i]);
     $("#chargedUpEndgameStatus2" + i1 + ">.value").text(getChargedUpEndgameStatusText(score2.ChargedUpEndgameStatuses[i]));
     $("#chargedUpEndgameStatus2" + i1).attr("data-value", score2.ChargedUpEndgameStatuses[i]);
+    $("#autoDockedStatus2" + i1 + ">.value").text(score2.AutoChargeStationDockedStatuses[i] ? "Yes" : "No");
+    $("#autoDockedStatus2" + i1).attr("data-value", score2.AutoChargeStationDockedStatuses[i]);
     $("#autoCargoLower2").text(score2.AutoCargoLower[0]);
     $("#autoCargoUpper2").text(score2.AutoCargoUpper[0]);
     $("#teleopCargoLower2").text(score2.TeleopCargoLower[0]);
     $("#teleopCargoUpper2").text(score2.TeleopCargoUpper[0]);
+    $("#currentScore2").text(realtimeScore2.ScoreSummary.Score);
   }
 };
 
@@ -94,6 +105,7 @@ var handleKeyPress = function(event) {
 
 // Handles an element click and sends the appropriate websocket message.
 var handleClick = function(shortcut) {
+  console.log(shortcut)
   websocket.send(shortcut);
 };
 

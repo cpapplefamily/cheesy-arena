@@ -23,7 +23,7 @@ UI for entering realtime scores.
         <div class="value"></div>
         <div class="shortcut"></div>
       </div>
-      <div id="chargedUpEndgameStatus{{$i}}" class="endgame-status robot-field" onclick="handleClick('{{add $i 3}}');">
+      <div id="autoDockedStatus{{$i}}" class="boolean robot-field" onclick="handleClick('{{add $i 3}}');">
         <div class="shortcut">{{add $i 3}}</div>
         <div class="value"></div>
         <div class="shortcut"></div>
@@ -35,6 +35,22 @@ UI for entering realtime scores.
       </div>
     </div>
     {{end}}
+    <div>
+      <div id="currentScore"></div>
+      <div>Engaged Status </div>
+      <div id="autoEngagedStatus" class="boolean robot-field" onclick="handleClick('{{0}}');">
+        <div class="shortcut">{{0}}</div>
+        <div class="value"></div>
+        <div class="shortcut"></div>
+      </div>
+      <div id="endGameChargeStationEngaged" class="boolean robot-field" onclick="handleClick('-');">
+        <div class="shortcut">-</div>
+        <div class="value"></div>
+        <div class="shortcut"></div>
+      </div>
+    </div>
+
+
   </div>
   {{if not .PlcIsEnabled}}
   <div id="elements">
