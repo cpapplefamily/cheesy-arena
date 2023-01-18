@@ -38,6 +38,7 @@ UI for entering realtime scores.
     <div>
       <div id="currentScore"></div>
       <div>Engaged Status </div>
+      <div>&nbsp;</div>
       <div id="autoEngagedStatus" class="boolean robot-field" onclick="handleClick('{{0}}');">
         <div class="shortcut">{{0}}</div>
         <div class="value"></div>
@@ -56,19 +57,65 @@ UI for entering realtime scores.
   <div id="elements">
     <div class="scoring-section">
       <div>
-        <div>&nbsp;</div>
         <div class="goal-header">Upper</div>
+        <div class="goal-header">Mid</div>
         <div class="goal-header">Lower</div>
       </div>
+
+
       <div>
-        <div class="goal-period">Auto</div>
-        {{template "goal" dict "period" "auto" "level" "Upper" "plus" "W" "minus" "Q"}}
-        {{template "goal" dict "period" "auto" "level" "Lower" "plus" "S" "minus" "A"}}
+        <div class="goal-period"></div>
+        {{template "grid" dict "gamePiece" "cone" "key" "Q"}}
+        {{template "grid" dict "gamePiece" "cone" "key" "A"}}
+        {{template "grid" dict "gamePiece" "lowerGrid" "key" "Z"}}
       </div>
       <div>
-        <div class="goal-period">Teleop</div>
-        {{template "goal" dict "period" "teleop" "level" "Upper" "plus" "R" "minus" "E"}}
-        {{template "goal" dict "period" "teleop" "level" "Lower" "plus" "F" "minus" "D"}}
+        <div class="goal-period"></div>
+        {{template "grid" dict "gamePiece" "cube" "key" "W"}}
+        {{template "grid" dict "gamePiece" "cube" "key" "S"}}
+        {{template "grid" dict "gamePiece" "lowerGrid" "key" "X"}}
+      </div>
+      <div>
+        <div class="goal-period"></div>
+        {{template "grid" dict "gamePiece" "cone" "key" "E"}}
+        {{template "grid" dict "gamePiece" "cone" "key" "D"}}
+        {{template "grid" dict "gamePiece" "lowerGrid" "key" "C"}}
+      </div>
+      <div>
+        <div class="goal-period"></div>
+        {{template "grid" dict "gamePiece" "cone" "key" "R"}}
+        {{template "grid" dict "gamePiece" "cone" "key" "F"}}
+        {{template "grid" dict "gamePiece" "lowerGrid" "key" "V"}}
+      </div>
+      <div>
+        <div class="goal-period"></div>
+        {{template "grid" dict "gamePiece" "cube" "key" "T"}}
+        {{template "grid" dict "gamePiece" "cube" "key" "G"}}
+        {{template "grid" dict "gamePiece" "lowerGrid" "key" "B"}}
+      </div>
+      <div>
+        <div class="goal-period"></div>
+        {{template "grid" dict "gamePiece" "cone" "key" "Y"}}
+        {{template "grid" dict "gamePiece" "cone" "key" "H"}}
+        {{template "grid" dict "gamePiece" "lowerGrid" "key" "N"}}
+      </div>
+      <div>
+        <div class="goal-period"></div>
+        {{template "grid" dict "gamePiece" "cone" "key" "U"}}
+        {{template "grid" dict "gamePiece" "cone" "key" "J"}}
+        {{template "grid" dict "gamePiece" "lowerGrid" "key" "M"}}
+      </div>
+      <div>
+        <div class="goal-period"></div>
+        {{template "grid" dict "gamePiece" "cube" "key" "I"}}
+        {{template "grid" dict "gamePiece" "cube" "key" "K"}}
+        {{template "grid" dict "gamePiece" "lowerGrid" "key" ","}}
+      </div>
+      <div>
+        <div class="goal-period"></div>
+        {{template "grid" dict "gamePiece" "cone" "key" "O"}}
+        {{template "grid" dict "gamePiece" "cone" "key" "L"}}
+        {{template "grid" dict "gamePiece" "lowerGrid" "key" "."}}
       </div>
     </div>
   </div>
@@ -83,6 +130,7 @@ UI for entering realtime scores.
       <div>
         <div>&nbsp;</div>
         <div class="goal-header">Upper</div>
+        <div class="goal-header">Mid</div>
         <div class="goal-header">Lower</div>
       </div>
       <div>
@@ -125,7 +173,6 @@ UI for entering realtime scores.
   </div>
 </div>
 {{end}}
-
 {{define "goal2"}}
 <div class="goal">
   <div class="number-button minus" onclick="handleClick('{{.minus}}');">
@@ -134,6 +181,13 @@ UI for entering realtime scores.
   <div id="{{.period}}Cargo{{.level}}2"></div>
   <div class="number-button plus" onclick="handleClick('{{.plus}}');">
     <div class="shortcut">{{.plus}}</div>+<div class="shortcut" style="opacity: 0;">{{.plus}}</div>
+  </div>
+</div>
+{{end}}
+{{define "grid"}}
+<div class="grid">
+  <div class="grid-button {{.gamePiece}}" onclick="handleClick('{{.key}}');">
+    <div class="shortcut">{{.key}}</div>-<div class="shortcut" style="opacity: 0;">{{.key}}</div>
   </div>
 </div>
 {{end}}
