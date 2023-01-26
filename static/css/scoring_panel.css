@@ -77,6 +77,16 @@ body {
   border: 3px solid #666;
   border-radius: 0.5vw;
 }
+.gameState {
+  width: 17vw;
+  height: 5vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.4vw 0.2vw;
+  border: 3px solid #666;
+  border-radius: 0.5vw;
+}
 .team {
   display: flex;
   justify-content: center;
@@ -153,6 +163,7 @@ body {
   border: 1px solid #666;
   border-radius: 0.5vw;
   font-size: 3vw;
+  color: rgb(0, 0, 0);
 }
 .plus {
   background: #263;
@@ -175,7 +186,7 @@ body {
   background: rgb(173, 49, 231);
 }
 .lowerGrid {
-  background: rgb(131, 102, 144);
+  background: rgb(185, 176, 189);
 }
 #instructions {
   margin-top: 0.3vw;

@@ -10,6 +10,7 @@ import (
 	"github.com/Team254/cheesy-arena/field"
 	"github.com/Team254/cheesy-arena/model"
 	"github.com/Team254/cheesy-arena/websocket"
+	"github.com/Team254/cheesy-arena/game"
 	"github.com/gorilla/mux"
 	"io"
 	"log"
@@ -101,6 +102,11 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 		score1 := &(*realtimeScore1).CurrentScore
 		score2 := &(*realtimeScore2).CurrentScore
 		scoreChanged := false
+		if command == "`"{
+			log.Print("command: ",command)
+			score1.AutoGridToggle_Enabled = !score1.AutoGridToggle_Enabled
+			scoreChanged = true
+		}
 		if command == "-"{
 			log.Print("command: ",command)
 			score1.EndGameChargeStationEngaged = !score1.EndGameChargeStationEngaged
@@ -185,40 +191,64 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 						scoreChanged = incrementGoal(score2.TeleopCargoUpper[:])
 					}
 				}
-				
+			
+			//Top Row
 			case "Q":
-				scoreChanged = decrementGoal(score1.AutoCargoUpper[:])
-			case "A":
-				scoreChanged = decrementGoal(score1.AutoCargoLower[:])
+				scoreChanged = gridscored(score1,2,0)
 			case "W":
-				scoreChanged = incrementGoal(score1.AutoCargoUpper[:])
-			case "S":
-				scoreChanged = incrementGoal(score1.AutoCargoLower[:])
+				scoreChanged = gridscored(score1,2,1)
 			case "E":
-				scoreChanged = decrementGoal(score1.TeleopCargoUpper[:])
-			case "D":
-				scoreChanged = decrementGoal(score1.TeleopCargoLower[:])
+				scoreChanged = gridscored(score1,2,2)
 			case "R":
-				scoreChanged = incrementGoal(score1.TeleopCargoUpper[:])
-			case "F":
-				scoreChanged = incrementGoal(score1.TeleopCargoLower[:])
-				//Group tWO
+				scoreChanged = gridscored(score1,2,3)
+			case "T":
+				scoreChanged = gridscored(score1,2,4)
+			case "Y":
+				scoreChanged = gridscored(score1,2,5)
 			case "U":
-				scoreChanged = decrementGoal(score2.AutoCargoUpper[:])
-			case "H":
-				scoreChanged = decrementGoal(score2.AutoCargoLower[:])
+				scoreChanged = gridscored(score1,2,6)
 			case "I":
-				scoreChanged = incrementGoal(score2.AutoCargoUpper[:])
-			case "J":
-				scoreChanged = incrementGoal(score2.AutoCargoLower[:])
+				scoreChanged = gridscored(score1,2,7)
 			case "O":
-				scoreChanged = decrementGoal(score2.TeleopCargoUpper[:])
+				scoreChanged = gridscored(score1,2,8)
+			//Mid Row
+			case "A":
+				scoreChanged = gridscored(score1,1,0)
+			case "S":
+				scoreChanged = gridscored(score1,1,1)
+			case "D":
+				scoreChanged = gridscored(score1,1,2)
+			case "F":
+				scoreChanged = gridscored(score1,1,3)
+			case "G":
+				scoreChanged = gridscored(score1,1,4)
+			case "H":
+				scoreChanged = gridscored(score1,1,5)
+			case "J":
+				scoreChanged = gridscored(score1,1,6)
 			case "K":
-				scoreChanged = decrementGoal(score2.TeleopCargoLower[:])
-			case "P":
-				scoreChanged = incrementGoal(score2.TeleopCargoUpper[:])
+				scoreChanged = gridscored(score1,1,7)
 			case "L":
-				scoreChanged = incrementGoal(score2.TeleopCargoLower[:])
+				scoreChanged = gridscored(score1,1,8)
+			//Bottom Row
+			case "Z":
+				scoreChanged = gridscored(score1,0,0)
+			case "X":
+				scoreChanged = gridscored(score1,0,1)
+			case "C":
+				scoreChanged = gridscored(score1,0,2)
+			case "V":
+				scoreChanged = gridscored(score1,0,3)
+			case "B":
+				scoreChanged = gridscored(score1,0,4)
+			case "N":
+				scoreChanged = gridscored(score1,0,5)
+			case "M":
+				scoreChanged = gridscored(score1,0,6)
+			case ",":
+				scoreChanged = gridscored(score1,0,7)
+			case ".":
+				scoreChanged = gridscored(score1,0,8)
 			}
 
 		}
@@ -244,4 +274,14 @@ func decrementGoal(goal []int) bool {
 		return true
 	}
 	return false
+}
+
+func gridscored(score *game.Score, row int, column int)bool{
+	if(score.AutoGridToggle_Enabled){
+		score.GridAciveInAutoStatuses[row][column] = !score.GridAciveInAutoStatuses[row][column] 
+		score.GridGamePeiceStatuses[row][column]  = score.GridAciveInAutoStatuses[row][column] 
+	}else{
+		score.GridGamePeiceStatuses[row][column]  = !score.GridGamePeiceStatuses[row][column] 
+	}
+	return true
 }

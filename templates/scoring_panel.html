@@ -56,6 +56,11 @@ UI for entering realtime scores.
   {{if not .PlcIsEnabled}}
   <div id="elements">
     <div class="scoring-section">
+      <div id="autoGridToggleEnabled" class="boolean gameState" onclick="handleClick('`');">
+        <div class="shortcut">`</div>
+        <div class="value"></div>
+        <div class="shortcut"></div>
+      </div>
       <div>
         <div class="goal-header">Upper</div>
         <div class="goal-header">Mid</div>

@@ -14,11 +14,13 @@ type Score struct {
 	TeleopCargoLower                [4]int
 	TeleopCargoUpper                [4]int
 	EndgameStatuses                 [3]EndgameStatus
+	AutoGridToggle_Enabled			bool
 	MobilityStatuses                [3]bool
 	AutoChargeStationDockedStatuses [3]bool
 	AutoChargeStationEngaged        bool
 	GridAciveInAutoStatuses         [3][9]bool
-	GridStatuses                    [3][9]bool
+	GridGamePeiceStatuses           [3][9]bool
+	GridAnimationStatuses			[3][9]GridAnimationStatus
 	LinksStatuses                   [3][7]int
 	Links                           int
 	ChargedUpEndgameStatuses        [3]ChargedUpEndgameStatus
@@ -57,6 +59,15 @@ const (
 	Endgame_Docked
 )
 
+type GridAnimationStatus int
+
+const (
+	No_None GridAnimationStatus = iota
+	
+	Auto_With_GamePeice
+	Auto_WithOut_GamePeice
+	
+)
 // Calculates and returns the summary fields used for ranking and display.
 func (score *Score) Summarize(opponentFouls []Foul) *ScoreSummary {
 	summary := new(ScoreSummary)
@@ -106,29 +117,29 @@ func (score *Score) Summarize(opponentFouls []Foul) *ScoreSummary {
 	//*** Start Charged Up Apply Bouns point if the Grid was populated in auto and had a active game Piece
 	for i := 0; i < 9; i++ {
 		//Low Goal points
-		if score.GridStatuses[0][i] {
+		if score.GridGamePeiceStatuses[0][i] {
 			summary.GridPoints += 2
 		}
 		//Low Goal Auto Bonus
-		if score.GridStatuses[0][i] && score.GridAciveInAutoStatuses[0][i] {
+		if score.GridGamePeiceStatuses[0][i] && score.GridAciveInAutoStatuses[0][i] {
 			summary.GridPoints += 1
 			summary.AutoPoints += 3 // Auto Points only used for Tie Breaker Otherwise its in the GridPoints already
 		}
 		//Mid Goal points
-		if score.GridStatuses[1][i] {
+		if score.GridGamePeiceStatuses[1][i] {
 			summary.GridPoints += 3
 		}
 		//Mid Goal Auto Bonus
-		if score.GridStatuses[1][i] && score.GridAciveInAutoStatuses[1][i] {
+		if score.GridGamePeiceStatuses[1][i] && score.GridAciveInAutoStatuses[1][i] {
 			summary.GridPoints += 1
 			summary.AutoPoints += 4 // Auto Points only used for Tie Breaker Otherwise its in the GridPoints already
 		}
 		//Hight Goal points
-		if score.GridStatuses[2][i] {
+		if score.GridGamePeiceStatuses[2][i] {
 			summary.GridPoints += 5
 		}
 		//High Goal Auto Bonus
-		if score.GridStatuses[2][i] && score.GridAciveInAutoStatuses[2][i] {
+		if score.GridGamePeiceStatuses[2][i] && score.GridAciveInAutoStatuses[2][i] {
 			summary.GridPoints += 1
 			summary.AutoPoints += 6 // Auto Points only used for Tie Breaker Otherwise its in the GridPoints already
 		}
@@ -146,18 +157,28 @@ func (score *Score) Summarize(opponentFouls []Foul) *ScoreSummary {
 
 	//*** Start Charged Up Calculate Links Statuse
 	//Fist step finds all overlaping groups of 3
+	for i := 0; i < 3; i++{
+		for j := 0; j < 7; j++{
+			score.LinksStatuses[i][j] = 0
+		}
+	}
 	for i := 0; i < 3; i++ {
 		for j := 0; j < 7; j++ {
-			if score.GridStatuses[i][j] {
+			if score.GridGamePeiceStatuses[i][j] {
 				score.LinksStatuses[i][j] = score.LinksStatuses[i][j] + 1
 			}
-			if score.GridStatuses[i][j+1] {
+			if score.GridGamePeiceStatuses[i][j+1] {
 				score.LinksStatuses[i][j] = score.LinksStatuses[i][j] + 1
 			}
-			if score.GridStatuses[i][j+2] {
+			if score.GridGamePeiceStatuses[i][j+2] {
 				score.LinksStatuses[i][j] = score.LinksStatuses[i][j] + 1
 			}
 		}
+	}
+
+	log.Print("All Links")
+	for i := 0; i < 3; i++{
+		log.Print(score.LinksStatuses[i][0],",",score.LinksStatuses[i][1],",",score.LinksStatuses[i][2],",",score.LinksStatuses[i][3],",",score.LinksStatuses[i][4],",",score.LinksStatuses[i][5],",",score.LinksStatuses[i][6])
 	}
 	// Second step removes Overlaping
 	// Column 0
@@ -169,6 +190,12 @@ func (score *Score) Summarize(opponentFouls []Foul) *ScoreSummary {
 			score.LinksStatuses[i][1] = 0
 		}
 	}
+
+	log.Print("Remove Column 1")
+	for i := 0; i < 3; i++{
+		log.Print(score.LinksStatuses[i][0],",",score.LinksStatuses[i][1],",",score.LinksStatuses[i][2],",",score.LinksStatuses[i][3],",",score.LinksStatuses[i][4],",",score.LinksStatuses[i][5],",",score.LinksStatuses[i][6])
+	}
+	
 	// Column 2-7
 	// Removed if either previous 2 columns are = 3
 	for i := 0; i < 3; i++ {
@@ -178,17 +205,24 @@ func (score *Score) Summarize(opponentFouls []Foul) *ScoreSummary {
 			}
 		}
 	}
-
+	log.Print("Remove Column 2-")
+	for i := 0; i < 3; i++{
+		log.Print(score.LinksStatuses[i][0],",",score.LinksStatuses[i][1],",",score.LinksStatuses[i][2],",",score.LinksStatuses[i][3],",",score.LinksStatuses[i][4],",",score.LinksStatuses[i][5],",",score.LinksStatuses[i][6])
+	}
+	
 	//Count the remaining Links
+	summary.LinksCount = 0
 	for i := 0; i < 3; i++ {
-		for j := 2; j < 7; j++ {
+		for j := 0; j < 7; j++ {
 			if score.LinksStatuses[i][j] >= 3 {
 				summary.LinksCount += 1
 			}
 		}
 	}
 
-	log.Print("summary.LinksCount: ", summary.LinksCount)
+	log.Print("Link Count: ", summary.LinksCount)
+
+	
 
 	//Total Links Points
 	summary.LinksPoints = summary.LinksCount * 5
@@ -279,8 +313,10 @@ func (score *Score) Summarize(opponentFouls []Foul) *ScoreSummary {
 
 	// Check for the opponent fouls that automatically trigger a ranking point.
 	// Note: There are no such fouls in the 2022 game; leaving this comment for future years.
+	log.Print("New Summery")
 	log.Print("summary.MobilityPoints: ", summary.MobilityPoints)
 	log.Print("summary.GridPoints: ", summary.GridPoints)
+	log.Print("summary.LinksCount: ", summary.LinksCount)
 	log.Print("summary.LinksPoints: ", summary.LinksPoints)
 	log.Print("summary.ChargeStationPoints: ", summary.ChargeStationPoints)
 	summary.MatchPoints = summary.MobilityPoints +

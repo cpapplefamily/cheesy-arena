@@ -52,6 +52,9 @@ var handleRealtimeScore = function(data) {
   var score1 = realtimeScore1.Score;
   var score2 = realtimeScore2.Score;
 
+  $("#autoGridToggleEnabled>.value").text(score1.AutoGridToggle_Enabled ? "Auto Score Toggel Enabled" : "Auto Score Toggel Disabled");
+  $("#autoGridToggleEnabled").attr("data-value", score1.AutoGridToggle_Enabled);
+
   //Group One Score
   for (var i = 0; i < 3; i++) {
     var i1 = i + 1;
