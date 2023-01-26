@@ -77,13 +77,29 @@ body {
   border: 3px solid #666;
   border-radius: 0.5vw;
 }
+.grid-field {
+  top: 0vh;
+  width: 4.1vw;
+  height: 2vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0vw ;
+  margin-bottom: 1vw;
+  margin-left: 0.2vw;
+  margin-right: 0.2vw;
+  border: 3px solid #666;
+  border-radius: 0.5vw;
+  align-self: start;
+}
 .gameState {
   width: 17vw;
   height: 5vw;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin: 0.4vw 0.2vw;
+  align-items: left;
+  margin-top: 8vw;
+  margin-right: 5vw;
   border: 3px solid #666;
   border-radius: 0.5vw;
 }
@@ -174,19 +190,33 @@ body {
 .grid {
   width: 5vw;
   height: 5vw;
-  margin: 0.4vw;
+  margin-top: 0.4vw;
+  margin-left: 0.4vw;
+  margin-right: 0.4vw;
+  margin-bottom: 0.0vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.cone {
+
+
+.cone[data-value="false"] {
   background: rgb(213, 231, 49);
 }
-.cube {
+.cone[data-value="true"] {
+  background: rgb(0, 255, 40);
+}
+.cube[data-value="false"]  {
   background: rgb(173, 49, 231);
 }
-.lowerGrid {
+.cube[data-value="true"]  {
+  background: rgb(0, 255, 0);
+}
+.lowerGrid[data-value="false"]  {
   background: rgb(185, 176, 189);
+}
+.lowerGrid[data-value="true"]  {
+  background: rgb(0, 255, 0);
 }
 #instructions {
   margin-top: 0.3vw;

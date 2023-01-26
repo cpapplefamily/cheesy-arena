@@ -56,71 +56,75 @@ UI for entering realtime scores.
   {{if not .PlcIsEnabled}}
   <div id="elements">
     <div class="scoring-section">
+     
       <div id="autoGridToggleEnabled" class="boolean gameState" onclick="handleClick('`');">
         <div class="shortcut">`</div>
         <div class="value"></div>
         <div class="shortcut"></div>
       </div>
+    
       <div>
         <div class="goal-header">Upper</div>
+        <div>&nbsp;</div>
         <div class="goal-header">Mid</div>
+        <div>&nbsp;</div>
         <div class="goal-header">Lower</div>
       </div>
 
 
       <div>
         <div class="goal-period"></div>
-        {{template "grid" dict "gamePiece" "cone" "key" "Q"}}
-        {{template "grid" dict "gamePiece" "cone" "key" "A"}}
-        {{template "grid" dict "gamePiece" "lowerGrid" "key" "Z"}}
+        {{template "grid" dict "gamePiece" "cone" "key" "Q" "row" "2" "column" "0"}}
+        {{template "grid" dict "gamePiece" "cone" "key" "A" "row" "1" "column" "0"}}
+        {{template "grid" dict "gamePiece" "lowerGrid" "key" "Z" "row" "0" "column" "0"}}
       </div>
       <div>
         <div class="goal-period"></div>
-        {{template "grid" dict "gamePiece" "cube" "key" "W"}}
-        {{template "grid" dict "gamePiece" "cube" "key" "S"}}
-        {{template "grid" dict "gamePiece" "lowerGrid" "key" "X"}}
+        {{template "grid" dict "gamePiece" "cube" "key" "W" "row" "2" "column" "1"}}
+        {{template "grid" dict "gamePiece" "cube" "key" "S" "row" "1" "column" "1"}}
+        {{template "grid" dict "gamePiece" "lowerGrid" "key" "X" "row" "0" "column" "1"}}
       </div>
       <div>
         <div class="goal-period"></div>
-        {{template "grid" dict "gamePiece" "cone" "key" "E"}}
-        {{template "grid" dict "gamePiece" "cone" "key" "D"}}
-        {{template "grid" dict "gamePiece" "lowerGrid" "key" "C"}}
+        {{template "grid" dict "gamePiece" "cone" "key" "E" "row" "2" "column" "2"}}
+        {{template "grid" dict "gamePiece" "cone" "key" "D" "row" "1" "column" "2"}}
+        {{template "grid" dict "gamePiece" "lowerGrid" "key" "C" "row" "0" "column" "2"}}
       </div>
       <div>
         <div class="goal-period"></div>
-        {{template "grid" dict "gamePiece" "cone" "key" "R"}}
-        {{template "grid" dict "gamePiece" "cone" "key" "F"}}
-        {{template "grid" dict "gamePiece" "lowerGrid" "key" "V"}}
+        {{template "grid" dict "gamePiece" "cone" "key" "R" "row" "2" "column" "3"}}
+        {{template "grid" dict "gamePiece" "cone" "key" "F" "row" "1" "column" "3"}}
+        {{template "grid" dict "gamePiece" "lowerGrid" "key" "V" "row" "0" "column" "3"}}
       </div>
       <div>
         <div class="goal-period"></div>
-        {{template "grid" dict "gamePiece" "cube" "key" "T"}}
-        {{template "grid" dict "gamePiece" "cube" "key" "G"}}
-        {{template "grid" dict "gamePiece" "lowerGrid" "key" "B"}}
+        {{template "grid" dict "gamePiece" "cube" "key" "T" "row" "2" "column" "4"}}
+        {{template "grid" dict "gamePiece" "cube" "key" "G" "row" "1" "column" "4"}}
+        {{template "grid" dict "gamePiece" "lowerGrid" "key" "B" "row" "0" "column" "4"}}
       </div>
       <div>
         <div class="goal-period"></div>
-        {{template "grid" dict "gamePiece" "cone" "key" "Y"}}
-        {{template "grid" dict "gamePiece" "cone" "key" "H"}}
-        {{template "grid" dict "gamePiece" "lowerGrid" "key" "N"}}
+        {{template "grid" dict "gamePiece" "cone" "key" "Y" "row" "2" "column" "5"}}
+        {{template "grid" dict "gamePiece" "cone" "key" "H" "row" "1" "column" "5"}}
+        {{template "grid" dict "gamePiece" "lowerGrid" "key" "N" "row" "0" "column" "5"}}
       </div>
       <div>
         <div class="goal-period"></div>
-        {{template "grid" dict "gamePiece" "cone" "key" "U"}}
-        {{template "grid" dict "gamePiece" "cone" "key" "J"}}
-        {{template "grid" dict "gamePiece" "lowerGrid" "key" "M"}}
+        {{template "grid" dict "gamePiece" "cone" "key" "U" "row" "2" "column" "6"}}
+        {{template "grid" dict "gamePiece" "cone" "key" "J" "row" "1" "column" "6"}}
+        {{template "grid" dict "gamePiece" "lowerGrid" "key" "M" "row" "0" "column" "6"}}
       </div>
       <div>
         <div class="goal-period"></div>
-        {{template "grid" dict "gamePiece" "cube" "key" "I"}}
-        {{template "grid" dict "gamePiece" "cube" "key" "K"}}
-        {{template "grid" dict "gamePiece" "lowerGrid" "key" ","}}
+        {{template "grid" dict "gamePiece" "cube" "key" "I" "row" "2" "column" "7"}}
+        {{template "grid" dict "gamePiece" "cube" "key" "K" "row" "1" "column" "7"}}
+        {{template "grid" dict "gamePiece" "lowerGrid" "key" "," "row" "0" "column" "7"}}
       </div>
       <div>
         <div class="goal-period"></div>
-        {{template "grid" dict "gamePiece" "cone" "key" "O"}}
-        {{template "grid" dict "gamePiece" "cone" "key" "L"}}
-        {{template "grid" dict "gamePiece" "lowerGrid" "key" "."}}
+        {{template "grid" dict "gamePiece" "cone" "key" "O" "row" "2" "column" "8"}}
+        {{template "grid" dict "gamePiece" "cone" "key" "L" "row" "1" "column" "8"}}
+        {{template "grid" dict "gamePiece" "lowerGrid" "key" "." "row" "0" "column" "8"}}
       </div>
     </div>
   </div>
@@ -191,8 +195,11 @@ UI for entering realtime scores.
 {{end}}
 {{define "grid"}}
 <div class="grid">
-  <div class="grid-button {{.gamePiece}}" onclick="handleClick('{{.key}}');">
+  <div id="scoreR{{.row}}C{{.column}}"    class="grid-button {{.gamePiece}}" onclick="handleClick('{{.key}}');">
     <div class="shortcut">{{.key}}</div>-<div class="shortcut" style="opacity: 0;">{{.key}}</div>
   </div>
+</div>
+<div id="autoGridStatusR{{.row}}C{{.column}}" class="boolean grid-field">
+  <div class="value"></div>
 </div>
 {{end}}

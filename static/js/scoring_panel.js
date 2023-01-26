@@ -79,6 +79,14 @@ var handleRealtimeScore = function(data) {
   $("#autoEngagedStatus").attr("data-value", score1.AutoChargeStationEngaged);
   $("#endGameChargeStationEngaged>.value").text(score1.EndGameChargeStationEngaged ? "Yes" : "No");
   $("#endGameChargeStationEngaged").attr("data-value", score1.EndGameChargeStationEngaged);
+
+  for (var i = 0; i < 3; i++){
+    for (var j = 0; j < 9; j++){
+      $("#autoGridStatusR" + i + "C" + j + ">.value").text(score1.GridAciveInAutoStatuses[i][j] ? "Auto" : "--");
+      $("#autoGridStatusR" + i + "C" + j).attr("data-value", score1.GridAciveInAutoStatuses[i][j]);
+      $("#scoreR" + i + "C" + j).attr("data-value", score1.GridGamePeiceStatuses[i][j]);
+    }
+  }
   
   //Group Two Score 
   for (var i = 0; i < 3; i++) {
