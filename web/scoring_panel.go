@@ -252,10 +252,22 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 			}
 
 		}
-
+		
 		if scoreChanged {
+			checkCoopStatus(score1, score2)
 			web.arena.RealtimeScoreNotifier.Notify()
 		}
+	}
+}
+
+// Check Coopertition Status
+func checkCoopStatus(score1 *game.Score, score2 *game.Score){
+	if score1.LinksCoopertitionReady && score2.LinksCoopertitionReady {
+		score1.LinksCoopertitionAchived = true
+		score2.LinksCoopertitionAchived = true
+	}else{
+		score1.LinksCoopertitionAchived = false
+		score2.LinksCoopertitionAchived = false
 	}
 }
 

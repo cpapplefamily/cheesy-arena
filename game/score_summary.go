@@ -27,6 +27,10 @@ type ScoreSummary struct {
 	LinksCount							int
 	LinksPoints							int
 	LinksGoal							int
+	CoopGamePeiceCount					int
+	CoopititionGamePeiceThreshold		int
+	LinksCoopertitionReady				bool
+	LinksCoopertitionAchived			bool
 	LinksRankingPoint					bool
 	Endgame_ParkedPoints				int
 	Endgame_DockedPoints				int

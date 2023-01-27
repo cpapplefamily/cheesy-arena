@@ -14,15 +14,17 @@ type Score struct {
 	TeleopCargoLower                [4]int
 	TeleopCargoUpper                [4]int
 	EndgameStatuses                 [3]EndgameStatus
-	AutoGridToggle_Enabled			bool
+	AutoGridToggle_Enabled          bool
 	MobilityStatuses                [3]bool
 	AutoChargeStationDockedStatuses [3]bool
 	AutoChargeStationEngaged        bool
 	GridAciveInAutoStatuses         [3][9]bool
 	GridGamePeiceStatuses           [3][9]bool
-	GridAnimationStatuses			[3][9]GridAnimationStatus
+	GridAnimationStatuses           [3][9]GridAnimationStatus
 	LinksStatuses                   [3][7]int
 	Links                           int
+	LinksCoopertitionReady          bool
+	LinksCoopertitionAchived        bool
 	ChargedUpEndgameStatuses        [3]ChargedUpEndgameStatus
 	EndGameChargeStationEngaged     bool
 	Fouls                           []Foul
@@ -35,7 +37,7 @@ var CargoBonusRankingPointThresholdWithQuintet = 18
 var HangarBonusRankingPointThreshold = 16
 var DoubleBonusRankingPointThreshold = 0
 
-var CoopititionThreshold = 5
+var CoopititionGamePeiceThreshold = 3
 var LinksRankingPointThresholdWithoutCoopertition = 5
 var LinksRankingPointThresholdWithCoopertition = 4
 var ChargeStationRankingPointThreshold = 26
@@ -63,11 +65,11 @@ type GridAnimationStatus int
 
 const (
 	No_None GridAnimationStatus = iota
-	
+
 	Auto_With_GamePeice
 	Auto_WithOut_GamePeice
-	
 )
+
 // Calculates and returns the summary fields used for ranking and display.
 func (score *Score) Summarize(opponentFouls []Foul) *ScoreSummary {
 	summary := new(ScoreSummary)
@@ -157,8 +159,8 @@ func (score *Score) Summarize(opponentFouls []Foul) *ScoreSummary {
 
 	//*** Start Charged Up Calculate Links Statuse
 	//Fist step finds all overlaping groups of 3
-	for i := 0; i < 3; i++{
-		for j := 0; j < 7; j++{
+	for i := 0; i < 3; i++ {
+		for j := 0; j < 7; j++ {
 			score.LinksStatuses[i][j] = 0
 		}
 	}
@@ -177,8 +179,8 @@ func (score *Score) Summarize(opponentFouls []Foul) *ScoreSummary {
 	}
 
 	log.Print("All Links")
-	for i := 0; i < 3; i++{
-		log.Print(score.LinksStatuses[i][0],",",score.LinksStatuses[i][1],",",score.LinksStatuses[i][2],",",score.LinksStatuses[i][3],",",score.LinksStatuses[i][4],",",score.LinksStatuses[i][5],",",score.LinksStatuses[i][6])
+	for i := 0; i < 3; i++ {
+		log.Print(score.LinksStatuses[i][0], ",", score.LinksStatuses[i][1], ",", score.LinksStatuses[i][2], ",", score.LinksStatuses[i][3], ",", score.LinksStatuses[i][4], ",", score.LinksStatuses[i][5], ",", score.LinksStatuses[i][6])
 	}
 	// Second step removes Overlaping
 	// Column 0
@@ -192,10 +194,10 @@ func (score *Score) Summarize(opponentFouls []Foul) *ScoreSummary {
 	}
 
 	log.Print("Remove Column 1")
-	for i := 0; i < 3; i++{
-		log.Print(score.LinksStatuses[i][0],",",score.LinksStatuses[i][1],",",score.LinksStatuses[i][2],",",score.LinksStatuses[i][3],",",score.LinksStatuses[i][4],",",score.LinksStatuses[i][5],",",score.LinksStatuses[i][6])
+	for i := 0; i < 3; i++ {
+		log.Print(score.LinksStatuses[i][0], ",", score.LinksStatuses[i][1], ",", score.LinksStatuses[i][2], ",", score.LinksStatuses[i][3], ",", score.LinksStatuses[i][4], ",", score.LinksStatuses[i][5], ",", score.LinksStatuses[i][6])
 	}
-	
+
 	// Column 2-7
 	// Removed if either previous 2 columns are = 3
 	for i := 0; i < 3; i++ {
@@ -206,10 +208,10 @@ func (score *Score) Summarize(opponentFouls []Foul) *ScoreSummary {
 		}
 	}
 	log.Print("Remove Column 2-")
-	for i := 0; i < 3; i++{
-		log.Print(score.LinksStatuses[i][0],",",score.LinksStatuses[i][1],",",score.LinksStatuses[i][2],",",score.LinksStatuses[i][3],",",score.LinksStatuses[i][4],",",score.LinksStatuses[i][5],",",score.LinksStatuses[i][6])
+	for i := 0; i < 3; i++ {
+		log.Print(score.LinksStatuses[i][0], ",", score.LinksStatuses[i][1], ",", score.LinksStatuses[i][2], ",", score.LinksStatuses[i][3], ",", score.LinksStatuses[i][4], ",", score.LinksStatuses[i][5], ",", score.LinksStatuses[i][6])
 	}
-	
+
 	//Count the remaining Links
 	summary.LinksCount = 0
 	for i := 0; i < 3; i++ {
@@ -221,8 +223,6 @@ func (score *Score) Summarize(opponentFouls []Foul) *ScoreSummary {
 	}
 
 	log.Print("Link Count: ", summary.LinksCount)
-
-	
 
 	//Total Links Points
 	summary.LinksPoints = summary.LinksCount * 5
@@ -248,9 +248,9 @@ func (score *Score) Summarize(opponentFouls []Foul) *ScoreSummary {
 		case Endgame_Parked:
 			summary.Endgame_ParkedPoints += 2
 		case Endgame_Docked:
-			if score.EndGameChargeStationEngaged{
+			if score.EndGameChargeStationEngaged {
 				summary.Endgame_DockedPoints += 10
-			}else{
+			} else {
 				summary.Endgame_DockedPoints += 6
 			}
 		}
@@ -284,16 +284,39 @@ func (score *Score) Summarize(opponentFouls []Foul) *ScoreSummary {
 	//++ Start Links RP
 	summary.LinksGoal = LinksRankingPointThresholdWithoutCoopertition
 
-	var OpponentCoopAchived = false
-	var MatchCoopAchived = false
-	if OpponentCoopAchived && summary.LinksCount >= CoopititionThreshold {
-		MatchCoopAchived = true
+	var coopGamePeiceCount = 0
+	// Count game peices in Coop zone
+	for i := 0; i < 3; i++ {
+		for j := 3; j < 6; j++ {
+			if score.GridGamePeiceStatuses[i][j] {
+				coopGamePeiceCount += 1
+			}
+		}
+	}
+	summary.CoopGamePeiceCount = coopGamePeiceCount
+	summary.CoopititionGamePeiceThreshold = CoopititionGamePeiceThreshold
+
+	//Set Team Links Coop Statuse
+	if coopGamePeiceCount >= CoopititionGamePeiceThreshold {
+		score.LinksCoopertitionReady = true
+	} else {
+		score.LinksCoopertitionReady = false
 	}
 
-	if CoopititionThreshold > 0 && MatchCoopAchived && summary.LinksCount >= CoopititionThreshold {
+	summary.LinksCoopertitionReady	= score.LinksCoopertitionReady	
+
+	//Adjust Links Goal using Coop Statuse
+	//**********************
+	// Currenly is one score cycle behind activation
+	// Any Score after the "Activation" Will adjust the threshold
+	// 
+	summary.LinksCoopertitionAchived = score.LinksCoopertitionAchived
+	if score.LinksCoopertitionAchived {
 		summary.LinksGoal = LinksRankingPointThresholdWithCoopertition
-		//summary.QuintetAchieved = true
+	} else {
+		summary.LinksGoal = LinksRankingPointThresholdWithoutCoopertition
 	}
+
 	if summary.LinksCount >= summary.LinksGoal {
 		summary.LinksRankingPoint = true
 	}

@@ -147,40 +147,40 @@ var handleRealtimeScore = function(data) {
   //$("#" + redSide + "CargoDisplay").css("color", setCargoColor(data.Red.ScoreSummary));
   $("#" + redSide + "UpperCargo").text(getUpperCargoCount(data.Red.Score));
   $("#" + redSide + "LowerCargo").text(getLowerCargoCount(data.Red.Score));
-  $("#" + redSide + "CargoNumerator").text(data.Red.ScoreSummary.CargoCount);
-  $("#" + redSide + "CargoDenominator").text(data.Red.ScoreSummary.CargoGoal);
+  $("#" + redSide + "CoopCounterNumerator").text(data.Red.ScoreSummary.CoopGamePeiceCount);
+  $("#" + redSide + "CoopCounterDenominator").text(data.Red.ScoreSummary.CoopititionGamePeiceThreshold);
 
   //$("#" + blueSide + "CargoDisplay").css("color", setCargoColor(data.Blue.ScoreSummary));
   $("#" + blueSide + "UpperCargo").text(getUpperCargoCount(data.Blue.Score));
   $("#" + blueSide + "LowerCargo").text(getLowerCargoCount(data.Blue.Score));
-  $("#" + blueSide + "CargoNumerator").text(data.Blue.ScoreSummary.CargoCount);
-  $("#" + blueSide + "CargoDenominator").text(data.Blue.ScoreSummary.CargoGoal);
+  $("#" + blueSide + "CoopCounterNumerator").text(data.Blue.ScoreSummary.CoopGamePeiceCount);
+  $("#" + blueSide + "CoopCounterDenominator").text(data.Blue.ScoreSummary.CoopititionGamePeiceThreshold);
   if (currentMatch.Type === "elimination") {
-    $("#" + redSide + "CargoDenominator").hide();
-    $("#" + blueSide + "CargoDenominator").hide();
+    $("#" + redSide + "CoopCounterDenominator").hide();
+    $("#" + blueSide + "CoopCounterDenominator").hide();
     $(".cargo-splitter").hide();
   } else {
-    $("#" + redSide + "CargoDenominator").show();
-    $("#" + blueSide + "CargoDenominator").show();
+    $("#" + redSide + "CoopCounterDenominator").show();
+    $("#" + blueSide + "CoopCounterDenominator").show();
     $(".cargo-splitter").show();
   }
 
   //Color the Cargo Total
-  $("#" + redSide + "CargoNumerator").css("color", setCargoColor(data.Red.ScoreSummary));
-  $("#" + redSide + "CargoDenominator").css("color", setCargoColor(data.Red.ScoreSummary));
+  $("#" + redSide + "CoopCounterNumerator").css("color", setCoopCounterColor(data.Red.ScoreSummary));
+  $("#" + redSide + "CoopCounterDenominator").css("color", setCoopCounterColor(data.Red.ScoreSummary));
 
-  $("#" + blueSide + "CargoNumerator").css("color", setCargoColor(data.Blue.ScoreSummary));
-  $("#" + blueSide + "CargoDenominator").css("color", setCargoColor(data.Blue.ScoreSummary));
+  $("#" + blueSide + "CoopCounterNumerator").css("color", setCoopCounterColor(data.Blue.ScoreSummary));
+  $("#" + blueSide + "CoopCounterDenominator").css("color", setCoopCounterColor(data.Blue.ScoreSummary));
   //$(".score-fields").css("color", "Yellow");
   
 };
 
-var setCargoColor = function(scoreSummary) {
+var setCoopCounterColor = function(scoreSummary) {
   //window.alert(game.QuintetThreshold);
-  if(scoreSummary.CargoBonusRankingPoint){ 
+  if(scoreSummary.LinksCoopertitionAchived){ 
     return "Aquamarine"
   }
-  if (scoreSummary.QuintetAchieved) {
+  if (scoreSummary.LinksCoopertitionReady) {
     return "Yellow"
   } else {
     return "White"
