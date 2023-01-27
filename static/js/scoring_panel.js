@@ -54,6 +54,8 @@ var handleRealtimeScore = function(data) {
 
   $("#autoGridToggleEnabled>.value").text(score1.AutoGridToggle_Enabled ? "Auto Score Toggel Enabled" : "Auto Score Toggel Disabled");
   $("#autoGridToggleEnabled").attr("data-value", score1.AutoGridToggle_Enabled);
+  //For Debuging Scoring
+  $("#currentScore").text("Current Score: " + realtimeScore1.ScoreSummary.Score);
 
   //Group One Score
   for (var i = 0; i < 3; i++) {
@@ -72,13 +74,13 @@ var handleRealtimeScore = function(data) {
     $("#autoCargoUpper").text(score1.AutoCargoUpper[0]);
     $("#teleopCargoLower").text(score1.TeleopCargoLower[0]);
     $("#teleopCargoUpper").text(score1.TeleopCargoUpper[0]);
-    //For Debuging Scoring
   }
-  $("#currentScore").text("Current Score: " + realtimeScore1.ScoreSummary.Score);
+  
   $("#autoEngagedStatus>.value").text(score1.AutoChargeStationEngaged ? "Yes" : "No");
   $("#autoEngagedStatus").attr("data-value", score1.AutoChargeStationEngaged);
   $("#endGameChargeStationEngaged>.value").text(score1.EndGameChargeStationEngaged ? "Yes" : "No");
   $("#endGameChargeStationEngaged").attr("data-value", score1.EndGameChargeStationEngaged);
+  
 
   for (var i = 0; i < 3; i++){
     for (var j = 0; j < 9; j++){
