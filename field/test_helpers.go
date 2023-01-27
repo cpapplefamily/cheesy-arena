@@ -28,6 +28,6 @@ func SetupTestArena(t *testing.T, uniqueName string) *Arena {
 
 func setupTestArena(t *testing.T) *Arena {
 	game.MatchTiming.WarmupDurationSec = 3
-	game.MatchTiming.PauseDurationSec = 2
+	game.MatchTiming.PauseDurationSec = 3
 	return SetupTestArena(t, "field")
 }
