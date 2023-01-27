@@ -254,7 +254,7 @@ var handleScorePosted = function(data) {
   $("#" + blueSide + "FinalLinkBonusRankingPoint").attr("data-checked", data.BlueScoreSummary.LinksRankingPoint);
   $("#" + blueSide + "FinalHangarBonusRankingPoint").html(data.BlueScoreSummary.HangarBonusRankingPoint ? "&#x2714;" : "&#x2718;");
   $("#" + blueSide + "FinalHangarBonusRankingPoint").attr("data-checked", data.BlueScoreSummary.HangarBonusRankingPoint);
-  $("#" + blueSide + "FinalChargeStationBonusRankingPoint").html(data.BlueScoreSummary.HangarChargeStationRankingPoint ? "&#x2714;" : "&#x2718;");
+  $("#" + blueSide + "FinalChargeStationBonusRankingPoint").html(data.BlueScoreSummary.ChargeStationRankingPoint ? "&#x2714;" : "&#x2718;");
   $("#" + blueSide + "FinalChargeStationBonusRankingPoint").attr("data-checked", data.BlueScoreSummary.ChargeStationRankingPoint);
   $("#" + blueSide + "FinalDoubleBonusRankingPoint").html(data.BlueScoreSummary.DoubleBonusRankingPoint ? "&#x2714;" : "&#x2718;");
   $("#" + blueSide + "FinalDoubleBonusRankingPoint").attr("data-checked", data.BlueScoreSummary.DoubleBonusRankingPoint);
@@ -268,10 +268,10 @@ var handleScorePosted = function(data) {
 
 var getRPCount = function(scoreSummary, oponentScore) {
   var count = 0;
-  if (scoreSummary.CargoBonusRankingPoint) {
+  if (scoreSummary.LinksRankingPoint) {
     count = count + 1;    
   }
-  if (scoreSummary.HangarBonusRankingPoint) {
+  if (scoreSummary.ChargeStationRankingPoint) {
     count  = count + 1;    
   }
   if(scoreSummary.Score > oponentScore){
