@@ -228,8 +228,12 @@ var handleScorePosted = function(data) {
   $("#" + redSide + "FinalRP").text(getRPCount(data.RedScoreSummary,data.BlueScoreSummary.Score) + " RP");
   $("#" + redSide + "FinalCargoBonusRankingPoint").html(data.RedScoreSummary.CargoBonusRankingPoint ? "&#x2714;" : "&#x2718;");
   $("#" + redSide + "FinalCargoBonusRankingPoint").attr("data-checked", data.RedScoreSummary.CargoBonusRankingPoint);
+  $("#" + redSide + "FinalLinkBonusRankingPoint").html(data.RedScoreSummary.LinksRankingPoint ? "&#x2714;" : "&#x2718;");
+  $("#" + redSide + "FinalLinkBonusRankingPoint").attr("data-checked", data.RedScoreSummary.LinksRankingPoint);
   $("#" + redSide + "FinalHangarBonusRankingPoint").html(data.RedScoreSummary.HangarBonusRankingPoint ? "&#x2714;" : "&#x2718;");
   $("#" + redSide + "FinalHangarBonusRankingPoint").attr("data-checked", data.RedScoreSummary.HangarBonusRankingPoint);
+  $("#" + redSide + "FinalChargeStationBonusRankingPoint").html(data.RedScoreSummary.ChargeStationRankingPoint ? "&#x2714;" : "&#x2718;");
+  $("#" + redSide + "FinalChargeStationBonusRankingPoint").attr("data-checked", data.RedScoreSummary.ChargeStationRankingPoint);
   $("#" + redSide + "FinalDoubleBonusRankingPoint").html(data.RedScoreSummary.DoubleBonusRankingPoint ? "&#x2714;" : "&#x2718;");
   $("#" + redSide + "FinalDoubleBonusRankingPoint").attr("data-checked", data.RedScoreSummary.DoubleBonusRankingPoint);
   $("#" + blueSide + "FinalScore").text(data.BlueScoreSummary.Score);
@@ -246,8 +250,12 @@ var handleScorePosted = function(data) {
   $("#" + blueSide + "FinalRP").text(getRPCount(data.BlueScoreSummary,data.RedScoreSummary.Score) + " RP");
   $("#" + blueSide + "FinalCargoBonusRankingPoint").html(data.BlueScoreSummary.CargoBonusRankingPoint ? "&#x2714;" : "&#x2718;");
   $("#" + blueSide + "FinalCargoBonusRankingPoint").attr("data-checked", data.BlueScoreSummary.CargoBonusRankingPoint);
+  $("#" + blueSide + "FinalLinkBonusRankingPoint").html(data.BlueScoreSummary.LinksRankingPoint ? "&#x2714;" : "&#x2718;");
+  $("#" + blueSide + "FinalLinkBonusRankingPoint").attr("data-checked", data.BlueScoreSummary.LinksRankingPoint);
   $("#" + blueSide + "FinalHangarBonusRankingPoint").html(data.BlueScoreSummary.HangarBonusRankingPoint ? "&#x2714;" : "&#x2718;");
   $("#" + blueSide + "FinalHangarBonusRankingPoint").attr("data-checked", data.BlueScoreSummary.HangarBonusRankingPoint);
+  $("#" + blueSide + "FinalChargeStationBonusRankingPoint").html(data.BlueScoreSummary.HangarChargeStationRankingPoint ? "&#x2714;" : "&#x2718;");
+  $("#" + blueSide + "FinalChargeStationBonusRankingPoint").attr("data-checked", data.BlueScoreSummary.ChargeStationRankingPoint);
   $("#" + blueSide + "FinalDoubleBonusRankingPoint").html(data.BlueScoreSummary.DoubleBonusRankingPoint ? "&#x2714;" : "&#x2718;");
   $("#" + blueSide + "FinalDoubleBonusRankingPoint").attr("data-checked", data.BlueScoreSummary.DoubleBonusRankingPoint);
   $("#finalSeriesStatus").text(data.SeriesStatus);
