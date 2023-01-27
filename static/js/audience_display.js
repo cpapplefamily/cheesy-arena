@@ -221,9 +221,9 @@ var handleScorePosted = function(data) {
   $("#" + redSide + "FinalTeam1Avatar").attr("src", getAvatarUrl(data.Match.Red1));
   $("#" + redSide + "FinalTeam2Avatar").attr("src", getAvatarUrl(data.Match.Red2));
   $("#" + redSide + "FinalTeam3Avatar").attr("src", getAvatarUrl(data.Match.Red3));
-  $("#" + redSide + "FinalTaxiPoints").text(data.RedScoreSummary.TaxiPoints);
-  $("#" + redSide + "FinalCargoPoints").text(data.RedScoreSummary.CargoPoints);
-  $("#" + redSide + "FinalHangarPoints").text(data.RedScoreSummary.HangarPoints);
+  $("#" + redSide + "FinalAutoChargePoints").text(data.RedScoreSummary.AutoChargePoints);
+  $("#" + redSide + "FinalEndGameChargePoints").text(data.RedScoreSummary.Endgame_DockedPoints + data.RedScoreSummary.Endgame_EngagedPoints);
+  $("#" + redSide + "FinalLinksCount").text(data.RedScoreSummary.LinksCount);
   $("#" + redSide + "FinalFoulPoints").text(data.RedScoreSummary.FoulPoints);
   $("#" + redSide + "FinalRP").text(getRPCount(data.RedScoreSummary,data.BlueScoreSummary.Score) + " RP");
   $("#" + redSide + "FinalCargoBonusRankingPoint").html(data.RedScoreSummary.CargoBonusRankingPoint ? "&#x2714;" : "&#x2718;");
@@ -243,9 +243,9 @@ var handleScorePosted = function(data) {
   $("#" + blueSide + "FinalTeam1Avatar").attr("src", getAvatarUrl(data.Match.Blue1));
   $("#" + blueSide + "FinalTeam2Avatar").attr("src", getAvatarUrl(data.Match.Blue2));
   $("#" + blueSide + "FinalTeam3Avatar").attr("src", getAvatarUrl(data.Match.Blue3));
-  $("#" + blueSide + "FinalTaxiPoints").text(data.BlueScoreSummary.TaxiPoints);
-  $("#" + blueSide + "FinalCargoPoints").text(data.BlueScoreSummary.CargoPoints);
-  $("#" + blueSide + "FinalHangarPoints").text(data.BlueScoreSummary.HangarPoints);
+  $("#" + blueSide + "FinalAutoChargePoints").text(data.BlueScoreSummary.AutoChargePoints);
+  $("#" + blueSide + "FinalEndGameChargePoints").text(data.BlueScoreSummary.Endgame_DockedPoints + data.BlueScoreSummary.Endgame_EngagedPoints);
+  $("#" + blueSide + "FinalLinksCount").text(data.BlueScoreSummary.LinksCount);
   $("#" + blueSide + "FinalFoulPoints").text(data.BlueScoreSummary.FoulPoints);
   $("#" + blueSide + "FinalRP").text(getRPCount(data.BlueScoreSummary,data.RedScoreSummary.Score) + " RP");
   $("#" + blueSide + "FinalCargoBonusRankingPoint").html(data.BlueScoreSummary.CargoBonusRankingPoint ? "&#x2714;" : "&#x2718;");
