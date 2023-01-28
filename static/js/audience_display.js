@@ -171,15 +171,27 @@ var handleRealtimeScore = function(data) {
 
   $("#" + blueSide + "CoopCounterNumerator").css("color", setCoopCounterColor(data.Blue.ScoreSummary));
   $("#" + blueSide + "CoopCounterDenominator").css("color", setCoopCounterColor(data.Blue.ScoreSummary));
-  //$(".score-fields").css("color", "Yellow");
-  
+
+  $(".score-fields").css("background-color", setCoopCounterBGColor(data.Red.ScoreSummary,data.Blue.ScoreSummary) );
 };
 
+var setCoopCounterBGColor = function(scoreSummary1,scoreSummary2){
+  if((scoreSummary1.CoopGamePeiceCount >= scoreSummary1.CoopititionGamePeiceThreshold) && (scoreSummary2.CoopGamePeiceCount >= scoreSummary2.CoopititionGamePeiceThreshold)){ 
+    return "Green"
+  }else{
+    return "None"
+  }
+}
+var setCoopCounterBGColor2 = function(scoreSummary1,scoreSummary2){
+  if((scoreSummary1.LinksCoopertitionAchived) || (scoreSummary2.LinksCoopertitionAchived)){ 
+    return "Green"
+  }else{
+    return "None"
+  }
+}
 var setCoopCounterColor = function(scoreSummary) {
   //window.alert(game.QuintetThreshold);
-  if(scoreSummary.LinksCoopertitionAchived){ 
-    return "Aquamarine"
-  }
+  
   if (scoreSummary.LinksCoopertitionReady) {
     return "Yellow"
   } else {

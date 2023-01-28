@@ -120,6 +120,9 @@ html {
   color: #fff;
   opacity: 0;
 }
+.coopertitioinField {
+  font-size: 10px;
+}
 
 #cargo-fields{
   font-family: "FuturaLTBold";
