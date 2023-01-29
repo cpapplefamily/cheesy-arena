@@ -5,7 +5,7 @@
 
 package game
 
-import "log"
+//import "log"
 
 type Score struct {
 	TaxiStatuses                    [3]bool
@@ -178,9 +178,9 @@ func (score *Score) Summarize(opponentFouls []Foul) *ScoreSummary {
 		}
 	}
 
-	log.Print("All Links")
+	//log.Print("All Links")
 	for i := 0; i < 3; i++ {
-		log.Print(score.LinksStatuses[i][0], ",", score.LinksStatuses[i][1], ",", score.LinksStatuses[i][2], ",", score.LinksStatuses[i][3], ",", score.LinksStatuses[i][4], ",", score.LinksStatuses[i][5], ",", score.LinksStatuses[i][6])
+		//log.Print(score.LinksStatuses[i][0], ",", score.LinksStatuses[i][1], ",", score.LinksStatuses[i][2], ",", score.LinksStatuses[i][3], ",", score.LinksStatuses[i][4], ",", score.LinksStatuses[i][5], ",", score.LinksStatuses[i][6])
 	}
 	// Second step removes Overlaping
 	// Column 0
@@ -193,9 +193,9 @@ func (score *Score) Summarize(opponentFouls []Foul) *ScoreSummary {
 		}
 	}
 
-	log.Print("Remove Column 1")
+	//log.Print("Remove Column 1")
 	for i := 0; i < 3; i++ {
-		log.Print(score.LinksStatuses[i][0], ",", score.LinksStatuses[i][1], ",", score.LinksStatuses[i][2], ",", score.LinksStatuses[i][3], ",", score.LinksStatuses[i][4], ",", score.LinksStatuses[i][5], ",", score.LinksStatuses[i][6])
+		//log.Print(score.LinksStatuses[i][0], ",", score.LinksStatuses[i][1], ",", score.LinksStatuses[i][2], ",", score.LinksStatuses[i][3], ",", score.LinksStatuses[i][4], ",", score.LinksStatuses[i][5], ",", score.LinksStatuses[i][6])
 	}
 
 	// Column 2-7
@@ -207,9 +207,9 @@ func (score *Score) Summarize(opponentFouls []Foul) *ScoreSummary {
 			}
 		}
 	}
-	log.Print("Remove Column 2-")
+	//log.Print("Remove Column 2-")
 	for i := 0; i < 3; i++ {
-		log.Print(score.LinksStatuses[i][0], ",", score.LinksStatuses[i][1], ",", score.LinksStatuses[i][2], ",", score.LinksStatuses[i][3], ",", score.LinksStatuses[i][4], ",", score.LinksStatuses[i][5], ",", score.LinksStatuses[i][6])
+		//log.Print(score.LinksStatuses[i][0], ",", score.LinksStatuses[i][1], ",", score.LinksStatuses[i][2], ",", score.LinksStatuses[i][3], ",", score.LinksStatuses[i][4], ",", score.LinksStatuses[i][5], ",", score.LinksStatuses[i][6])
 	}
 
 	//Count the remaining Links
@@ -222,7 +222,7 @@ func (score *Score) Summarize(opponentFouls []Foul) *ScoreSummary {
 		}
 	}
 
-	log.Print("Link Count: ", summary.LinksCount)
+	//log.Print("Link Count: ", summary.LinksCount)
 
 	//Total Links Points
 	summary.LinksPoints = summary.LinksCount * 5
@@ -336,12 +336,12 @@ func (score *Score) Summarize(opponentFouls []Foul) *ScoreSummary {
 
 	// Check for the opponent fouls that automatically trigger a ranking point.
 	// Note: There are no such fouls in the 2022 game; leaving this comment for future years.
-	log.Print("New Summery")
-	log.Print("summary.MobilityPoints: ", summary.MobilityPoints)
-	log.Print("summary.GridPoints: ", summary.GridPoints)
-	log.Print("summary.LinksCount: ", summary.LinksCount)
-	log.Print("summary.LinksPoints: ", summary.LinksPoints)
-	log.Print("summary.ChargeStationPoints: ", summary.ChargeStationPoints)
+	//log.Print("New Summery")
+	//log.Print("summary.MobilityPoints: ", summary.MobilityPoints)
+	//log.Print("summary.GridPoints: ", summary.GridPoints)
+	//log.Print("summary.LinksCount: ", summary.LinksCount)
+	//log.Print("summary.LinksPoints: ", summary.LinksPoints)
+	//log.Print("summary.ChargeStationPoints: ", summary.ChargeStationPoints)
 	summary.MatchPoints = summary.MobilityPoints +
 		summary.GridPoints +
 		summary.LinksPoints +
