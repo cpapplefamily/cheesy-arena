@@ -4,6 +4,7 @@
 //
 // Client-side methods for the audience display.
 
+var isOffseason = true;
 var websocket;
 var transitionMap;
 const transitionQueue = [];
@@ -555,7 +556,7 @@ var transitionLogoToLogoLuma = function(callback) {
 };
 
 var transitionLogoToScore = function(callback) {
-  if(matchtype == "Qualification"){
+  if(matchtype == "Qualification" || isOffseason){
     $(".final-rp").show();
   }else{
     $(".final-rp").hide();
