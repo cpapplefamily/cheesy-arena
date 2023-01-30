@@ -77,6 +77,12 @@ body {
   border: 3px solid #666;
   border-radius: 0.5vw;
 }
+#currentScore {
+  height: 3.5vw;
+}
+#chargeStatointatus {
+  text-align: center;
+}
 .grid-field {
   top: 0vh;
   width: 4.1vw;
