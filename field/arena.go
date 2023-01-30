@@ -213,6 +213,7 @@ func (arena *Arena) UpdatePlayoffBracket(startTime *time.Time) error {
 
 // Sets up the arena for the given match.
 func (arena *Arena) LoadMatch(match *model.Match) error {
+	log.Print("New Match Loaded")
 	if arena.MatchState != PreMatch {
 		return fmt.Errorf("Cannot load match while there is a match still in progress or with results pending.")
 	}
@@ -250,7 +251,9 @@ func (arena *Arena) LoadMatch(match *model.Match) error {
 	// Reset the arena state and realtime scores.
 	arena.soundsPlayed = make(map[*game.MatchSound]struct{})
 	arena.RedRealtimeScore = NewRealtimeScore()
+	arena.RedRealtimeScore.CurrentScore.AutoGridToggle_Enabled = true
 	arena.BlueRealtimeScore = NewRealtimeScore()
+	arena.BlueRealtimeScore.CurrentScore.AutoGridToggle_Enabled = true
 	arena.FieldVolunteers = false
 	arena.FieldReset = false
 	arena.ScoringPanelRegistry.resetScoreCommitted()
