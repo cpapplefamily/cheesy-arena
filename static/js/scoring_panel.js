@@ -52,7 +52,7 @@ var handleRealtimeScore = function(data) {
   var score1 = realtimeScore1.Score;
   var score2 = realtimeScore2.Score;
 
-  $("#autoGridToggleEnabled>.value").text(score1.AutoGridToggle_Enabled ? "Auto Score Toggel Enabled" : "Auto Score Toggel Disabled");
+  $("#autoGridToggleEnabled>.value").text(score1.AutoGridToggle_Enabled ? "Auto Score Toggle Enabled" : "Auto Score Toggle Disabled");
   $("#autoGridToggleEnabled").attr("data-value", score1.AutoGridToggle_Enabled);
   //For Debuging Scoring
   $("#currentScore").text("Current Score: " + realtimeScore1.ScoreSummary.Score);
