@@ -182,13 +182,7 @@ var setCoopCounterBGColor = function(scoreSummary1,scoreSummary2){
     return "None"
   }
 }
-var setCoopCounterBGColor2 = function(scoreSummary1,scoreSummary2){
-  if((scoreSummary1.LinksCoopertitionAchived) || (scoreSummary2.LinksCoopertitionAchived)){ 
-    return "Green"
-  }else{
-    return "None"
-  }
-}
+
 var setCoopCounterColor = function(scoreSummary) {
   //window.alert(game.QuintetThreshold);
   
@@ -276,6 +270,10 @@ var handleScorePosted = function(data) {
 
   // Reload the bracket to reflect any changes.
   $("#bracketSvg").attr("src", "/api/bracket/svg?v=" + new Date().getTime());
+
+  $(".linksField").text(data.BlueScoreSummary.LinksCoopertitionAchived ? "Links Co-Op Active" : "Links");
+  $(".linksField").css("background-color", data.BlueScoreSummary.LinksCoopertitionAchived ? "Yellow" : "None" );
+  
 };
 
 var getRPCount = function(scoreSummary, oponentScore) {
