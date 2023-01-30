@@ -204,19 +204,19 @@ body {
   background: rgb(213, 231, 49);
 }
 .cone[data-value="true"] {
-  background: rgb(0, 255, 40);
+  background: rgb(0, 153, 23);
 }
 .cube[data-value="false"]  {
   background: rgb(173, 49, 231);
 }
 .cube[data-value="true"]  {
-  background: rgb(0, 255, 0);
+  background: rgb(0, 153, 23);
 }
 .lowerGrid[data-value="false"]  {
   background: rgb(185, 176, 189);
 }
 .lowerGrid[data-value="true"]  {
-  background: rgb(0, 255, 0);
+  background: rgb(0, 153, 23);
 }
 #instructions {
   margin-top: 0.3vw;
