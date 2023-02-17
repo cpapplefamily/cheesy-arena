@@ -150,12 +150,19 @@ var handleRealtimeScore = function(data) {
   $("#" + redSide + "LowerCargo").text(getLowerCargoCount(data.Red.Score));
   $("#" + redSide + "CoopCounterNumerator").text(data.Red.ScoreSummary.CoopGamePeiceCount);
   $("#" + redSide + "CoopCounterDenominator").text(data.Red.ScoreSummary.CoopititionGamePeiceThreshold);
-
+  $("#" + redSide + "LinksCount").text(data.Red.ScoreSummary.LinksCount);
+  $("#" + redSide + "LinksCount").css("color", setLinksCounterColor(data.Red.ScoreSummary));
+  $("#" + redSide + "LinksCount").css("background-color", setLinksCounterBGColor(data.Red.ScoreSummary));
+  
   //$("#" + blueSide + "CargoDisplay").css("color", setCargoColor(data.Blue.ScoreSummary));
   $("#" + blueSide + "UpperCargo").text(getUpperCargoCount(data.Blue.Score));
   $("#" + blueSide + "LowerCargo").text(getLowerCargoCount(data.Blue.Score));
   $("#" + blueSide + "CoopCounterNumerator").text(data.Blue.ScoreSummary.CoopGamePeiceCount);
   $("#" + blueSide + "CoopCounterDenominator").text(data.Blue.ScoreSummary.CoopititionGamePeiceThreshold);
+  $("#" + blueSide + "LinksCount").text(data.Blue.ScoreSummary.LinksCount);
+  $("#" + blueSide + "LinksCount").css("color", setLinksCounterColor(data.Blue.ScoreSummary));
+  $("#" + blueSide + "LinksCount").css("background-color", setLinksCounterBGColor(data.Blue.ScoreSummary));
+
   if (currentMatch.Type === "elimination") {
     $("#" + redSide + "CoopCounterDenominator").hide();
     $("#" + blueSide + "CoopCounterDenominator").hide();
@@ -191,6 +198,24 @@ var setCoopCounterColor = function(scoreSummary) {
     return "Yellow"
   } else {
     return "White"
+  }
+}
+var setLinksCounterColor = function(scoreSummary) {
+  //window.alert(game.QuintetThreshold);
+  
+  if (scoreSummary.LinksRankingPoint) {
+    return "Black"
+  } else {
+    return "White"
+  }
+}
+var setLinksCounterBGColor = function(scoreSummary) {
+  //window.alert(game.QuintetThreshold);
+  
+  if (scoreSummary.LinksRankingPoint) {
+    return "Yellow"
+  } else {
+    return "None"
   }
 }
 

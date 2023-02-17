@@ -146,6 +146,17 @@ html {
   color: #fff;
   opacity: .1;
 }
+.links-fields {
+  text-align: center;
+  font-family: "FuturaLTBold";
+  font-size: 30px;
+  line-height: 25px;
+  color: #fff;
+}
+.linksCountField {
+  font-size: 12px;
+}
+
 .cargo-splitter {
   width: 25px;
   height: 1px;
