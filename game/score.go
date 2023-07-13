@@ -17,6 +17,7 @@ type Score struct {
 	TrapNotes					int
 	HarmonyStatuses				[3]bool
 	StageStatuses				[3]StageStatus
+	AmplificationSecRemaining  int
 	AmplificationActive			bool
 	AmpAccumulatorDisable		bool
 	CoopertitionStatus			bool

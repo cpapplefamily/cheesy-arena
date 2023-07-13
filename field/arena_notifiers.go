@@ -34,6 +34,10 @@ type ArenaNotifiers struct {
 type MatchTimeMessage struct {
 	MatchState
 	MatchTimeSec int
+	RedAmplificationRemaining int
+	BlueAmplificationRemaining int
+	
+	
 }
 
 type audienceAllianceScoreFields struct {
@@ -175,7 +179,7 @@ func (arena *Arena) GenerateMatchLoadMessage() any {
 }
 
 func (arena *Arena) generateMatchTimeMessage() any {
-	return MatchTimeMessage{arena.MatchState, int(arena.MatchTimeSec())}
+	return MatchTimeMessage{arena.MatchState, int(arena.MatchTimeSec()),arena.RedRealtimeScore.CurrentScore.AmplificationSecRemaining,arena.BlueRealtimeScore.CurrentScore.AmplificationSecRemaining}
 }
 
 func (arena *Arena) generateMatchTimingMessage() any {
