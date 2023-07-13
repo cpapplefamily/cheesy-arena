@@ -25,9 +25,9 @@
           <div class="col-lg-2" data-toggle="tooltip" title="Robot Status">Rbt</div>
           <div class="col-lg-2" data-toggle="tooltip" title="Bypass/Disable">Byp</div>
         </div>
-        {{template "matchPlayTeam" dict "color" "B" "position" 1}}
-        {{template "matchPlayTeam" dict "color" "B" "position" 2}}
-        {{template "matchPlayTeam" dict "color" "B" "position" 3}}
+        {{template "matchPlayTeam" dict "color" "B" "position" 1 "data" . "bypass" 1}}
+        {{template "matchPlayTeam" dict "color" "B" "position" 2 "data" . "bypass" 2}}
+        {{template "matchPlayTeam" dict "color" "B" "position" 3 "data" . "bypass" 3}}
         <div id="playoffBlueAllianceInfo"></div>
       </div>
       <div class="col-lg-6 well well-darkred status-well">
@@ -38,19 +38,21 @@
           <div class="col-lg-2" data-toggle="tooltip" title="Robot Status">Rbt</div>
           <div class="col-lg-2" data-toggle="tooltip" title="Bypass/Disable">Byp</div>
         </div>
-        {{template "matchPlayTeam" dict "color" "R" "position" 3}}
-        {{template "matchPlayTeam" dict "color" "R" "position" 2}}
-        {{template "matchPlayTeam" dict "color" "R" "position" 1}}
+        {{template "matchPlayTeam" dict "color" "R" "position" 3 "data" . "bypass" 4}}
+        {{template "matchPlayTeam" dict "color" "R" "position" 2 "data" . "bypass" 5}}
+        {{template "matchPlayTeam" dict "color" "R" "position" 1 "data" . "bypass" 6}}
         <div id="playoffRedAllianceInfo"></div>
       </div>
     </div>
     <div class="row text-center">
-      <button type="button" id="startMatch" class="btn btn-success btn-lg btn-match-play"
-          onclick="startMatch();" disabled>
+      <button accesskey="s" type="button" id="startMatch" class="btn btn-success btn-lg btn-match-play"
+        onclick="startMatch();" disabled 
+        data-toggle="tooltip" title="Quick Key [Alt]+s">
         Start Match
       </button>
-      <button type="button" id="abortMatch" class="btn btn-primary btn-lg btn-match-play"
-          onclick="abortMatch();" disabled>
+      <button accesskey="a" type="button" id="abortMatch" class="btn btn-primary btn-lg btn-match-play"
+        onclick="abortMatch();" disabled
+        data-toggle="tooltip" title="Quick Key [Alt]+a">
         Abort Match
       </button>
       <button type="button" id="substituteTeams" class="btn btn-warning btn-lg btn-match-play"
@@ -63,8 +65,9 @@
       </button>
     </div>
     <div id="buttonBottomRow" class="row text-center">
-      <button type="button" id="commitResults" class="btn btn-info btn-lg btn-match-play"
-          onclick="confirmCommit();" disabled>
+      <button accesskey="c" type="button" id="commitResults" class="btn btn-info btn-lg btn-match-play"
+          onclick="confirmCommit();" disabled
+          data-toggle="tooltip" title="Quick Key [Alt]+c">
         Commit Results
       </button>
       <button type="button" id="discardResults" class="btn btn-danger btn-lg btn-match-play"
@@ -234,7 +237,7 @@
       <div class="modal-footer">
         <form class="form-horizontal" action="/setup/teams/clear" method="POST">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" onclick="commitResults();" data-dismiss="modal">
+          <button accesskey="v" type="button" class="btn btn-primary" onclick="commitResults();" data-dismiss="modal" data-toggle="tooltip" title="Quick Key [Alt]+v">
             Commit Results
           </button>
         </form>
@@ -285,7 +288,9 @@
     <div class="robot-status" data-toggle="tooltip" title="Battery / Time Since Link Lost"></div>
   </div>
   <div class="col-lg-2 col-no-padding">
-    <div class="bypass-status" onclick="toggleBypass('{{.color}}{{.position}}');"></div>
+    <div accesskey="{{.bypass}}" class="bypass-status" onclick="toggleBypass('{{.color}}{{.position}}');" 
+      data-toggle="tooltip" title="Quick Key [Alt]+{{.bypass}}">
+    </div>
   </div>
 </div>
 {{end}}
