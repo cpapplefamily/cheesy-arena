@@ -117,7 +117,7 @@ body[data-position=right] #inMatch #blueScore {
 /* Pre Match */
 #preMatch #teamNumber {
   position: absolute;
-  top: 100px;
+  top: 0vh;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -127,7 +127,7 @@ body[data-position=right] #inMatch #blueScore {
 }
 #preMatch .databar {
   position: absolute;
-  bottom: 100px;
+  bottom: 0vh;
   left: 0;
   right: 0;
   margin: 0 auto;
