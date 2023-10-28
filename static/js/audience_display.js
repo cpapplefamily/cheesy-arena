@@ -21,7 +21,7 @@ const sponsorTextTemplate = Handlebars.compile($("#sponsorTextTemplate").html())
 // Constants for overlay positioning. The CSS is the source of truth for the values that represent initial state.
 const overlayCenteringTopUp = "-130px";
 const overlayCenteringBottomHideParams = {queue: false, bottom: $("#overlayCentering").css("bottom")};
-const overlayCenteringBottomShowParams = {queue: false, bottom: "0px"};
+const overlayCenteringBottomShowParams = {queue: false, bottom: "0px"}; //for top set to 550px
 const overlayCenteringTopHideParams = {queue: false, top: overlayCenteringTopUp};
 const overlayCenteringTopShowParams = {queue: false, top: "50px"};
 const eventMatchInfoDown = "30px";
