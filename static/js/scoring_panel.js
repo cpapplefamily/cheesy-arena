@@ -56,6 +56,8 @@ const handleRealtimeScore = function(data) {
     $("#autoDockStatus" + i1).attr("data-value", score.AutoDockStatuses[i]);
     $("#endgameStatus" + i1 + ">.value").text(getEndgameStatusText(score.EndgameStatuses[i]));
     $("#endgameStatus" + i1).attr("data-value", score.EndgameStatuses[i]);
+    $("#stageStatus" + i1 + ">.value").text(getStageStatusText(score.StageStatuses[i]));
+    $("#stageStatus" + i1).attr("data-value", score.StageStatuses[i]);
   }
 
   $("#autoChargeStationLevel>.value").text(score.AutoChargeStationLevel ? "Level" : "Not Level");
@@ -74,6 +76,10 @@ const handleRealtimeScore = function(data) {
   }
 };
 
+// Handles a keyboard event and sends the appropriate websocket message.
+var handleKeyPress = function(event) {
+  websocket.send(String.fromCharCode(event.keyCode));
+};
 // Handles an element click and sends the appropriate websocket message.
 const handleClick = function(command, teamPosition = 0, gridRow = 0, gridNode = 0, nodeState = 0) {
   websocket.send(command, {TeamPosition: teamPosition, GridRow: gridRow, GridNode: gridNode, NodeState: nodeState});
@@ -97,6 +103,18 @@ const getEndgameStatusText = function(level) {
       return "None";
   }
 };
+const getStageStatusText = function(level) {
+  switch (level) {
+    case 1:
+      return "Park";
+    case 2:
+      return "Onstage";
+    case 3:
+      return "Spotlight";
+    default:
+      return "None";
+  }
+};
 
 $(function() {
   alliance = window.location.href.split("/").slice(-1)[0];
@@ -108,4 +126,5 @@ $(function() {
     matchTime: function(event) { handleMatchTime(event.data); },
     realtimeScore: function(event) { handleRealtimeScore(event.data); },
   });
+  $(document).keypress(handleKeyPress);
 });

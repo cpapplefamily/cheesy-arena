@@ -138,6 +138,20 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 					}
 					scoreChanged = true
 				}
+			case "stageStatus":
+				if args.TeamPosition >= 1 && args.TeamPosition <= 3 {
+					score.StageStatuses[args.TeamPosition-1]++
+					if score.StageStatuses[args.TeamPosition-1] > 3 {
+						score.StageStatuses[args.TeamPosition-1] = 0
+					}
+					scoreChanged = true
+				}
+			case "Q":
+				score.StageStatuses[1]++
+				if score.StageStatuses[1] > 3 {
+					score.StageStatuses[1] = 0
+				}
+				scoreChanged = true
 			case "autoChargeStationLevel":
 				score.AutoChargeStationLevel = !score.AutoChargeStationLevel
 				scoreChanged = true
