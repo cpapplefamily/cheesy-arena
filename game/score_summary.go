@@ -22,6 +22,15 @@ type ScoreSummary struct {
 	ActivationBonusRankingPoint     bool
 	BonusRankingPoints              int
 	NumOpponentTechFouls            int
+	AmpPoints						int
+	SpeakerPoints					int
+	TrapPoints						int
+	OnstagePoints					int
+	RobotsOnstage					int
+	HarmonyPoints					int
+	EndStagePoints					int
+	MelodyRankingPoint				bool
+	EmsembleRankingPoint			bool
 }
 
 type MatchStatus int
