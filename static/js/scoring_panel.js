@@ -58,12 +58,31 @@ const handleRealtimeScore = function(data) {
     $("#endgameStatus" + i1).attr("data-value", score.EndgameStatuses[i]);
     $("#stageStatus" + i1 + ">.value").text(getStageStatusText(score.StageStatuses[i]));
     $("#stageStatus" + i1).attr("data-value", score.StageStatuses[i]);
+    $(`#harmonyStatus${i1}>.value`).text(score.HarmonyStatuses[i] ? "Yes" : "No");
+    $("#harmonyStatus" + i1).attr("data-value", score.HarmonyStatuses[i]);
+    
+    $(`#coopertitionStatus>.value`).text(score.CoopertitionStatus ? "Cooperation Enabled" : "Cooperation");
+    $("#coopertitionStatus").attr("data-value", score.CoopertitionStatus);
+    $(`#amplificationActive>.value`).text(score.AmplificationActive ? "Amplification Active" : "Amplification");
+    $("#amplificationActive").attr("data-value", score.AmplificationActive);
   }
 
   $("#autoChargeStationLevel>.value").text(score.AutoChargeStationLevel ? "Level" : "Not Level");
   $("#autoChargeStationLevel").attr("data-value", score.AutoChargeStationLevel);
   $("#endgameChargeStationLevel>.value").text(score.EndgameChargeStationLevel ? "Level" : "Not Level");
   $("#endgameChargeStationLevel").attr("data-value", score.EndgameChargeStationLevel);
+
+  $("#currentScore").text("Current Score: " + realtimeScore.ScoreSummary.Score);
+  $("#currentAmpificationCount").text("Ampification Count: " + score.AmplificationCount);
+  $("#ampCount").text("Amp Total Count: " + (score.AutoAmpNotes + score.TeleopAmpNotes));
+  $("#teleopAmpCount").text(score.TeleopAmpNotes);
+  $("#autoAmpCount").text(score.AutoAmpNotes);
+  $("#speakerCount").text("Speaker Total Count: " + (score.AutoSpeakerNotes + score.TeleopSpeakerNotesNotAmplified + score.TeleopSpeakerNotesAmplified));
+  $("#autoSpeakerCount").text(score.AutoSpeakerNotes);
+  $("#teleopSpeakerCountNotAmplified").text(score.TeleopSpeakerNotesNotAmplified);
+  $("#teleopSpeakerCountAmplified").text(score.TeleopSpeakerNotesAmplified);
+  $("#trapCount1").text((score.TrapNotes));
+  $("#trapCount").text("Trap Count: " + (score.TrapNotes));
 
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 9; j++) {

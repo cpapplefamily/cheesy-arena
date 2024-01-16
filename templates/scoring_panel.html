@@ -7,14 +7,17 @@
 {{define "title"}}Scoring Panel{{end}}
 {{define "body"}}
 <div id="matchName">&nbsp;</div>
+<div id="currentScore"></div>
 <div id="alliance">
   <div class="scoring-section">
     <div class="scoring-header">
       <div>&nbsp;</div>
       <div>Mobility</div>
       <div>Stage</div>
+      <div>Harmony</div>
     </div>
     {{range $i := seq 3}}
+
       <div>
         <div id="team{{$i}}" class="team robot-field"></div>
         <div id="mobilityStatus{{$i}}" class="boolean robot-field" onclick="handleClick('mobilityStatus', {{$i}});">
@@ -24,45 +27,50 @@
           onclick="handleClick('stageStatus', {{$i}});">
           <div class="value"></div>
         </div>
+        <div id="harmonyStatus{{$i}}" class="boolean robot-field" onclick="handleClick('harmonyStatus', {{$i}});">
+          <div class="value"></div>
+        </div>
       </div>
     {{end}}
+    <div>&nbsp;</div>
+    <div>
+      <div id="currentAmpificationCount"></div>
+      <div id="ampCount"></div>
+      <div id="speakerCount"></div>
+      <div id="trapCount"></div>
+      <div id="coopertitionStatus" class="boolean robot-field" onclick="handleClick('coopertitionStatus');">
+        <div class="value"></div>
+      </div>
+      <div id="amplificationActive" class="boolean robot-field" onclick="handleClick('amplificationActive');">
+        <div class="value"></div>
+      </div>
+    </div>
   </div>
-  <div id="chargeStation" class="scoring-section">
-    <div id="autoChargeStationLevel" class="charge-station-level robot-field"
-      onclick="handleClick('autoChargeStationLevel');">
-      <div class="value"></div>
-    </div>
-    <div>Auto</div>
-    <div>Charge Station</div>
-    <div>Endgame</div>
-    <div id="endgameChargeStationLevel" class="charge-station-level robot-field"
-      onclick="handleClick('endgameChargeStationLevel');">
-      <div class="value"></div>
-    </div>
+  <div id="stage" class="scoring-section">
+    <div class="goal-header">Stage Trap</div>
+    {{template "goal" dict "plus" "T" "minus" "Y" "count" "trapCount1"}}
   </div>
   <div id="elements">
     <div class="scoring-section">
       <div>
         <div>&nbsp;</div>
-        <div class="goal-header">AMP</div>
         <div class="goal-header">Speaker</div>
+        <div class="goal-header">AMP</div>
       </div>
       <div>
         <div class="goal-period">Auto</div>
-        {{template "goal" dict "period" "auto" "level" "Upper" "plus" "W" "minus" "Q"}}
-        {{template "goal" dict "period" "auto" "level" "Lower" "plus" "S" "minus" "A"}}
+        {{template "goal" dict "plus" "S" "minus" "A" "count" "autoSpeakerCount"}}
+        {{template "goal" dict "plus" "W" "minus" "Q" "count" "autoAmpCount"}}
       </div>
       <div>
         <div class="goal-period">Teleop</div>
-        {{template "goal" dict "period" "teleop" "level" "Upper" "plus" "R" "minus" "E"}}
-        {{template "goal" dict "period" "teleop" "level" "Lower" "plus" "F" "minus" "D"}}
+        {{template "goal" dict "plus" "F" "minus" "D" "count" "teleopSpeakerCountNotAmplified"}}
+        {{template "goal" dict "plus" "R" "minus" "E" "count" "teleopAmpCount"}}
       </div>
       <div>
         <div class="goal-period">Amplified</div>
-        <div>&nbsp;</div>
-        <div>&nbsp;</div>
-        <div>&nbsp;</div>
-        {{template "goal" dict "period" "teleop" "level" "Lower" "plus" "F" "minus" "D"}}
+        {{template "goal" dict "plus" "H" "minus" "G" "count" "teleopSpeakerCountAmplified"}}
+
       </div>
     </div>
   </div>
@@ -85,12 +93,16 @@
 {{end}}
 {{define "goal"}}
 <div class="goal">
-  <div class="number-button minus" onclick="handleClick('{{.minus}}',1);">
-    <div class="shortcut">{{.minus}}</div>-<div class="shortcut" style="opacity: 0;">{{.minus}}</div>
+  <div class="number-button minus" onclick="handleClick('{{.minus}}');">
+    <div class="shortcut">{{.minus}}</div>
+    -
+    <div class="shortcut" style="opacity: 0;">{{.minus}}</div>
   </div>
-  <div id="{{.period}}Cargo{{.level}}"></div>
+  <div id={{.count}}></div>
   <div class="number-button plus" onclick="handleClick('{{.plus}}');">
-    <div class="shortcut">{{.plus}}</div>+<div class="shortcut" style="opacity: 0;">{{.plus}}</div>
+    <div class="shortcut">{{.plus}}</div>
+    +
+    <div class="shortcut" style="opacity: 0;">{{.plus}}</div>
   </div>
 </div>
 {{end}}

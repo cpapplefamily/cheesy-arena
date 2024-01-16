@@ -146,12 +146,87 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 					}
 					scoreChanged = true
 				}
+			case "harmonyStatus":
+				if args.TeamPosition >= 1 && args.TeamPosition <= 3 {
+					score.HarmonyStatuses[args.TeamPosition-1] = !score.HarmonyStatuses[args.TeamPosition-1]
+					scoreChanged = true
+				}
+			case "coopertitionStatus":
+				if score.AmplificationCount > 0 && !score.CoopertitionStatus {
+					score.CoopertitionStatus = !score.CoopertitionStatus
+					score.AmplificationCount = decrementAmplification(score.AmplificationCount)
+					scoreChanged = true
+				}
+			case "amplificationActive":
+				if score.AmplificationCount > 1 {//&& !score.AmplificationActive {
+					score.AmplificationActive = !score.AmplificationActive
+					score.AmplificationCount = 0
+					scoreChanged = true
+				}
+			//Notes Auto
 			case "Q":
-				score.StageStatuses[1]++
-				if score.StageStatuses[1] > 3 {
-					score.StageStatuses[1] = 0
+				score.AutoAmpNotes--
+				score.AmplificationCount = decrementAmplification(score.AmplificationCount)
+				if score.AutoAmpNotes <= 0 {
+					score.AutoAmpNotes = 0
 				}
 				scoreChanged = true
+			case "W":
+				score.AutoAmpNotes++
+				score.AmplificationCount = incrementAmplification(score.AmplificationCount)
+				scoreChanged = true
+			case "A":
+				score.AutoSpeakerNotes--
+				if score.AutoSpeakerNotes <= 0 {
+					score.AutoSpeakerNotes = 0
+				}
+				scoreChanged = true
+			case "S":
+				score.AutoSpeakerNotes++
+				scoreChanged = true
+			//Notes Teleop
+			case "E":
+				score.TeleopAmpNotes--
+				score.AmplificationCount = decrementAmplification(score.AmplificationCount)
+				if score.TeleopAmpNotes <= 0 {
+					score.TeleopAmpNotes = 0
+				}
+				scoreChanged = true
+			case "R":
+				score.TeleopAmpNotes++
+				score.AmplificationCount = incrementAmplification(score.AmplificationCount)
+				scoreChanged = true
+			case "D":
+				score.TeleopSpeakerNotesNotAmplified--
+				if score.TeleopSpeakerNotesNotAmplified <= 0 {
+					score.TeleopSpeakerNotesNotAmplified = 0
+				}
+				scoreChanged = true
+			case "F":
+				score.TeleopSpeakerNotesNotAmplified++
+				scoreChanged = true
+			case "G":
+				score.TeleopSpeakerNotesAmplified--
+				if score.TeleopSpeakerNotesAmplified <= 0 {
+					score.TeleopSpeakerNotesAmplified = 0
+				}
+				scoreChanged = true
+			case "H":
+				score.TeleopSpeakerNotesAmplified++
+				scoreChanged = true
+			case "Y":
+				score.TrapNotes--
+				if score.TrapNotes <= 0 {
+					score.TrapNotes = 0
+				}
+				scoreChanged = true
+			case "T":
+				score.TrapNotes++
+				if score.TrapNotes >= 3 {
+					score.TrapNotes = 3
+				}
+				scoreChanged = true
+			//2023
 			case "autoChargeStationLevel":
 				score.AutoChargeStationLevel = !score.AutoChargeStationLevel
 				scoreChanged = true
@@ -186,5 +261,22 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 				web.arena.RealtimeScoreNotifier.Notify()
 			}
 		}
+
+		
 	}
+
 }
+
+func incrementAmplification(amplificationCount int) int {
+	if amplificationCount < 2{
+		amplificationCount++
+	}
+	return amplificationCount
+}
+
+func decrementAmplification(amplificationCount int) int {
+	if amplificationCount > 0{
+		amplificationCount--
+	}
+	return amplificationCount
+} 

@@ -7,15 +7,17 @@ package game
 
 type Score struct {
 	MobilityStatuses          [3]bool
+	AmplificationCount			int
 	AutoAmpNotes				int
 	TeleopAmpNotes				int
 	AutoSpeakerNotes			int
 	TeleopSpeakerNotesNotAmplified	int
 	TeleopSpeakerNotesAmplified	int
 	TrapNotes					int
-	Harmony						[3]bool
+	HarmonyStatuses				[3]bool
 	StageStatuses				[3]StageStatus
-	CoopertitionActive			bool
+	AmplificationActive			bool
+	CoopertitionStatus			bool
 	///
 	Grid                      Grid
 	AutoDockStatuses          [3]bool
@@ -103,10 +105,9 @@ func (score *Score) Summarize(opponentScore *Score) *ScoreSummary {
 	//						summary.ChargeStationPoints + 
 	//						summary.ParkPoints
 	
-	summary.AmpPoints = score.AutoAmpNotes * 2 + score.TeleopAmpNotes * 1
-	summary.SpeakerPoints = score.AutoAmpNotes * 2 + 
-							score.AutoSpeakerNotes * 5 + 
-							score.TeleopAmpNotes * 1 +
+	summary.AmpPoints = score.AutoAmpNotes * 2 + 
+						score.TeleopAmpNotes * 1
+	summary.SpeakerPoints = score.AutoSpeakerNotes * 5 + 
 							score.TeleopSpeakerNotesNotAmplified * 2 + 
 							score.TeleopSpeakerNotesAmplified * 5
 
@@ -128,13 +129,13 @@ func (score *Score) Summarize(opponentScore *Score) *ScoreSummary {
 
 	harmonyCount := 0
 	for i := 0; i < 3; i++ {
-		if score.Harmony[i]{
+		if score.HarmonyStatuses[i]{
 			harmonyCount += 1
 		}
 	}
 	if harmonyCount >= 2 {
 		for i := 0; i < 3; i++ {
-			if score.Harmony[i]{
+			if score.HarmonyStatuses[i] && (score.StageStatuses[i]>1){
 				summary.HarmonyPoints += 2
 			}
 		}
@@ -179,7 +180,7 @@ func (score *Score) Summarize(opponentScore *Score) *ScoreSummary {
 	
 	//Set Melody Threshold for Melody Ranking Point
 	melodyThreshold := 18
-	if score.CoopertitionActive && opponentScore.CoopertitionActive{
+	if score.CoopertitionStatus && opponentScore.CoopertitionStatus{
 		melodyThreshold = 15
 	}
 
