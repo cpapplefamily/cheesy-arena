@@ -923,9 +923,51 @@ func (arena *Arena) getAssignedAllianceStation(teamId int) string {
 	return ""
 }
 
+var startAmplificationRed = false
+var startTimeRed = time.Now()
+var startAmplificationBlue = false
+var startTimeBlue = time.Now()
+
 // Updates the score given new input information from the field PLC, and actuates PLC outputs accordingly.
 func (arena *Arena) handlePlcInputOutput() {
 	if !arena.Plc.IsEnabled() {
+		redScore := &arena.RedRealtimeScore.CurrentScore
+		blueScore := &arena.BlueRealtimeScore.CurrentScore
+		
+		if redScore.AmplificationActive{
+			if !startAmplificationRed{
+				startTimeRed = time.Now()
+				startAmplificationRed = true
+				redScore.TeleopSpeaderNotesAmplifiedLimitCount = 0
+				log.Println("******Start Amplification*******")
+			}
+			if time.Since(startTimeRed) >= 13 * time.Second || redScore.TeleopSpeaderNotesAmplifiedLimitCount >= 4{
+				log.Println("******End Amplification*******")
+				//refresh the scoring panel
+				arena.RealtimeScoreNotifier.Notify()
+				redScore.AmplificationActive = false
+			}
+		}else{
+			startAmplificationRed = false
+		}
+
+		
+		if blueScore.AmplificationActive{
+			if !startAmplificationBlue{
+				startTimeBlue = time.Now()
+				startAmplificationBlue = true
+				blueScore.TeleopSpeaderNotesAmplifiedLimitCount = 0
+				log.Println("******Start Amplification*******")
+			}
+			if time.Since(startTimeBlue) >= 13 * time.Second || blueScore.TeleopSpeaderNotesAmplifiedLimitCount >= 4{
+				log.Println("******End Amplification*******")
+				//refresh the scoring panel
+				arena.RealtimeScoreNotifier.Notify()
+				blueScore.AmplificationActive = false
+			}
+		}else{
+			startAmplificationBlue = false
+		}
 		return
 	}
 

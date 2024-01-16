@@ -173,7 +173,9 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 				scoreChanged = true
 			case "W":
 				score.AutoAmpNotes++
-				score.AmplificationCount = incrementAmplification(score.AmplificationCount)
+				if !score.AmplificationActive{
+					score.AmplificationCount = incrementAmplification(score.AmplificationCount)
+				}
 				scoreChanged = true
 			case "A":
 				score.AutoSpeakerNotes--
@@ -194,7 +196,9 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 				scoreChanged = true
 			case "R":
 				score.TeleopAmpNotes++
-				score.AmplificationCount = incrementAmplification(score.AmplificationCount)
+				if !score.AmplificationActive{
+					score.AmplificationCount = incrementAmplification(score.AmplificationCount)
+				}
 				scoreChanged = true
 			case "D":
 				score.TeleopSpeakerNotesNotAmplified--
@@ -203,7 +207,12 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 				}
 				scoreChanged = true
 			case "F":
+				if !score.AmplificationActive{
 				score.TeleopSpeakerNotesNotAmplified++
+				}else{
+				score.TeleopSpeakerNotesAmplified++	
+				score.TeleopSpeaderNotesAmplifiedLimitCount++
+				}
 				scoreChanged = true
 			case "G":
 				score.TeleopSpeakerNotesAmplified--
@@ -212,8 +221,11 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 				}
 				scoreChanged = true
 			case "H":
-				score.TeleopSpeakerNotesAmplified++
-				scoreChanged = true
+				if score.AmplificationActive{
+					score.TeleopSpeakerNotesAmplified++
+					score.TeleopSpeaderNotesAmplifiedLimitCount++
+					scoreChanged = true
+				}
 			case "Y":
 				score.TrapNotes--
 				if score.TrapNotes <= 0 {

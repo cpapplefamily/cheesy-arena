@@ -13,6 +13,7 @@ type Score struct {
 	AutoSpeakerNotes			int
 	TeleopSpeakerNotesNotAmplified	int
 	TeleopSpeakerNotesAmplified	int
+	TeleopSpeaderNotesAmplifiedLimitCount int
 	TrapNotes					int
 	HarmonyStatuses				[3]bool
 	StageStatuses				[3]StageStatus
