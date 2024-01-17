@@ -16,6 +16,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"strings"
 )
 
 // Renders the scoring interface which enables input of scores in real-time.
@@ -119,18 +120,21 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 				continue
 			}
 
-			switch command {
-			case "mobilityStatus":
+			switch strings.ToUpper(command) {
+			//case "mobilityStatus":
+			case "MOBILITYSTATUS":
 				if args.TeamPosition >= 1 && args.TeamPosition <= 3 {
 					score.MobilityStatuses[args.TeamPosition-1] = !score.MobilityStatuses[args.TeamPosition-1]
 					scoreChanged = true
 				}
-			case "autoDockStatus":
+			//case "autoDockStatus":
+			case "AUTODOCKSTATUS":
 				if args.TeamPosition >= 1 && args.TeamPosition <= 3 {
 					score.AutoDockStatuses[args.TeamPosition-1] = !score.AutoDockStatuses[args.TeamPosition-1]
 					scoreChanged = true
 				}
-			case "endgameStatus":
+			//case "endgameStatus":
+			case "ENDGAMESTATUS":
 				if args.TeamPosition >= 1 && args.TeamPosition <= 3 {
 					score.EndgameStatuses[args.TeamPosition-1]++
 					if score.EndgameStatuses[args.TeamPosition-1] > 2 {
@@ -138,7 +142,8 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 					}
 					scoreChanged = true
 				}
-			case "stageStatus":
+			//case "stageStatus":
+			case "STAGESTATUS":
 				if args.TeamPosition >= 1 && args.TeamPosition <= 3 {
 					score.StageStatuses[args.TeamPosition-1]++
 					if score.StageStatuses[args.TeamPosition-1] > 3 {
@@ -146,18 +151,21 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 					}
 					scoreChanged = true
 				}
-			case "harmonyStatus":
+			//case "harmonyStatus":
+			case "HARMONYSTATUS":
 				if args.TeamPosition >= 1 && args.TeamPosition <= 3 {
 					score.HarmonyStatuses[args.TeamPosition-1] = !score.HarmonyStatuses[args.TeamPosition-1]
 					scoreChanged = true
 				}
-			case "coopertitionStatus":
+			//case "coopertitionStatus":
+			case "COOPERTITIONSTATUS":
 				if score.AmplificationCount > 0 && !score.CoopertitionStatus {
 					score.CoopertitionStatus = !score.CoopertitionStatus
 					score.AmplificationCount = decrementAmplification(score.AmplificationCount)
 					scoreChanged = true
 				}
-			case "amplificationActive":
+			//case "amplificationActive":
+			case "AMPLIFICATIONACTIVE":
 				if score.AmplificationCount > 1 {//&& !score.AmplificationActive {
 					score.AmplificationActive = !score.AmplificationActive
 					score.AmplificationCount = 0
@@ -173,7 +181,7 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 				scoreChanged = true
 			case "W":
 				score.AutoAmpNotes++
-				if !score.AmplificationActive{
+				if !score.AmpAccumulatorDisable{
 					score.AmplificationCount = incrementAmplification(score.AmplificationCount)
 				}
 				scoreChanged = true
@@ -196,7 +204,7 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 				scoreChanged = true
 			case "R":
 				score.TeleopAmpNotes++
-				if !score.AmplificationActive{
+				if !score.AmpAccumulatorDisable{
 					score.AmplificationCount = incrementAmplification(score.AmplificationCount)
 				}
 				scoreChanged = true
