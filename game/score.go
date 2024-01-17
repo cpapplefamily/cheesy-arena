@@ -18,6 +18,7 @@ type Score struct {
 	HarmonyStatuses				[3]bool
 	StageStatuses				[3]StageStatus
 	AmplificationActive			bool
+	AmpAccumulatorDisable		bool
 	CoopertitionStatus			bool
 	///
 	Grid                      Grid

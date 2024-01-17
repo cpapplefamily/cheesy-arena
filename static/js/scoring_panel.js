@@ -65,6 +65,8 @@ const handleRealtimeScore = function(data) {
     $("#coopertitionStatus").attr("data-value", score.CoopertitionStatus);
     $(`#amplificationActive>.value`).text(score.AmplificationActive ? "Amplification Active" : "Amplification");
     $("#amplificationActive").attr("data-value", score.AmplificationActive);
+    $("#amplificationActive").css("background-color", !score.AmpAccumulatorDisable && score.AmplificationActive ? "yellow" : "");
+    $("#amplificationActive").css("color", !score.AmpAccumulatorDisable && score.AmplificationActive ? "black" : "");
   }
 
   $("#autoChargeStationLevel>.value").text(score.AutoChargeStationLevel ? "Level" : "Not Level");

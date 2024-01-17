@@ -84,6 +84,7 @@ body {
 }
 .endgame-status[data-value="3"] {
   background-color: rgb(208, 194, 3);
+  color: #000;
 }
 .charge-station-level[data-value="false"] {
   background-color: #622;
