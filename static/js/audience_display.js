@@ -146,18 +146,30 @@ const handleRealtimeScore = function(data) {
   $("#" + redSide + "ScoreNumber").text(data.Red.ScoreSummary.Score - data.Red.ScoreSummary.EndgamePoints);
   $("#" + blueSide + "ScoreNumber").text(data.Blue.ScoreSummary.Score - data.Blue.ScoreSummary.EndgamePoints);
 
-  $("#" + redSide + "LinkNumerator").text(data.Red.ScoreSummary.NumLinks);
-  $("#" + redSide + "LinkDenominator").text(data.Red.ScoreSummary.NumLinksGoal);
-  $("#" + blueSide + "LinkNumerator").text(data.Blue.ScoreSummary.NumLinks);
-  $("#" + blueSide + "LinkDenominator").text(data.Blue.ScoreSummary.NumLinksGoal);
+  $("#" + redSide + "MelodyNumerator").text(data.Red.ScoreSummary.TotalNotes);
+  $("#" + redSide + "MelodyDenominator").text(data.Red.ScoreSummary.NumSpeakersGoal);
+  $("#" + redSide + "AmpCount").text(data.Red.ScoreSummary.AmplificationCount);
+  $("#" + redSide + "CoopStatus").text(data.Red.ScoreSummary.CoopertitionStatus ? "ENABLED":"FALSE");
+  $("." + redSide + "-speaker-icon").css("width", data.Red.ScoreSummary.AmpAccumulatorDisable ?  "50px" :  "20px");
+  $("." + redSide + "-speaker-icon").css("filter", data.Red.ScoreSummary.AmpAccumulatorDisable ?  
+    "invert(9%) sepia(100%) saturate(5311%) hue-rotate(245deg) brightness(115%) contrast(145%)" :  
+    "");
+  $("#" + blueSide + "MelodyNumerator").text(data.Blue.ScoreSummary.TotalNotes);
+  $("#" + blueSide + "MelodyDenominator").text(data.Blue.ScoreSummary.NumSpeakersGoal);
+  $("#" + blueSide + "AmpCount").text(data.Blue.ScoreSummary.AmplificationCount);
+  $("#" + blueSide + "CoopStatus").text(data.Blue.ScoreSummary.CoopertitionStatus ? "ENABLED":"FALSE");
+  $("." + blueSide + "-speaker-icon").css("width", data.Blue.ScoreSummary.AmpAccumulatorDisable ?  "50px" :  "20px");
+  $("." + blueSide + "-speaker-icon").css("filter", data.Blue.ScoreSummary.AmpAccumulatorDisable ?  
+    " invert(26%) sepia(83%) saturate(7485%) hue-rotate(356deg) brightness(104%) contrast(118%)" :  
+    "");
   if (currentMatch.Type === matchTypePlayoff) {
-    $("#" + redSide + "LinkDenominator").hide();
-    $("#" + blueSide + "LinkDenominator").hide();
-    $(".link-splitter").hide();
+    $("#" + redSide + "SpeakerDenominator").hide();
+    $("#" + blueSide + "SpeakerDenominator").hide();
+    $(".speaker-splitter").hide();
   } else {
     $("#" + redSide + "LinkDenominator").show();
     $("#" + blueSide + "LinkDenominator").show();
-    $(".link-splitter").show();
+    $(".speaker-splitter").show();
   }
 
   fetch("/api/grid/red/svg")
@@ -181,21 +193,24 @@ const handleScorePosted = function(data) {
     setTeamInfo(redSide, 4, 0, data.RedRankings);
   }
   $("#" + redSide + "FinalMobilityPoints").text(data.RedScoreSummary.MobilityPoints);
-  $("#" + redSide + "FinalGridPoints").text(data.RedScoreSummary.GridPoints);
-  $("#" + redSide + "FinalChargeStationPoints").text(data.RedScoreSummary.ChargeStationPoints);
-  $("#" + redSide + "FinalParkPoints").text(data.RedScoreSummary.ParkPoints);
+  $("#" + redSide + "FinalAutoAmpPoints").text(data.RedScoreSummary.AutoAmpPoints);
+  $("#" + redSide + "FinalAmpPoints").text(data.RedScoreSummary.AmpPoints);
+  $("#" + redSide + "FinalAutoSpeakerPoints").text(data.RedScoreSummary.AutoSpeakerPoints);
+  $("#" + redSide + "FinalSpeakerPoints").text(data.RedScoreSummary.SpeakerPoints);
+  $("#" + redSide + "FinalAmplifiedPoints").text(data.RedScoreSummary.AmplifiedPoints);
+  $("#" + redSide + "FinalEndStagePoints").text(data.RedScoreSummary.EndStagePoints);
   $("#" + redSide + "FinalFoulPoints").text(data.RedScoreSummary.FoulPoints);
-  $("#" + redSide + "FinalSustainabilityBonusRankingPoint").html(
-    data.RedScoreSummary.SustainabilityBonusRankingPoint ? "&#x2714;" : "&#x2718;"
+  $("#" + redSide + "FinalMelodyRankingPoint").html(
+    data.RedScoreSummary.MelodyRankingPoint ? "&#x2714;" : "&#x2718;"
   );
-  $("#" + redSide + "FinalSustainabilityBonusRankingPoint").attr(
-    "data-checked", data.RedScoreSummary.SustainabilityBonusRankingPoint
+  $("#" + redSide + "FinalMelodyRankingPoint").attr(
+    "data-checked", data.RedScoreSummary.MelodyRankingPoint
   );
-  $("#" + redSide + "FinalActivationBonusRankingPoint").html(
-    data.RedScoreSummary.ActivationBonusRankingPoint ? "&#x2714;" : "&#x2718;"
+  $("#" + redSide + "FinalEmsembleRankingPoint").html(
+    data.RedScoreSummary.EmsembleRankingPoint ? "&#x2714;" : "&#x2718;"
   );
-  $("#" + redSide + "FinalActivationBonusRankingPoint").attr(
-    "data-checked", data.RedScoreSummary.ActivationBonusRankingPoint
+  $("#" + redSide + "FinalEmsembleRankingPoint").attr(
+    "data-checked", data.RedScoreSummary.EmsembleRankingPoint
   );
   $("#" + redSide + "FinalRankingPoints").html(data.RedRankingPoints);
   $("#" + redSide + "FinalWins").text(data.RedWins);
@@ -215,21 +230,24 @@ const handleScorePosted = function(data) {
     setTeamInfo(blueSide, 4, 0, data.BlueRankings);
   }
   $("#" + blueSide + "FinalMobilityPoints").text(data.BlueScoreSummary.MobilityPoints);
-  $("#" + blueSide + "FinalGridPoints").text(data.BlueScoreSummary.GridPoints);
-  $("#" + blueSide + "FinalChargeStationPoints").text(data.BlueScoreSummary.ChargeStationPoints);
-  $("#" + blueSide + "FinalParkPoints").text(data.BlueScoreSummary.ParkPoints);
+  $("#" + blueSide + "FinalAutoAmpPoints").text(data.BlueScoreSummary.AutoAmpPoints);
+  $("#" + blueSide + "FinalAmpPoints").text(data.BlueScoreSummary.AmpPoints);
+  $("#" + blueSide + "FinalAutoSpeakerPoints").text(data.BlueScoreSummary.AutoSpeakerPoints);
+  $("#" + blueSide + "FinalSpeakerPoints").text(data.BlueScoreSummary.SpeakerPoints);
+  $("#" + blueSide + "FinalAmplifiedPoints").text(data.BlueScoreSummary.AmplifiedPoints);
+  $("#" + blueSide + "FinalEndStagePoints").text(data.BlueScoreSummary.EndStagePoints);
   $("#" + blueSide + "FinalFoulPoints").text(data.BlueScoreSummary.FoulPoints);
-  $("#" + blueSide + "FinalSustainabilityBonusRankingPoint").html(
-    data.BlueScoreSummary.SustainabilityBonusRankingPoint ? "&#x2714;" : "&#x2718;"
+  $("#" + blueSide + "FinalMelodyRankingPoint").html(
+    data.BlueScoreSummary.MelodyRankingPoint ? "&#x2714;" : "&#x2718;"
   );
-  $("#" + blueSide + "FinalSustainabilityBonusRankingPoint").attr(
-    "data-checked", data.BlueScoreSummary.SustainabilityBonusRankingPoint
+  $("#" + blueSide + "FinalMelodyRankingPoint").attr(
+    "data-checked", data.BlueScoreSummary.MelodyRankingPoint
   );
-  $("#" + blueSide + "FinalActivationBonusRankingPoint").html(
-    data.BlueScoreSummary.ActivationBonusRankingPoint ? "&#x2714;" : "&#x2718;"
+  $("#" + blueSide + "FinalEmsembleRankingPoint").html(
+    data.BlueScoreSummary.EmsembleRankingPoint ? "&#x2714;" : "&#x2718;"
   );
-  $("#" + blueSide + "FinalActivationBonusRankingPoint").attr(
-    "data-checked", data.BlueScoreSummary.ActivationBonusRankingPoint
+  $("#" + blueSide + "FinalEmsembleRankingPoint").attr(
+    "data-checked", data.BlueScoreSummary.EmsembleRankingPoint
   );
   $("#" + blueSide + "FinalRankingPoints").html(data.BlueRankingPoints);
   $("#" + blueSide + "FinalWins").text(data.BlueWins);

@@ -31,29 +31,41 @@
                 <img class="avatar" id="leftTeam3Avatar" src="" />
               </div>
               <div class="score-fields">
-                <div class="score-links">
-                  <div>
-                    <span id="leftLinkNumerator"></span>
-                    <span class="link-splitter">/</span>
-                    <span id="leftLinkDenominator"></span>
-                  </div>
-                  <img class="link-icon" src="/static/img/link.svg" />
+                <div class="coopStatus">
+                  Coop Status
+                  <span id="leftCoopStatus"></span>
+                  <div>Amp Count</div>
+                  <span id="leftAmpCount"></span>
                 </div>
-                <div class="score-grid" id="leftGrid"></div>
+                <div class="score-speakers">
+                  MELODY
+                  <div>
+                    <span id="leftMelodyNumerator"></span>
+                    <span class="speaker-splitter">/</span>
+                    <span id="leftMelodyDenominator"></span>
+                  </div>
+                  <img class="left-speaker-icon" src="/static/img/speaker.svg" />
+                </div>
               </div>
               <div class="score-number" id="leftScoreNumber"></div>
             </div>
             <div class="score score-right reversible-right">
               <div class="score-number" id="rightScoreNumber"></div>
               <div class="score-fields">
-                <div class="score-grid" id="rightGrid"></div>
-                <div class="score-links">
+                <div class="score-speakers">
+                  MELODY
                   <div>
-                    <span id="rightLinkNumerator"></span>
-                    <span class="link-splitter">/</span>
-                    <span id="rightLinkDenominator"></span>
+                    <span id="rightMelodyNumerator"></span>
+                    <span class="speaker-splitter">/</span>
+                    <span id="rightMelodyDenominator"></span>
                   </div>
-                  <img class="link-icon" src="/static/img/link.svg" />
+                  <img class="right-speaker-icon" src="/static/img/speaker.svg" />
+                </div>
+                <div class="coopStatus">
+                  Coop Status
+                  <span id="rightCoopStatus"></span>
+                  Amp Count
+                  <span id="rightAmpCount"></span>
                 </div>
               </div>
               <div class="avatars">
@@ -127,13 +139,16 @@
             </div>
             <div class="final-breakdown" id="leftFinalBreakdown">
               <div id="leftFinalMobilityPoints"></div>
-              <div id="leftFinalGridPoints"></div>
-              <div id="leftFinalChargeStationPoints"></div>
-              <div id="leftFinalParkPoints"></div>
+              <div id="leftFinalAutoAmpPoints"></div>
+              <div id="leftFinalAmpPoints"></div>
+              <div id="leftFinalAutoSpeakerPoints"></div>
+              <div id="leftFinalSpeakerPoints"></div>
+              <div id="leftFinalAmplifiedPoints"></div>
+              <div id="leftFinalEndStagePoints"></div>
               <div id="leftFinalFoulPoints"></div>
               <div class="playoff-hidden-field">
-                <div id="leftFinalSustainabilityBonusRankingPoint"></div>
-                <div id="leftFinalActivationBonusRankingPoint"></div>
+                <div id="leftFinalMelodyRankingPoint"></div>
+                <div id="leftFinalEmsembleRankingPoint"></div>
                 <div id="leftFinalRankingPoints"></div>
               </div>
               <div class="playoff-only-field">
@@ -143,13 +158,16 @@
             </div>
             <div class="final-breakdown" id="centerFinalBreakdown">
               <div>Mobility</div>
-              <div>Grid</div>
-              <div>Charge Station</div>
-              <div>Park</div>
+              <div>Auto Amp Points</div>
+              <div>Teleop Amp Points</div>
+              <div>Auto Speaker Points</div>
+              <div>Teleop Speaker Points</div>
+              <div>Amplified Points</div>
+              <div>End Game Points</div>
               <div>Foul</div>
               <div class="playoff-hidden-field">
-                <div>Sustainability Bonus</div>
-                <div>Activation Bonus</div>
+                <div>Melody Ranking Point</div>
+                <div>Emsemble Ranking Point</div>
                 <div>Ranking Points</div>
               </div>
               <div class="playoff-only-field">
@@ -159,13 +177,16 @@
             </div>
             <div class="final-breakdown" id="rightFinalBreakdown">
               <div id="rightFinalMobilityPoints"></div>
-              <div id="rightFinalGridPoints"></div>
-              <div id="rightFinalChargeStationPoints"></div>
-              <div id="rightFinalParkPoints"></div>
+              <div id="rightFinalAutoAmpPoints"></div>
+              <div id="rightFinalAmpPoints"></div>
+              <div id="rightFinalAutoSpeakerPoints"></div>
+              <div id="rightFinalSpeakerPoints"></div>
+              <div id="rightFinalAmplifiedPoints"></div>
+              <div id="rightFinalEndStagePoints"></div>
               <div id="rightFinalFoulPoints"></div>
               <div class="playoff-hidden-field">
-                <div id="rightFinalSustainabilityBonusRankingPoint"></div>
-                <div id="rightFinalActivationBonusRankingPoint"></div>
+                <div id="rightFinalMelodyRankingPoint"></div>
+                <div id="rightFinalEmsembleRankingPoint"></div>
                 <div id="rightFinalRankingPoints"></div>
               </div>
               <div class="playoff-only-field">

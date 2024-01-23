@@ -124,7 +124,16 @@ html {
   justify-content: space-evenly;
   opacity: 0;
 }
-.score-links {
+.coopStatus {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "FuturaLTBold";
+  font-size: 15px;
+  color: #fff;
+}
+.score-speakers {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -133,12 +142,14 @@ html {
   font-size: 17px;
   color: #fff;
 }
-.link-splitter {
+.speaker-splitter {
   margin: 0 -4px;
 }
-.link-icon {
+.right-speaker-icon {
   margin-top: 5px;
-  width: 25px;
+}
+.left-speaker-icon {
+  margin-top: 5px;
 }
 .score-grid {
   display: flex;
@@ -259,7 +270,7 @@ html {
 .blindsCenter {
   position: absolute;
   top: 0;
-  bottom: 0;
+  bottom: 100px;
   margin: auto auto;
   border-radius: 50%;
   width: 310px;
@@ -329,7 +340,7 @@ html {
   padding-left: 150px;
 }
 .final-breakdown {
-  height: 330px;
+  height: 400px;
   display: flex;
   flex-direction: column;
   justify-content: center;

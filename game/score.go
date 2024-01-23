@@ -33,6 +33,8 @@ type Score struct {
 var SustainabilityBonusLinkThresholdWithoutCoop = 6
 var SustainabilityBonusLinkThresholdWithCoop = 5
 var ActivationBonusPointThreshold = 26
+var MelodyBonusSpeakerThresholdWithoutCoop = 18
+var MelodyBonusSpeakerThresholdWithCoop = 15
 
 // Represents the state of a robot at the end of the match.
 type EndgameStatus int
@@ -106,13 +108,18 @@ func (score *Score) Summarize(opponentScore *Score) *ScoreSummary {
 	//						summary.GridPoints + 
 	//						summary.ChargeStationPoints + 
 	//						summary.ParkPoints
-	
-	summary.AmpPoints = score.AutoAmpNotes * 2 + 
-						score.TeleopAmpNotes * 1
-	summary.SpeakerPoints = score.AutoSpeakerNotes * 5 + 
-							score.TeleopSpeakerNotesNotAmplified * 2 + 
-							score.TeleopSpeakerNotesAmplified * 5
 
+	//*************************** Pass to summary
+	summary.AmpAccumulatorDisable = score.AmpAccumulatorDisable
+	summary.AmplificationActive = score.AmplificationActive
+	summary.AmplificationCount = score.AmplificationCount
+	summary.CoopertitionStatus = score.CoopertitionStatus
+	summary.AutoAmpPoints = score.AutoAmpNotes * 2
+	summary.AmpPoints = score.TeleopAmpNotes * 1
+	summary.AutoSpeakerPoints = score.AutoSpeakerNotes * 5
+	summary.SpeakerPoints = score.TeleopSpeakerNotesNotAmplified * 2  
+	summary.AmplifiedPoints = score.TeleopSpeakerNotesAmplified * 5
+	
 	summary.TrapPoints = score.TrapNotes * 5
 
 	//summary.OnstagePoints = 0
@@ -149,9 +156,14 @@ func (score *Score) Summarize(opponentScore *Score) *ScoreSummary {
 							summary.TrapPoints
 
 	summary.MatchPoints = 	summary.MobilityPoints + 
+							summary.AutoAmpPoints +
 							summary.AmpPoints + 
+							summary.AutoSpeakerPoints +
 							summary.SpeakerPoints +
+							summary.AmplifiedPoints +
 							summary.EndStagePoints
+
+
 							
 
 
@@ -179,6 +191,8 @@ func (score *Score) Summarize(opponentScore *Score) *ScoreSummary {
 					score.AutoSpeakerNotes +
 					score.TeleopSpeakerNotesNotAmplified +
 					score.TeleopSpeakerNotesAmplified
+
+	summary.TotalNotes = totalNotes
 	
 	//Set Melody Threshold for Melody Ranking Point
 	melodyThreshold := 18
@@ -200,25 +214,27 @@ func (score *Score) Summarize(opponentScore *Score) *ScoreSummary {
 	}
 
 	// Calculate bonus ranking points.
-/* 	summary.CoopertitionBonus = score.Grid.IsCoopertitionThresholdAchieved() &&
-		opponentScore.Grid.IsCoopertitionThresholdAchieved()
-	summary.NumLinks = len(score.Grid.Links())
-	summary.NumLinksGoal = SustainabilityBonusLinkThresholdWithoutCoop */
+	summary.CoopertitionBonus = score.CoopertitionStatus &&
+	 							opponentScore.CoopertitionStatus
+	summary.NumSpeakers = 	score.AutoSpeakerNotes + 
+							score.TeleopSpeakerNotesNotAmplified + 
+							score.TeleopSpeakerNotesAmplified
+	summary.NumSpeakersGoal = MelodyBonusSpeakerThresholdWithoutCoop
 	// A SustainabilityBonusLinkThresholdWithCoop of 0 disables the coopertition bonus.
-/* 	if SustainabilityBonusLinkThresholdWithCoop > 0 && summary.CoopertitionBonus {
-		summary.NumLinksGoal = SustainabilityBonusLinkThresholdWithCoop
+	if MelodyBonusSpeakerThresholdWithoutCoop > 0 && summary.CoopertitionBonus {
+		summary.NumSpeakersGoal = MelodyBonusSpeakerThresholdWithCoop
 	}
-	if summary.NumLinks >= summary.NumLinksGoal {
-		summary.SustainabilityBonusRankingPoint = true
+	if summary.NumSpeakers >= summary.NumSpeakersGoal {
+		summary.MelodyRankingPoint = true
 	}
-	summary.ActivationBonusRankingPoint = summary.ChargeStationPoints >= ActivationBonusPointThreshold
+	//summary.ActivationBonusRankingPoint = summary.ChargeStationPoints >= ActivationBonusPointThreshold
 
 	if summary.SustainabilityBonusRankingPoint {
 		summary.BonusRankingPoints++
 	}
 	if summary.ActivationBonusRankingPoint {
 		summary.BonusRankingPoints++
-	} */
+	} 
 
 	return summary
 }

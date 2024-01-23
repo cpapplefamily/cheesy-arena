@@ -22,15 +22,25 @@ type ScoreSummary struct {
 	ActivationBonusRankingPoint     bool
 	BonusRankingPoints              int
 	NumOpponentTechFouls            int
+	AmplificationCount				int
+	AutoAmpPoints					int
 	AmpPoints						int
+	AutoSpeakerPoints				int
 	SpeakerPoints					int
+	AmplifiedPoints					int
 	TrapPoints						int
 	OnstagePoints					int
 	RobotsOnstage					int
 	HarmonyPoints					int
 	EndStagePoints					int
+	CoopertitionStatus				bool
+	AmplificationActive				bool
+	AmpAccumulatorDisable			bool
 	MelodyRankingPoint				bool
 	EmsembleRankingPoint			bool
+	NumSpeakers                        int
+	NumSpeakersGoal                    int
+	TotalNotes						int
 }
 
 type MatchStatus int

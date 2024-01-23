@@ -9,6 +9,7 @@ import "math/rand"
 
 type RankingFields struct {
 	RankingPoints       int
+	CoopertitionBonus	int
 	MatchPoints         int
 	ChargeStationPoints int
 	AutoPoints          int

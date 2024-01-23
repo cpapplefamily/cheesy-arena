@@ -950,9 +950,9 @@ func (arena *Arena) handlePlcInputOutput() {
 			if time.Since(startTimeRed) >= 13 * time.Second || redScore.TeleopSpeaderNotesAmplifiedLimitCount >= 4{
 				log.Println("******End Red Amplification*******")
 				//refresh the scoring panel
-				arena.RealtimeScoreNotifier.Notify()
 				redScore.AmpAccumulatorDisable = false
 				redScore.AmplificationActive = false
+				arena.RealtimeScoreNotifier.Notify()
 			}
 		}else{
 			startAmplificationRed = false
@@ -974,9 +974,9 @@ func (arena *Arena) handlePlcInputOutput() {
 			if time.Since(startTimeBlue) >= 13 * time.Second || blueScore.TeleopSpeaderNotesAmplifiedLimitCount >= 4{
 				log.Println("******End Blue Amplification*******")
 				//refresh the scoring panel
-				arena.RealtimeScoreNotifier.Notify()
 				blueScore.AmpAccumulatorDisable = false
 				blueScore.AmplificationActive = false
+				arena.RealtimeScoreNotifier.Notify()
 			}
 		}else{
 			startAmplificationBlue = false
