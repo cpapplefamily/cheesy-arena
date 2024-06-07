@@ -502,8 +502,10 @@ html {
   opacity: 0;
   text-align: center;
 }
+
 #bracketSvg {
-  width: 1920px;
+  width: fit-content;
+  height: fit-content;
 }
 #sponsor {
   position: fixed;
