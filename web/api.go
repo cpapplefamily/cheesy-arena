@@ -291,7 +291,7 @@ func (web *Web) generateBracketSvg(w io.Writer, activeMatch *model.Match) error 
 	bracketType := "double"
 	numAlliances := web.arena.EventSettings.NumPlayoffAlliances
 	
-	log.Printf("web.arena.EventSettings.PlayoffType: %s", web.arena.EventSettings.PlayoffType)
+	log.Printf("web.arena.EventSettings.PlayoffType: %v", web.arena.EventSettings.PlayoffType)
 	
 	if web.arena.EventSettings.PlayoffType == model.DoubleEliminationPlayoff {
 		if numAlliances == 8 {
