@@ -55,10 +55,10 @@ func (web *Web) settingsPostHandler(w http.ResponseWriter, r *http.Request) {
 	} else {
 		playoffType = model.DoubleEliminationPlayoff
 		numAlliances = 8
-		log.Printf("setup_settings.go playoffType: %s", playoffType)
+		log.Printf("setup_settings.go playoffType: %v", playoffType)
 		log.Printf("setup_settings.go eventSettings.ElimType: double")
 		numAlliances, _ = strconv.Atoi(r.PostFormValue("numPlayoffAlliances"))
-		log.Printf("setup_settings.go numAlliances: %s", numAlliances)
+		log.Printf("setup_settings.go numAlliances: %v", numAlliances)
 		
 		if  numAlliances < 3 || numAlliances > 8 {
 			web.renderSettings(w, r, "Number of alliances For Double Must be between 3 and 8.")
