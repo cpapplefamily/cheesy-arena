@@ -25,9 +25,8 @@ type AmpSpeaker struct {
 func (ampSpeaker *AmpSpeaker) UpdateState(
 	ampNoteCount, speakerNoteCount int, amplifyButton, coopButton bool, matchStartTime, currentTime time.Time,
 ) {
-	newAmpNotes := ampNoteCount - ampSpeaker.ampNotesScored()
-	newSpeakerNotes := speakerNoteCount - ampSpeaker.speakerNotesScored()
-
+		newAmpNotes := ampNoteCount - ampSpeaker.ampNotesScored()
+		newSpeakerNotes := speakerNoteCount - ampSpeaker.speakerNotesScored()
 	// Handle the autonomous period.
 	autoValidityCutoff := matchStartTime.Add(GetDurationToAutoEnd() + speakerAutoGracePeriodSec*time.Second)
 	if currentTime.Before(autoValidityCutoff) {

@@ -15,6 +15,8 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"time"
+
 )
 
 // Renders the scoring interface which enables input of scores in real-time.
@@ -139,6 +141,7 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 					scoreChanged = true
 				}
 			case "microphone":
+				log.Printf("Microphone Pressed")
 				if args.StageIndex >= 0 && args.StageIndex <= 2 {
 					score.MicrophoneStatuses[args.StageIndex] = !score.MicrophoneStatuses[args.StageIndex]
 					scoreChanged = true
@@ -148,10 +151,82 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 					score.TrapStatuses[args.StageIndex] = !score.TrapStatuses[args.StageIndex]
 					scoreChanged = true
 				}
-			case "speeker":
+			case "S":
+				var _matchStartTime = web.arena.MatchStartTime
+				var _currentTime = time.Now()
+				score.AmpSpeaker.UpdateState(	score.AmpSpeaker.AutoAmpNotes + 
+												score.AmpSpeaker.TeleopAmpNotes,	
 
-			case "amp":
+												score.AmpSpeaker.AutoSpeakerNotes + 
+												score.AmpSpeaker.TeleopUnamplifiedSpeakerNotes +
+												score.AmpSpeaker.TeleopAmplifiedSpeakerNotes	+	1, 
 
+												false,
+												
+												false, 
+												
+												_matchStartTime,
+												
+												_currentTime)
+				log.Printf("Speaker Pressed")
+				scoreChanged = true
+			case "A":
+				var _matchStartTime = web.arena.MatchStartTime
+				var _currentTime = time.Now()
+				score.AmpSpeaker.UpdateState(	score.AmpSpeaker.AutoAmpNotes + 
+												score.AmpSpeaker.TeleopAmpNotes + 1, 
+
+												score.AmpSpeaker.AutoSpeakerNotes + 
+												score.AmpSpeaker.TeleopUnamplifiedSpeakerNotes +
+												score.AmpSpeaker.TeleopAmplifiedSpeakerNotes,
+
+												false,
+												
+												false, 
+												
+												_matchStartTime,
+												
+												_currentTime)
+				log.Printf("Amp Pressed")
+				scoreChanged = true
+			case "amplifyButton":
+				var _matchStartTime = web.arena.MatchStartTime
+				var _currentTime = time.Now()
+				score.AmpSpeaker.UpdateState(	score.AmpSpeaker.AutoAmpNotes + 
+					score.AmpSpeaker.TeleopAmpNotes, 
+					
+					score.AmpSpeaker.AutoSpeakerNotes + 
+					score.AmpSpeaker.TeleopUnamplifiedSpeakerNotes +
+					score.AmpSpeaker.TeleopAmplifiedSpeakerNotes,
+					
+					true,
+					
+					false, 
+					
+					_matchStartTime,
+					
+					_currentTime)
+					log.Printf("amplifyButton Pressed")
+					scoreChanged = true
+				case "coopButton":
+			var _matchStartTime = web.arena.MatchStartTime
+			var _currentTime = time.Now()
+			score.AmpSpeaker.UpdateState(	score.AmpSpeaker.AutoAmpNotes + 
+											score.AmpSpeaker.TeleopAmpNotes, 
+
+											score.AmpSpeaker.AutoSpeakerNotes + 
+											score.AmpSpeaker.TeleopUnamplifiedSpeakerNotes +
+											score.AmpSpeaker.TeleopAmplifiedSpeakerNotes,
+
+											false,
+											
+											true, 
+											
+											_matchStartTime,
+											
+											_currentTime)
+			log.Printf("coopButton Pressed")
+			scoreChanged = true
 			}
 
 			if scoreChanged {

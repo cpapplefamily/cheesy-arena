@@ -59,6 +59,32 @@ const handleRealtimeScore = function(data) {
     $(`#stageSide${i}Microphone`).attr("data-value", score.MicrophoneStatuses[i]);
     $(`#stageSide${i}Trap`).attr("data-value", score.TrapStatuses[i]);
   }
+
+  //Some Diagnostis
+  $("#currentScore").text("Current Score: " + realtimeScore.ScoreSummary.Score);
+  $("#currentAmpificationCount").text("Banked Amp Notes: " + score.AmpSpeaker.BankedAmpNotes);
+  $("#ampCount").text("Amp Total Count: " + ( score.AmpSpeaker.TeleopAmpNotes + 
+                                              score.AmpSpeaker.AutoAmpNotes));
+  //$("#teleopAmpCount").text(score.TeleopAmpNotes);
+  //$("#autoAmpCount").text(score.AutoAmpNotes);
+  $("#speakerCount").text("Speaker Total Count: " + ( score.AmpSpeaker.AutoSpeakerNotes + 
+                                                      score.AmpSpeaker.TeleopUnamplifiedSpeakerNotes +
+                                                      score.AmpSpeaker.TeleopAmplifiedSpeakerNotes));
+  //$("#autoSpeakerCount").text(score.AutoSpeakerNotes);
+  //$("#teleopSpeakerCountNotAmplified").text(score.TeleopSpeakerNotesNotAmplified);
+  //$("#teleopSpeakerCountAmplified").text(score.TeleopSpeakerNotesAmplified);
+  //$("#trapCount1").text((score.TrapNotes));
+  //$("#trapCount").text("Trap Count: " + (score.TrapNotes));
+
+  
+  $(`#coopertitionStatus>.value`).text(score.AmpSpeaker.CoopActivated ? "Cooperation Enabled" : "Cooperation");
+  $("#coopertitionStatus").attr("data-value", score.AmpSpeaker.CoopActivated);
+  $(`#amplificationActive>.value`).text(realtimeScore.Score.AmplifiedTimeRemainingSec > 0 ? "Amplification Active" : "Amplification");
+  $("#amplificationActive").attr("data-value", data.Blue.AmplifiedTimeRemainingSec > 0);
+  //$("#amplificationActive").css("background-color", realtimeScore.AmplifiedTimeRemainingSec > 0 ? "yellow" : "");
+  //$("#amplificationActive").css("color", !score.AmpAccumulatorDisable && score.AmplificationActive ? "black" : "");
+  //$("#amplificationActive").css("background-color", !score.AmpAccumulatorDisable && score.AmplificationActive ? "yellow" : "");
+  //$("#amplificationActive").css("color", !score.AmpAccumulatorDisable && score.AmplificationActive ? "black" : "");
 };
 
 // Handles an element click and sends the appropriate websocket message.

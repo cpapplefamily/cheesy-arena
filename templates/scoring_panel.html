@@ -7,8 +7,50 @@
 {{define "title"}}Scoring Panel{{end}}
 {{define "body"}}
 <div id="matchName">&nbsp;</div>
+<div id="currentScore"></div>
 <div id="alliance">
+  <td>
+    1
+  </td>
+  <td>
+    2
+  </td>
+  <td>
+    3
+  </td>
   <div class="scoring-section">
+
+    <div id="elements">
+      <div class="goal-header">Speaker  
+        {{template "goaladd" dict "plus" "S" }}
+      </div>
+      <div class="goal-header">AMP
+        {{template "goaladd" dict "plus" "A" }}
+      </div>
+      <div class="goal-header">CoopBTN
+        {{template "goaladd" dict "plus" "coopButton" }}
+      </div>
+      <div class="goal-header">AmpBTN
+        {{template "goaladd" dict "plus" "amplifyButton" }}
+      </div>
+    </div>
+
+    <div>
+      <div id="currentAmpificationCount"></div>
+      <div id="ampCount"></div>
+      <div id="speakerCount"></div>
+      <div id="coopertitionStatus" class="boolean robot-field" onclick="handleClick('coopButton');">
+        <div class="value"></div>
+      </div>
+      <div id="amplificationActive" class="boolean robot-field" onclick="handleClick('amplifyButton');">
+        <div class="value"></div>
+      </div>
+      <div id="ampAccumulatorDisable" class="boolean robot-field" onclick="handleClick('ampAccumulatorDisable');">
+        <div class="value"></div>
+      </div>
+    </div>
+    
+
     <div class="scoring-header">
       <div>&nbsp;</div>
       <div>Leave</div>
@@ -72,5 +114,38 @@
 <div class="stage-side-col">
   <div id="stageSide{{.index}}Microphone" class="boolean" onclick="handleClick('microphone', 0, {{.index}});">Mic</div>
   <div id="stageSide{{.index}}Trap" class="boolean" onclick="handleClick('trap', 0, {{.index}});">Trap</div>
+</div>
+{{end}}
+{{define "goal"}}
+<div class="goal">
+  <div class="number-button minus" onclick="handleClick('{{.minus}}');">
+    <div class="shortcut">{{.minus}}</div>
+    -
+    <div class="shortcut" style="opacity: 0;">{{.minus}}</div>
+  </div>
+  <div id={{.count}}></div>
+  <div class="number-button plus" onclick="handleClick('{{.plus}}');">
+    <div class="shortcut">{{.plus}}</div>
+    +
+    <div class="shortcut" style="opacity: 0;">{{.plus}}</div>
+  </div>
+</div>
+{{end}}
+{{define "goaladd"}}
+<div class="goal">
+  <div class="number-button plus" onclick="handleClick('{{.plus}}');">
+    <div class="shortcut">{{.plus}}</div>
+    +
+    <div class="shortcut" style="opacity: 0;">{{.plus}}</div>
+  </div>
+</div>
+{{end}}
+{{define "goalsub"}}
+<div class="goal">
+  <div class="number-button minus" onclick="handleClick('{{.minus}}');">
+    <div class="shortcut">{{.minus}}</div>
+    -
+    <div class="shortcut" style="opacity: 0;">{{.minus}}</div>
+  </div>
 </div>
 {{end}}
