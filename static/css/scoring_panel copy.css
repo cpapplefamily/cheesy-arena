@@ -33,10 +33,10 @@ body {
   border: 1px solid #333;
 }
 #alliance[data-alliance="red"] {
-  background-color: rgb(138, 17, 21);
+  background-color: #322;
 }
 #alliance[data-alliance="blue"] {
-  background-color: rgb(0, 79, 140);
+  background-color: #223;
 }
 #matchName {
   margin-bottom: 0.5vw;
@@ -142,6 +142,7 @@ body {
   left: 12.2vw;
   width: 9vw;
 }
+
 .goal {
   width: 10vw;
   height: 5vw;
@@ -158,8 +159,7 @@ body {
   align-items: center;
   border: 1px solid #666;
   border-radius: 0.5vw;
-  font-size: 50%;
-  
+  font-size: 3vw;
 }
 .plus {
   background: #263;
@@ -167,14 +167,8 @@ body {
 .minus {
   background: #633;
 }
-.btn1 {
-  background: #263;
-}
-.btn2 {
-  background: #633;
-}
 #elements {
-  
+ 
   justify-content: space-evenly;
   align-items: start;
 }
@@ -183,40 +177,15 @@ body {
   font-size: 1vw;
   align-self: flex-start;
 }
-.row{
-  width: 100%;
-}
-/* Create two unequal columns that floats next to each other */
+
 .column {
   float: left;
-  padding: 1px;
-  /*height: 300px; /* Should be removed. Only for demonstration */
+  width: 50%;
 }
 
-.left {
-  width: 25%;
-  
-}
-
-.right {
-  width: 75%;
-  
-}
-#manualScore {
-  width: 98%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  border-radius: 25px;
-  border: 1px solid #333;
-}
-#manualScore[data-alliance="red"] {
-  background-color: rgb(138, 17, 21);
-}
-#manualScore[data-alliance="blue"] {
-  background-color: rgb(0, 79, 140);
-}
-.icon {
-  width: 100%;
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }

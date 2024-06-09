@@ -100,6 +100,7 @@ const commitMatchScore = function() {
 $(function() {
   alliance = window.location.href.split("/").slice(-1)[0];
   $("#alliance").attr("data-alliance", alliance);
+  $("#manualScore").attr("data-alliance", alliance);
 
   // Set up the websocket back to the server.
   websocket = new CheesyWebsocket("/panels/scoring/" + alliance + "/websocket", {
