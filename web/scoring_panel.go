@@ -174,25 +174,31 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 					score.AmpSpeaker.AutoSpeakerNotes = score.AmpSpeaker.AutoSpeakerNotes+1
 					log.Printf("O Pressed")
 					scoreChanged = true
+				case "o":
+					if score.AmpSpeaker.AutoSpeakerNotes > 0 {
+						score.AmpSpeaker.AutoSpeakerNotes = score.AmpSpeaker.AutoSpeakerNotes-1
+					}
+					log.Printf("o Pressed")
+					scoreChanged = true
 				case "P":
-					score.AmpSpeaker.AutoSpeakerNotes = score.AmpSpeaker.AutoSpeakerNotes-1
+					score.AmpSpeaker.TeleopAmplifiedSpeakerNotes = score.AmpSpeaker.TeleopAmplifiedSpeakerNotes+1
 					log.Printf("P Pressed")
 					scoreChanged = true
-				case "K":
-					score.AmpSpeaker.TeleopAmplifiedSpeakerNotes = score.AmpSpeaker.TeleopAmplifiedSpeakerNotes+1
-					log.Printf("K Pressed")
+				case "p":
+					if score.AmpSpeaker.TeleopAmplifiedSpeakerNotes > 0{
+						score.AmpSpeaker.TeleopAmplifiedSpeakerNotes = score.AmpSpeaker.TeleopAmplifiedSpeakerNotes-1
+					}
+					log.Printf("p Pressed")
 					scoreChanged = true
-				case "L":
-					score.AmpSpeaker.TeleopAmplifiedSpeakerNotes = score.AmpSpeaker.TeleopAmplifiedSpeakerNotes-1
-					log.Printf("L Pressed")
-					scoreChanged = true
-				case "k":
+				case "I":
 					score.AmpSpeaker.TeleopUnamplifiedSpeakerNotes = score.AmpSpeaker.TeleopUnamplifiedSpeakerNotes+1
-					log.Printf("k Pressed")
+					log.Printf("I Pressed")
 					scoreChanged = true
-				case "l":
-					score.AmpSpeaker.TeleopUnamplifiedSpeakerNotes = score.AmpSpeaker.TeleopUnamplifiedSpeakerNotes-1
-					log.Printf("l Pressed")
+				case "i":
+					if score.AmpSpeaker.TeleopUnamplifiedSpeakerNotes > 0{
+						score.AmpSpeaker.TeleopUnamplifiedSpeakerNotes = score.AmpSpeaker.TeleopUnamplifiedSpeakerNotes-1
+					}
+					log.Printf("i Pressed")
 					scoreChanged = true
 				case "A":
 					var _matchStartTime = web.arena.MatchStartTime
@@ -217,17 +223,33 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 					score.AmpSpeaker.AutoAmpNotes = score.AmpSpeaker.AutoAmpNotes+1
 					log.Printf("U Pressed")
 					scoreChanged = true
-				case "I":
-					score.AmpSpeaker.AutoAmpNotes = score.AmpSpeaker.AutoAmpNotes-1
-					log.Printf("I Pressed")
-					scoreChanged = true
 				case "u":
-					score.AmpSpeaker.TeleopAmpNotes = score.AmpSpeaker.TeleopAmpNotes+1
+					if score.AmpSpeaker.AutoAmpNotes > 0 {
+						score.AmpSpeaker.AutoAmpNotes = score.AmpSpeaker.AutoAmpNotes-1
+					}
 					log.Printf("u Pressed")
 					scoreChanged = true
-				case "i":
-					score.AmpSpeaker.TeleopAmpNotes = score.AmpSpeaker.TeleopAmpNotes-1
-					log.Printf("i Pressed")
+				case "Y":
+					score.AmpSpeaker.TeleopAmpNotes = score.AmpSpeaker.TeleopAmpNotes+1
+					log.Printf("Y Pressed")
+					scoreChanged = true
+				case "y":
+					if score.AmpSpeaker.TeleopAmpNotes > 0 {
+						score.AmpSpeaker.TeleopAmpNotes = score.AmpSpeaker.TeleopAmpNotes-1
+					}
+					log.Printf("y Pressed")
+					scoreChanged = true
+				case "B":
+					if score.AmpSpeaker.BankedAmpNotes < 2{
+						score.AmpSpeaker.BankedAmpNotes = score.AmpSpeaker.BankedAmpNotes+1
+					}
+					log.Printf("B Pressed")
+					scoreChanged = true
+				case "b":
+					if score.AmpSpeaker.BankedAmpNotes > 0 {
+						score.AmpSpeaker.BankedAmpNotes = score.AmpSpeaker.BankedAmpNotes-1
+					}
+					log.Printf("b Pressed")
 					scoreChanged = true
 				case "amplifyButton":
 					var _matchStartTime = web.arena.MatchStartTime

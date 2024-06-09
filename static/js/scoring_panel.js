@@ -83,6 +83,14 @@ const handleRealtimeScore = function(data) {
   $("#amplificationActive").attr("data-value", realtimeScore.AmplifiedTimePostWindow);
   $("#amplificationActive").css("background-color", !(realtimeScore.AmplifiedTimeRemainingSec > 0) && realtimeScore.AmplifiedTimePostWindow? "yellow" : "");
   $("#amplificationActive").css("color", !(realtimeScore.AmplifiedTimeRemainingSec > 0) && realtimeScore.AmplifiedTimePostWindow  ? "black" : "");
+
+  $("#autoSpeakerNotes").text(score.AmpSpeaker.AutoSpeakerNotes);
+  $("#autoSpeakerNotes").text(score.AmpSpeaker.AutoSpeakerNotes);
+  $("#teleopAmplifiedSpeakerNotes").text(score.AmpSpeaker.TeleopAmplifiedSpeakerNotes);
+  $("#teleopUnamplifiedSpeakerNotes").text(score.AmpSpeaker.TeleopUnamplifiedSpeakerNotes);
+  $("#autoAmpNotes").text(score.AmpSpeaker.AutoAmpNotes);
+  $("#teleopAmpNotes").text(score.AmpSpeaker.TeleopAmpNotes);
+  $("#bankedAmpNotes").text(score.AmpSpeaker.BankedAmpNotes);
 };
 
 // Handles an element click and sends the appropriate websocket message.

@@ -19,15 +19,16 @@
 
       <div id="elements">
         <div class="goal-header" >Speaker  
-          {{template "goaladd" dict "plus" "S" }}
-          {{template "2goal" dict "btn1" "O" "icon1" "Auto+" "btn2" "P" "icon2" "Auto-"}}
-          {{template "2goal" dict "btn1" "K" "icon1" "Amped+" "btn2" "L" "icon2" "Amped-"}}
-          {{template "2goal" dict "btn1" "k" "icon1" "Teliop+" "btn2" "l" "icon2" "Teliop-"}}
+          {{template "goaladd" dict "plus" "S" "icon1" "Auto+"}}
+          {{template "2goal" dict "btn1" "O" "icon1" "Auto+" "btn2" "o" "icon2" "Auto-" "count" "autoSpeakerNotes"}}
+          {{template "2goal" dict "btn1" "P" "icon1" "Amped+" "btn2" "p" "icon2" "Amped-" "count" "teleopAmplifiedSpeakerNotes"}}
+          {{template "2goal" dict "btn1" "I" "icon1" "Teliop+" "btn2" "i" "icon2" "Teliop-" "count" "teleopUnamplifiedSpeakerNotes"}}
         </div>
         <div class="goal-header">AMP
-          {{template "goaladd" dict "plus" "A" }}
-          {{template "2goal" dict "btn1" "U" "icon1" "Amped+" "btn2" "I" "icon2" "Amped-"}}
-          {{template "2goal" dict "btn1" "u" "icon1" "Teliop+" "btn2" "i" "icon2" "Teliop-"}}
+          {{template "goaladd" dict "plus" "A" "icon1" "Sensor"}}
+          {{template "2goal" dict "btn1" "U" "icon1" "Amped+" "btn2" "u" "icon2" "Amped-" "count" "autoAmpNotes"}}
+          {{template "2goal" dict "btn1" "Y" "icon1" "Teliop+" "btn2" "y" "icon2" "Teliop-" "count" "teleopAmpNotes"}}
+          {{template "2goal" dict "btn1" "B" "icon1" "bank+" "btn2" "b" "icon2" "bank-" "count" "bankedAmpNotes"}}
         </div>
         <div class="goal-header">Coop Button
           <div id="coopertitionStatus" class="boolean robot-field" onclick="handleClick('coopButton');">
@@ -126,7 +127,9 @@
 <div class="goal">
   <div class="number-button plus" onclick="handleClick('{{.plus}}');">
     <div class="shortcut">{{.plus}}</div>
-    Sensor
+    <div class="icon">
+      {{.icon1}}
+    </div>
     <div class="shortcut" style="opacity: 0;">{{.plus}}</div>
   </div>
 </div>
@@ -135,7 +138,9 @@
 <div class="goal">
   <div class="number-button minus" onclick="handleClick('{{.minus}}');">
     <div class="shortcut">{{.minus}}</div>
-    -
+    <div class="icon">
+      {{.icon1}}
+    </div>
     <div class="shortcut" style="opacity: 0;">{{.minus}}</div>
   </div>
 </div>
@@ -152,6 +157,7 @@
     </div>
     <div class="shortcut" style="opacity: 0;">{{.btn1}}</div>
   </div>
+  <div id={{.count}}></div>
   <div class="number-button btn2" onclick="handleClick('{{.btn2}}');">
     <div class="shortcut">{{.btn2}}</div>
     <div class="icon">
