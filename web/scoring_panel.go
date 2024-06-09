@@ -221,6 +221,9 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 					scoreChanged = true
 				case "U":
 					score.AmpSpeaker.AutoAmpNotes = score.AmpSpeaker.AutoAmpNotes+1
+					if score.AmpSpeaker.BankedAmpNotes < 2{
+						score.AmpSpeaker.BankedAmpNotes = score.AmpSpeaker.BankedAmpNotes+1
+					}
 					log.Printf("U Pressed")
 					scoreChanged = true
 				case "u":
@@ -231,6 +234,9 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 					scoreChanged = true
 				case "Y":
 					score.AmpSpeaker.TeleopAmpNotes = score.AmpSpeaker.TeleopAmpNotes+1
+					if score.AmpSpeaker.BankedAmpNotes < 2{
+						score.AmpSpeaker.BankedAmpNotes = score.AmpSpeaker.BankedAmpNotes+1
+					}
 					log.Printf("Y Pressed")
 					scoreChanged = true
 				case "y":
