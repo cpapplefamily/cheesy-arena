@@ -12,6 +12,7 @@ type RealtimeScore struct {
 	Cards                     map[string]string
 	FoulsCommitted            bool
 	AmplifiedTimeRemainingSec int
+	AmplifiedTimePostWindow	  bool
 }
 
 func NewRealtimeScore() *RealtimeScore {

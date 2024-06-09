@@ -79,12 +79,10 @@ const handleRealtimeScore = function(data) {
   
   $(`#coopertitionStatus>.value`).text(score.AmpSpeaker.CoopActivated ? "Cooperation Enabled" : "Cooperation");
   $("#coopertitionStatus").attr("data-value", score.AmpSpeaker.CoopActivated);
-  $(`#amplificationActive>.value`).text(realtimeScore.Score.AmplifiedTimeRemainingSec > 0 ? "Amplification Active" : "Amplification");
-  $("#amplificationActive").attr("data-value", data.Blue.AmplifiedTimeRemainingSec > 0);
-  //$("#amplificationActive").css("background-color", realtimeScore.AmplifiedTimeRemainingSec > 0 ? "yellow" : "");
-  //$("#amplificationActive").css("color", !score.AmpAccumulatorDisable && score.AmplificationActive ? "black" : "");
-  //$("#amplificationActive").css("background-color", !score.AmpAccumulatorDisable && score.AmplificationActive ? "yellow" : "");
-  //$("#amplificationActive").css("color", !score.AmpAccumulatorDisable && score.AmplificationActive ? "black" : "");
+  $(`#amplificationActive>.value`).text(realtimeScore.AmplifiedTimePostWindow ? "Amplification Active" : "Amplification");
+  $("#amplificationActive").attr("data-value", realtimeScore.AmplifiedTimePostWindow);
+  $("#amplificationActive").css("background-color", !(realtimeScore.AmplifiedTimeRemainingSec > 0) && realtimeScore.AmplifiedTimePostWindow? "yellow" : "");
+  $("#amplificationActive").css("color", !(realtimeScore.AmplifiedTimeRemainingSec > 0) && realtimeScore.AmplifiedTimePostWindow  ? "black" : "");
 };
 
 // Handles an element click and sends the appropriate websocket message.

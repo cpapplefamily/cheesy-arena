@@ -45,7 +45,7 @@ func TestSetupSettingsDoubleElimination(t *testing.T) {
 	recorder := web.postHttpResponse("/setup/settings", "playoffType=DoubleEliminationPlayoff&numPlayoffAlliances=3")
 	assert.Equal(t, 303, recorder.Code)
 	assert.Equal(t, model.DoubleEliminationPlayoff, web.arena.EventSettings.PlayoffType)
-	assert.Equal(t, 8, web.arena.EventSettings.NumPlayoffAlliances)
+	assert.Equal(t, 3, web.arena.EventSettings.NumPlayoffAlliances)
 }
 
 func TestSetupSettingsInvalidValues(t *testing.T) {

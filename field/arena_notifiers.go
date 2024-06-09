@@ -40,6 +40,7 @@ type audienceAllianceScoreFields struct {
 	Score                     *game.Score
 	ScoreSummary              *game.ScoreSummary
 	AmplifiedTimeRemainingSec int
+	AmplifiedTimePostWindow	  bool
 }
 
 // Instantiates notifiers and configures their message producing methods.
@@ -327,6 +328,7 @@ func getAudienceAllianceScoreFields(allianceScore *RealtimeScore,
 	fields.Score = &allianceScore.CurrentScore
 	fields.ScoreSummary = allianceScoreSummary
 	fields.AmplifiedTimeRemainingSec = allianceScore.AmplifiedTimeRemainingSec
+	fields.AmplifiedTimePostWindow = allianceScore.AmplifiedTimePostWindow
 	return fields
 }
 
