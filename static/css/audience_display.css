@@ -559,17 +559,17 @@ html {
   position: absolute;
   height: 100%;
   left: 3em;
-  top: 3em;
+  top: 85vh;
 }
 #allianceRankings {
-  max-width: 11em;
-  max-height: 92%;
+  max-width: calc(100% - 6em);
+  max-height: 15%;
   display: flex;
   flex-flow: column wrap;
   overflow: hidden;
   background-color: #fff;
   border: 2px solid #222;
-  font-size: 2em;
+  font-size: 1.5em;
   font-family: "FuturaLT";
 }
 .unpicked {
