@@ -33,8 +33,8 @@ const scoreMid = "185px";
 const scoreOut = "400px";
 const scoreFieldsOut = "180px";
 const scoreLogoTop = "-470px";
-const bracketLogoTop = "-780px";
-const bracketLogoScale = 0.75;
+const bracketLogoTop = "-980px";
+const bracketLogoScale = 0.55;
 const timeoutDetailsIn = $("#timeoutDetails").css("width");
 const timeoutDetailsOut = "570px";
 
