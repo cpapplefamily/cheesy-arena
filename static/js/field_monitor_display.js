@@ -148,6 +148,7 @@ var handleMatchTime = function(data) {
   translateMatchTime(data, function(matchState, matchStateText, countdownSec) {
     $("#matchState").text(matchStateText);
     $("#matchTime").text(countdownSec);
+    $("#matchTimeAllianceStation").text(countdownSec);
     if (matchStateText === "PRE-MATCH" | matchStateText === "POST-MATCH") {
       $(".ds-dependent").attr("data-preMatch", "true");
     } else {
@@ -162,10 +163,22 @@ var handleRealtimeScore = function(data,reversed) {
     if (reversed === "true") {
       $("#rightScore").text(data.Red.ScoreSummary.Score);
       $("#leftScore").text(data.Blue.ScoreSummary.Score);
+
+      $("#rightScoreAllianceDisplay").text(data.Blue.ScoreSummary.Score);
+      $("#leftScoreAllianceDisplay").text(data.Red.ScoreSummary.Score);
+      $(`#noteNumerator`).text(data.Blue.ScoreSummary.NumNotes);
+      $(`#noteDenominator`).text(data.Blue.ScoreSummary.NumNotesGoal);
+      $(`#amplifiedTimeRemaining`).text(data.Blue.AmplifiedTimeRemainingSec);
+      
     } else {
       $("#rightScore").text(data.Blue.ScoreSummary.Score);
       $("#leftScore").text(data.Red.ScoreSummary.Score);
 
+      $("#rightScoreAllianceDisplay").text(data.Red.ScoreSummary.Score);
+      $("#leftScoreAllianceDisplay").text(data.Blue.ScoreSummary.Score);
+      $(`#noteNumerator`).text(data.Red.ScoreSummary.NumNotes);
+      $(`#noteDenominator`).text(data.Red.ScoreSummary.NumNotesGoal);
+      $(`#amplifiedTimeRemaining`).text(data.Red.AmplifiedTimeRemainingSec);
     }
 };
 
