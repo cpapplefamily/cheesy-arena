@@ -51,6 +51,7 @@
     </div>
   </div>
   </body>
+  
   <script src="/static/js/lib/jquery.min.js"></script>
   <script src="/static/js/lib/jquery.json-2.4.min.js"></script>
   <script src="/static/js/lib/jquery.websocket-0.0.1.js"></script>
@@ -59,6 +60,10 @@
   <script src="/static/js/lib/bootstrap.bundle.min.js"></script>
   <script src="/static/js/match_timing.js"></script>
   <script src="/static/js/field_monitor_display.js"></script>
+  {{range $sound := .MatchSounds}}
+  <audio id="sound-{{$sound.Name}}" src="/static/audio/{{$sound.Name}}.{{$sound.FileExtension}}" preload="auto">
+  </audio>
+{{end}}
 </html>
 
 {{define "row"}}
