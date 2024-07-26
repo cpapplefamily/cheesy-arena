@@ -892,6 +892,8 @@ func (arena *Arena) getAssignedAllianceStation(teamId int) string {
 }
 var redAmplifiedTimePostWindow_ons = false
 var blueAmplifiedTimePostWindow_ons = false
+var redAmplifiedTimeRemaining_ons = false
+var blueAmplifiedTimeRemaining_ons = false
 // Updates the score given new input information from the field PLC, and actuates PLC outputs accordingly.
 func (arena *Arena) handlePlcInputOutput() {
 	if !arena.Plc.IsEnabled() {
@@ -1011,9 +1013,13 @@ func (arena *Arena) handlePlcInputOutput() {
 			redCoopAmpLight := redAmpSpeaker.CoopActivated
 			if redAmplifiedTimeRemaining > 0 {
 				redAmplifiedTimePostWindow_ons = false
+				redAmplifiedTimeRemaining_ons = false
 				redLowAmpLight = int(redAmplifiedTimeRemaining*2)%2 == 0
 				redHighAmpLight = !redLowAmpLight
 				arena.RealtimeScoreNotifier.Notify()
+			}else if !redAmplifiedTimeRemaining_ons{
+				arena.RealtimeScoreNotifier.Notify()
+				redAmplifiedTimeRemaining_ons = true
 			}
 			if !redAmplifiedTimePostWindow && !redAmplifiedTimePostWindow_ons{
 				arena.RealtimeScoreNotifier.Notify()
@@ -1025,9 +1031,13 @@ func (arena *Arena) handlePlcInputOutput() {
 			blueCoopAmpLight := blueAmpSpeaker.CoopActivated
 			if blueAmplifiedTimeRemaining > 0 {
 				blueAmplifiedTimePostWindow_ons = false
+				blueAmplifiedTimeRemaining_ons = false
 				blueLowAmpLight = int(blueAmplifiedTimeRemaining*4)%2 == 0
 				blueHighAmpLight = !blueLowAmpLight
 				arena.RealtimeScoreNotifier.Notify()
+			}else if !blueAmplifiedTimeRemaining_ons{
+				arena.RealtimeScoreNotifier.Notify()
+				blueAmplifiedTimeRemaining_ons = true
 			}
 			if !blueAmplifiedTimePostWindow && !blueAmplifiedTimePostWindow_ons{
 				arena.RealtimeScoreNotifier.Notify()

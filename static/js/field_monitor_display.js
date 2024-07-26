@@ -148,6 +148,7 @@ var handleMatchTime = function(data) {
   translateMatchTime(data, function(matchState, matchStateText, countdownSec) {
     $("#matchState").text(matchStateText);
     $("#matchTime").text(countdownSec);
+    $("#matchTimeAllianceStation").text(countdownSec);
     if (matchStateText === "PRE-MATCH" | matchStateText === "POST-MATCH") {
       $(".ds-dependent").attr("data-preMatch", "true");
     } else {
@@ -156,16 +157,38 @@ var handleMatchTime = function(data) {
   });
 };
 
+// Handles a websocket message to play a sound to signal match start/stop/etc.
+const handlePlaySound = function(sound) {
+  $("audio").each(function(k, v) {
+    // Stop and reset any sounds that are still playing.
+    v.pause();
+    v.currentTime = 0;
+  });
+  $("#sound-" + sound)[0].play();
+};
+
 // Handles a websocket message to update the match score.
 var handleRealtimeScore = function(data,reversed) {
 
     if (reversed === "true") {
       $("#rightScore").text(data.Red.ScoreSummary.Score);
       $("#leftScore").text(data.Blue.ScoreSummary.Score);
+
+      $("#rightScoreAllianceDisplay").text(data.Blue.ScoreSummary.Score);
+      $("#leftScoreAllianceDisplay").text(data.Red.ScoreSummary.Score);
+      $(`#noteNumerator`).text(data.Blue.ScoreSummary.NumNotes);
+      $(`#noteDenominator`).text(data.Blue.ScoreSummary.NumNotesGoal);
+      $(`#amplifiedTimeRemaining`).text(data.Blue.AmplifiedTimeRemainingSec);
+      
     } else {
       $("#rightScore").text(data.Blue.ScoreSummary.Score);
       $("#leftScore").text(data.Red.ScoreSummary.Score);
 
+      $("#rightScoreAllianceDisplay").text(data.Red.ScoreSummary.Score);
+      $("#leftScoreAllianceDisplay").text(data.Blue.ScoreSummary.Score);
+      $(`#noteNumerator`).text(data.Red.ScoreSummary.NumNotes);
+      $(`#noteDenominator`).text(data.Red.ScoreSummary.NumNotesGoal);
+      $(`#amplifiedTimeRemaining`).text(data.Red.AmplifiedTimeRemainingSec);
     }
 };
 
@@ -234,5 +257,6 @@ $(function() {
     matchTiming: function(event) { handleMatchTiming(event.data); },
     matchTime: function(event) { handleMatchTime(event.data); },
     realtimeScore: function(event) { handleRealtimeScore(event.data,reversed); },
+    playSound: function(event) { handlePlaySound(event.data); },
   });
 });
