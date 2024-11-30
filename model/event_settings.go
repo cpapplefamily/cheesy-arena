@@ -23,6 +23,7 @@ type EventSettings struct {
 	SelectionRound3Order            string
 	SelectionShowUnpickedTeams      bool
 	TbaDownloadEnabled              bool
+	AlternateIOEnabled              bool
 	TbaPublishingEnabled            bool
 	TbaEventCode                    string
 	TbaSecretId                     string
@@ -74,6 +75,7 @@ func (database *Database) GetEventSettings() (*EventSettings, error) {
 		SelectionRound3Order:            "",
 		SelectionShowUnpickedTeams:      true,
 		TbaDownloadEnabled:              true,
+		AlternateIOEnabled:              false,
 		ApChannel:                       36,
 		WarmupDurationSec:               game.MatchTiming.WarmupDurationSec,
 		AutoDurationSec:                 game.MatchTiming.AutoDurationSec,

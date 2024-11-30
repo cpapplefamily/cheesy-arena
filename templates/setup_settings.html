@@ -234,6 +234,15 @@
               <input type="text" class="form-control" name="plcAddress" value="{{.PlcAddress}}">
             </div>
           </div>
+          <div class="row mb-3">
+            <label class="col-lg-8 control-label" for="alternateIOEnabled">
+              Enable Alternate IO (IE: Raspberry Pi)
+            </label>
+            <div class="col-lg-1 checkbox">
+              <input type="checkbox" id="alternateIOEnabled"
+                name="alternateIOEnabled"{{if .AlternateIOEnabled}} checked{{end}}>
+            </div>
+          </div>
         </fieldset>
         <fieldset class="mb-4">
           <legend>Team Signs</legend>

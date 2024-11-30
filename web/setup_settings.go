@@ -85,6 +85,7 @@ func (web *Web) settingsPostHandler(w http.ResponseWriter, r *http.Request) {
 	eventSettings.SelectionRound3Order = r.PostFormValue("selectionRound3Order")
 	eventSettings.SelectionShowUnpickedTeams = r.PostFormValue("selectionShowUnpickedTeams") == "on"
 	eventSettings.TbaDownloadEnabled = r.PostFormValue("tbaDownloadEnabled") == "on"
+	eventSettings.AlternateIOEnabled = r.PostFormValue("alternateIOEnabled") == "on"
 	eventSettings.TbaPublishingEnabled = r.PostFormValue("tbaPublishingEnabled") == "on"
 	eventSettings.TbaEventCode = r.PostFormValue("tbaEventCode")
 	eventSettings.TbaSecretId = r.PostFormValue("tbaSecretId")
