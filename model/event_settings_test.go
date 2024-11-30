@@ -25,6 +25,7 @@ func TestEventSettingsReadWrite(t *testing.T) {
 			SelectionRound3Order:            "",
 			SelectionShowUnpickedTeams:      true,
 			TbaDownloadEnabled:              true,
+			AlternateIOEnabled:              true,
 			ApChannel:                       36,
 			WarmupDurationSec:               0,
 			AutoDurationSec:                 15,
