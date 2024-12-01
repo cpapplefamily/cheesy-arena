@@ -181,6 +181,7 @@ body {
 .shortcut {
   margin: 0 0.2vw;
   font-size: 1vw;
+  width: 100%;
   align-self: flex-start;
 }
 .row{
@@ -219,4 +220,73 @@ body {
 }
 .icon {
   width: 100%;
+}
+
+.eStops {
+  width: 98%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 25px;
+  border: 1px solid #333;
+}
+  .teamEstopPanle {
+    width: 10vw;
+    height: auto;
+    margin: 0.4vw 3vw;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .octagon-button {
+    position: relative;
+    width: 10vw; /* Adjust width */
+    height: 10vw; /* Adjust height */
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 2vw;
+    color: rgb(255, 255, 255); /* Text color */
+    cursor: pointer;
+    border: none;
+  }
+  
+  .octagon-button .icon {
+    margin-top: 1px;
+  }
+  
+  .octagon-button:hover {
+    background: #fbff06; /* Change color on hover */
+    color: rgb(0, 0, 0); /* Text color */
+  }
+
+  .iconCentered{
+    display: flex;
+    align-items: center; /* Vertically center the content */
+    justify-content: center; /* Horizontally center the content */
+    text-align: center; /* Center text alignment */
+    height: auto; /* Allow dynamic height adjustment */
+    line-height: 1.5; /* Adjust line spacing if needed */
+    padding: 10px; /* Add padding to increase perceived size */
+    font-size: 1.2em; /* Increase font size for visibility */
+  }
+  .shorcutCentered {
+    align-items: center; /* Vertically center the content */
+    justify-content: center; /* Horizontally center the content */
+    margin-bottom: 5px; /* Space between text and icon */
+    text-align: center; /* Center text within its container */
+  }
+
+  .hidden {
+    display: none; /* Completely hides the element */
+}
+.btnE {
+  background: rgb(255, 0, 0);
+}
+.btnA {
+  background: rgb(0, 119, 255);
 }
