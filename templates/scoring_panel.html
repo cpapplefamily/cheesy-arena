@@ -19,16 +19,16 @@
 
       <div id="elements">
         <div class="goal-header" >Speaker  
-          {{template "goaladd" dict "plus" "S" "icon1" "Auto+"}}
-          {{template "2goal" dict "btn1" "O" "icon1" "Auto+" "btn2" "o" "icon2" "Auto-" "count" "autoSpeakerNotes"}}
-          {{template "2goal" dict "btn1" "P" "icon1" "Amped+" "btn2" "p" "icon2" "Amped-" "count" "teleopAmplifiedSpeakerNotes"}}
-          {{template "2goal" dict "btn1" "I" "icon1" "Teliop+" "btn2" "i" "icon2" "Teliop-" "count" "teleopUnamplifiedSpeakerNotes"}}
+          {{template "goaladd" dict "plus" "S" "txt1" "Auto+"}}
+          {{template "2goal" dict "btn1" "O" "txt1" "Auto+" "btn2" "o" "txt2" "Auto-" "count" "autoSpeakerNotes"}}
+          {{template "2goal" dict "btn1" "P" "txt1" "Amped+" "btn2" "p" "txt2" "Amped-" "count" "teleopAmplifiedSpeakerNotes"}}
+          {{template "2goal" dict "btn1" "I" "txt1" "Teliop+" "btn2" "i" "txt2" "Teliop-" "count" "teleopUnamplifiedSpeakerNotes"}}
         </div>
         <div class="goal-header">AMP
-          {{template "goaladd" dict "plus" "A" "icon1" "Sensor"}}
-          {{template "2goal" dict "btn1" "U" "icon1" "Auto+" "btn2" "u" "icon2" "Auto-" "count" "autoAmpNotes"}}
-          {{template "2goal" dict "btn1" "Y" "icon1" "Teliop+" "btn2" "y" "icon2" "Teliop-" "count" "teleopAmpNotes"}}
-          {{template "2goal" dict "btn1" "B" "icon1" "bank+" "btn2" "b" "icon2" "bank-" "count" "bankedAmpNotes"}}
+          {{template "goaladd" dict "plus" "A" "txt1" "Sensor"}}
+          {{template "2goal" dict "btn1" "U" "txt1" "Auto+" "btn2" "u" "txt2" "Auto-" "count" "autoAmpNotes"}}
+          {{template "2goal" dict "btn1" "Y" "txt1" "Teliop+" "btn2" "y" "txt2" "Teliop-" "count" "teleopAmpNotes"}}
+          {{template "2goal" dict "btn1" "B" "txt1" "bank+" "btn2" "b" "txt2" "bank-" "count" "bankedAmpNotes"}}
         </div>
         <div class="goal-header">Coop Button
           <div id="coopertitionStatus" class="boolean robot-field" onclick="handleClick('coopButton');">
@@ -93,7 +93,16 @@
         </div>
       </div>
     </div>
+    <button id="toggleButton">Show E-Stops</button>
+    <div class="eStops">EStops
+      {{template "2stops" dict "btn1" "E1" "txt1" "EStop" "btn2" "A1" "txt2" "AStop"}}
+      {{template "2stops" dict "btn1" "E2" "txt1" "EStop" "btn2" "A2" "txt2" "AStop"}}
+      {{template "2stops" dict "btn1" "E3" "txt1" "EStop" "btn2" "A3" "txt2" "AStop"}}
+    </div>
   </div>
+
+
+
 </div>
 
 <div id="commitMatchScore">
@@ -128,18 +137,19 @@
   <div class="number-button plus" onclick="handleClick('{{.plus}}');">
     <div class="shortcut">{{.plus}}</div>
     <div class="icon">
-      {{.icon1}}
+      {{.txt1}}
     </div>
     <div class="shortcut" style="opacity: 0;">{{.plus}}</div>
   </div>
 </div>
 {{end}}
+
 {{define "goalsub"}}
 <div class="goal">
   <div class="number-button minus" onclick="handleClick('{{.minus}}');">
     <div class="shortcut">{{.minus}}</div>
     <div class="icon">
-      {{.icon1}}
+      {{.txt1}}
     </div>
     <div class="shortcut" style="opacity: 0;">{{.minus}}</div>
   </div>
@@ -153,7 +163,7 @@
   <div class="number-button btn1" onclick="handleClick('{{.btn1}}');">
     <div class="shortcut">{{.btn1}}</div>
     <div class="icon">
-      {{.icon1}}
+      {{.txt1}}
     </div>
     <div class="shortcut" style="opacity: 0;">{{.btn1}}</div>
   </div>
@@ -161,7 +171,29 @@
   <div class="number-button btn2" onclick="handleClick('{{.btn2}}');">
     <div class="shortcut">{{.btn2}}</div>
     <div class="icon">
-      {{.icon2}}
+      {{.txt2}}
+    </div>
+    <div class="shortcut" style="opacity: 0;">{{.minus}}</div>
+  </div>
+</div>
+{{end}}
+
+{{define "2stops"}}
+<div class="teamEstopPanle">
+  <div class="number-button btnE octagon-button" onclick="handleClick('{{.btn1}}');">
+    <div class="shorcutCentered">{{.btn1}}
+      <div class="iconCentered">
+        {{.txt1}}
+      </div>
+    </div>
+    <div class="shortcut" style="opacity: 0;">{{.btn1}}</div>
+  </div>
+  <div>&nbsp;</div>
+  <div class="number-button btnA octagon-button" onclick="handleClick('{{.btn2}}');">
+    <div class="shorcutCentered">{{.btn2}}
+      <div class="iconCentered">
+        {{.txt2}}
+      </div>
     </div>
     <div class="shortcut" style="opacity: 0;">{{.minus}}</div>
   </div>

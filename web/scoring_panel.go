@@ -299,6 +299,66 @@ func (web *Web) scoringPanelWebsocketHandler(w http.ResponseWriter, r *http.Requ
 													web.arena.CurrentMatch.Type == model.Playoff)
 					log.Printf("coopButton Pressed")
 					scoreChanged = true
+				case "E1":
+					if web.arena.EventSettings.AlternateIOEnabled{
+						if alliance == "red"{
+							web.arena.Plc.SetAlternateIOStopState(1,false)
+						}else{
+							web.arena.Plc.SetAlternateIOStopState(7,false)
+						}
+						log.Printf("E1 Pressed")
+						scoreChanged = true
+					}
+				case "A1":
+					if web.arena.EventSettings.AlternateIOEnabled{
+						if alliance == "red"{
+							web.arena.Plc.SetAlternateIOStopState(2,false)
+						}else{
+							web.arena.Plc.SetAlternateIOStopState(8,false)
+						}
+						log.Printf("A1 Pressed")
+						scoreChanged = true
+					}
+				case "E2":
+					if web.arena.EventSettings.AlternateIOEnabled{
+						if alliance == "red"{
+							web.arena.Plc.SetAlternateIOStopState(3,false)
+						}else{
+							web.arena.Plc.SetAlternateIOStopState(9,false)
+						}
+						log.Printf("E2 Pressed")
+						scoreChanged = true
+					}
+				case "A2":
+					if web.arena.EventSettings.AlternateIOEnabled{
+						if alliance == "red"{
+							web.arena.Plc.SetAlternateIOStopState(4,false)
+						}else{
+							web.arena.Plc.SetAlternateIOStopState(10,false)
+						}
+						log.Printf("A2 Pressed")
+						scoreChanged = true
+					}
+				case "E3":
+					if web.arena.EventSettings.AlternateIOEnabled{
+						if alliance == "red"{
+							web.arena.Plc.SetAlternateIOStopState(5,false)
+						}else{
+							web.arena.Plc.SetAlternateIOStopState(11,false)
+						}
+						log.Printf("E3 Pressed")
+						scoreChanged = true
+					}
+				case "A3":
+					if web.arena.EventSettings.AlternateIOEnabled{
+						if alliance == "red"{
+							web.arena.Plc.SetAlternateIOStopState(6,false)
+						}else{
+							web.arena.Plc.SetAlternateIOStopState(12,false)
+						}
+						log.Printf("A3 Pressed")
+						scoreChanged = true
+					}
 			}
 
 			if scoreChanged {

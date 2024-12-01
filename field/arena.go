@@ -924,18 +924,12 @@ var blueAmplifiedTimeRemaining_ons = false
 // Updates the score given new input information from the field PLC, and actuates PLC outputs accordingly.
 func (arena *Arena) handlePlcInputOutput() {
 	if !arena.Plc.IsEnabled() {
-		// Declare and initialize arrays
-		redEStops, blueEStops := [3]bool{}, [3]bool{}
-		redAStops, blueAStops := [3]bool{}, [3]bool{}
-		// Fill arrays with false values
-		for i := range redEStops {
-			redEStops[i] = false
-			redAStops[i] = false
+		// Handle PLC functions that are always active.
+		if arena.Plc.GetFieldEStop() && !arena.matchAborted {
+			arena.AbortMatch()
 		}
-		for i := range blueEStops {
-			blueEStops[i] = false
-			blueAStops[i] = false
-		}
+		redEStops, blueEStops := arena.Plc.GetTeamEStops()
+		redAStops, blueAStops := arena.Plc.GetTeamAStops()
 		arena.handleTeamStop("R1", redEStops[0], redAStops[0])
 		arena.handleTeamStop("R2", redEStops[1], redAStops[1])
 		arena.handleTeamStop("R3", redEStops[2], redAStops[2])

@@ -117,3 +117,20 @@ $(function() {
     realtimeScore: function(event) { handleRealtimeScore(event.data); },
   });
 });
+
+// Set initial visibility state
+let bool = false;
+
+// Function to toggle visibility of the panel
+function toggleEstopPanel() {
+    const panel = document.querySelector('.eStops');
+    if (bool) {
+        panel.classList.remove('hidden'); // Hide the panel
+    } else {
+        panel.classList.add('hidden'); // Show the panel
+    }
+    bool = !bool; // Toggle the boolean state
+}
+
+// Attach event listener to the button
+document.getElementById('toggleButton').addEventListener('click', toggleEstopPanel);

@@ -18,6 +18,8 @@ type Plc interface {
 	SetAddress(address string)
 	IsEnabled() bool
 	IsHealthy() bool
+	SetAlternateIOStopState(input int, state bool)
+	ResetEstops()
 	IoChangeNotifier() *websocket.Notifier
 	Run()
 	GetArmorBlockStatuses() map[string]bool
@@ -164,6 +166,25 @@ func (plc *ModbusPlc) SetAddress(address string) {
 	}
 }
 
+func (plc *ModbusPlc) ResetEstops(){
+	plc.inputs[red1EStop] = true
+	plc.inputs[red2EStop] = true
+	plc.inputs[red3EStop] = true
+	plc.inputs[blue1EStop] = true
+	plc.inputs[blue2EStop] = true
+	plc.inputs[blue3EStop] = true
+	plc.inputs[red1AStop] = true
+	plc.inputs[red2AStop] = true
+	plc.inputs[red3AStop] = true
+	plc.inputs[blue1AStop] = true
+	plc.inputs[blue2AStop] = true
+	plc.inputs[blue3AStop] = true
+}
+
+// used for Alternate IO stops
+func (plc *ModbusPlc) SetAlternateIOStopState(input int, state bool){
+	plc.inputs[input] = state
+}
 // Returns true if the PLC is enabled in the configurations.
 func (plc *ModbusPlc) IsEnabled() bool {
 	return plc.address != ""
@@ -186,6 +207,7 @@ func (plc *ModbusPlc) Run() {
 			if !plc.IsEnabled() {
 				// No PLC is configured; just allow the loop to continue to simulate inputs and outputs.
 				plc.isHealthy = false
+
 			} else {
 				err := plc.connect()
 				if err != nil {
@@ -403,6 +425,7 @@ func (plc *ModbusPlc) update() {
 
 	// Detect any changes in input or output and notify listeners if so.
 	if plc.inputs != plc.oldInputs || plc.registers != plc.oldRegisters || plc.coils != plc.oldCoils {
+		log.Print("changes in input or output")
 		plc.ioChangeNotifier.Notify()
 		plc.oldInputs = plc.inputs
 		plc.oldRegisters = plc.registers
