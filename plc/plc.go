@@ -167,6 +167,7 @@ func (plc *ModbusPlc) SetAddress(address string) {
 }
 
 func (plc *ModbusPlc) ResetEstops(){
+	plc.inputs[fieldEStop] = true
 	plc.inputs[red1EStop] = true
 	plc.inputs[red2EStop] = true
 	plc.inputs[red3EStop] = true
